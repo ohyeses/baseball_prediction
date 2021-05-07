@@ -188,7 +188,7 @@
 		<!-- //menu-inner -->
 
 		<section id="contents">
-			 <div id="section1">
+			 <div id="section1" style=display:none>
 				<div class="background">
 					<div class="background1 right">
 						<div class="bg img1"></div>
@@ -258,7 +258,7 @@
 			</div>
 			<!-- //section1 -->
 
-			<div id="section2">
+			 <div id="section2">
 				<div class="o_container">
 					<div class="sec2">
 						<div class="about">
@@ -333,7 +333,7 @@
 			</div>
 			<!-- //section2 -->
 
-			<div id="section3">
+			<div id="section3" style=display:none>
 				<div class="o_container">
 					<div class="sec3">
 
@@ -626,7 +626,7 @@
 			</div>
 			<!-- //section3 -->
 
-			<div id="section4">
+			<div id="section4" style=display:none>
 				<div class="sec4">
 					<div class="o_container">
 						<div class="row">
@@ -816,7 +816,7 @@
 			</div>
 			<!-- //section4 -->
 
-			<div id="section5">
+ 			<div id="section5" style=display:none>
 				<div class="o_container">
 					<div class="sec5">
 						<div class="sec5-title">
@@ -844,40 +844,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> 
 			<!-- //section5 -->
 
 
-			<!-- //section6 -->
-			<div id="section5">
-				<div class="o_container">
-					<div class="sec5">
-						<div class="sec5-title">
-							<span>CONTACT BY</span> <span>PUBLISHER</span>
-						</div>
-						<div class="contact-img">
-							<a
-								href="https://map.naver.com/?query=%EA%B2%BD%EA%B8%B0%EB%8F%84+%EC%84%B1%EB%82%A8%EC%8B%9C+%EB%B6%84%EB%8B%B9%EA%B5%AC+%EC%A0%95%EC%9E%90%EC%9D%BC%EB%A1%9C72"
-								target="_blank"><img src="assets/img/contact.png" alt="map"></a>
-						</div>
-						<div class="contactMe-left">
-							<span>72 Bundang-gu, Seongnam-si, Gyeonggi</span>
-						</div>
-						<div class="contactMe-right">
-							<div class="home">
-								<strong>HOME</strong><br> <strong>031-5569-8877</strong>
-							</div>
-							<div class="tell">
-								<strong>TELL ME</strong><br> <strong>+82
-									10-3192-7793</strong>
-							</div>
-							<div class="email">
-								<strong>E-MAIL US</strong><br> <strong>wngus3277@naver.com</strong>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+
 
 		</section>
 
