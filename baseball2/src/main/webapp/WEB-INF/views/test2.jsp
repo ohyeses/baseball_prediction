@@ -1,10 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OH YES!</title>
-
+<title>TEST BOARD</title>
 <!-- css -->
 <link rel="stylesheet" href="assets/css/reset.css">
 <link rel="stylesheet" href="assets/css/style4.css">
@@ -15,6 +17,7 @@
 <link rel="stylesheet" href="assets/css/glitch.css">
 <link rel="stylesheet" href="assets/css/img_glitch.css">
 <link rel="stylesheet" href="assets/css/modal.css">
+
 
 <!-- font -->
 <link
@@ -33,10 +36,12 @@
 
 </head>
 <body>
+<!-- 된다아아아아아아아아아아아아아 -->
 
-	<div class="progress" id="progress">
+<!-- 진행바 없앰 -->
+<!-- 	<div class="progress" id="progress">
 		<span class="progress-bar"></span> <span class="progress-text">0%</span>
-	</div>
+	</div> -->
 	<!--     <div class="progress2"></div> -->
 	<!-- //progress -->
 
@@ -164,14 +169,14 @@
 							class="fa fa-share" aria-hidden="true"></i></a>
 					</div>
 					<div class="menu-right">
-						<a href="#section2"><span>INTRO</span></a><br>
-						 <a href="#section3"><span>CODING</span></a><br> 
-						 <a href="#section4"><span>ANIMATION</span></a><br>
-						  <a href="#section5"><span>CONTACT</span></a><br>
+						<a href="./index4.html#section2"><span>INTRO</span></a><br>
+						 <a href="./index4.html#section3"><span>CODING</span></a><br> 
+						 <a href="./index4.html#section4"><span>ANIMATION</span></a><br>
+						  <a href="./index4.html#section5"><span>CONTACT</span></a><br>
 						<!-- 	 <a href="#section5"><span>BOARD</span></a><br> -->
 							 <a href="test2.do" target="_blank"><span>BOARD</span></a> <br>
 							  
-							<a href="#section5"><span>LOGIN</span></a><br>
+							<a href="./index4.html#section5"><span>LOGIN</span></a><br>
 						<!-- <a href="https://codepen.io/wngus3277" target="_blank"><span>CODEPEN</span></a> -->
 						
 						
@@ -183,7 +188,7 @@
 		<!-- //menu-inner -->
 
 		<section id="contents">
-			<div id="section1">
+			 <div id="section1">
 				<div class="background">
 					<div class="background1 right">
 						<div class="bg img1"></div>
@@ -222,7 +227,7 @@
 						<div class="overlay left"></div>
 					</div>
 				</div>
-				<!-- //background -->
+				//background
 
 				<div class="main-contents o_container">
 					<div class="main-title">
@@ -239,7 +244,7 @@
 						</h1>
 					</div>
 				</div>
-				<!-- //main-contents -->
+				//main-contents
 
 				<div class="main-btn-wrap">
 					<div class="main-btn">
@@ -249,7 +254,7 @@
 						<a href="#section2">SCROLL DOWN</a>
 					</div>
 				</div>
-				<!-- //main-btn -->
+				//main-btn
 			</div>
 			<!-- //section1 -->
 
@@ -934,5 +939,8 @@
 				});
 			});
 		</script>
+
+
+
 </body>
 </html>

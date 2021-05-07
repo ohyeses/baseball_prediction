@@ -48,7 +48,7 @@ public class MemberController {
 	public String memberDelete(int num, HttpServletRequest request) {
 		dao.memberDelete(num);		
 		
-		request.getSession().invalidate(); // 濡쒓렇�븘�썐泥섎━ �옄�룄�쑝濡� �맂�떎.
+		request.getSession().invalidate(); // 로그아웃처리 자도으로 된다.
 		
 		return "redirect:/memberList.do";
 	}
@@ -72,13 +72,13 @@ public class MemberController {
 		return "memberRegister";
 	}
 	
-	// �쉶�썝�씤利앹쿂由�
+	// 회원인증처리
 	@RequestMapping("/memberLogin.do")
 	public String memberLogin(MemberVO vo, HttpServletRequest request) {
 		
 		String name = dao.memberLogin(vo);
 		if(name!=null && !"".equals(name)) {
-			// �쉶�썝�씤利앹꽦怨� -> �쉶�썝�씤利앹뿉 �꽦怨듯뻽�떎�뒗 �궗�떎�쓣 �듅�젙 硫붾え由�(request, session)�뿉 媛앹껜諛붿씤�뵫�쓣 �빐以��떎.
+			// 회원인증성공 -> 회원인증에 성공했다는 사실을 특정 메모리(request, session)에 객체바인딩을 해준다.
 			//HttpSession session = request.getSession();
 			request.getSession().setAttribute("id", vo.getId());
 			request.getSession().setAttribute("name", vo.getId());
@@ -86,7 +86,7 @@ public class MemberController {
 			//HttpSession session = request.getSession();
 			request.getSession().setAttribute("id", "");
 			request.getSession().setAttribute("name", "");
-			request.getSession().setAttribute("msg", "�궗�슜�옄�쓽 �젙蹂닿� �삱諛붾Ⅴ吏� �븡�뒿�땲�떎.");
+			request.getSession().setAttribute("msg", "사용자의 정보가 올바르지 않습니다.");
 		}
 		
 		return "redirect:/memberList.do";
@@ -94,14 +94,13 @@ public class MemberController {
 	
 	
 	@RequestMapping("/memberLogout.do")
-	public String memberLogout(HttpServletRequest request) { // 湲곗〈�뿉 �엳�뜕 �꽭�뀡 媛��졇���빞 �븯�땲源�
+	public String memberLogout(HttpServletRequest request) { // 기존에 있던 세션 가져와야 하니까
 		
-		request.getSession().invalidate();//invalidate -> �꽭�뀡 臾댄슚�솕
+		request.getSession().invalidate();//invalidate -> 세션 무효화
 		
 		return "redirect:/memberList.do";
 		
 	}
-	
 	
 	@RequestMapping("/test.do")
 	public String test(Model model) {
@@ -112,6 +111,14 @@ public class MemberController {
 		return "test"; // /WEB-INF/views/memberList.jsp <--- ${list}
 	}
 	
+	@RequestMapping("/test2.do")
+	public String test2(Model model) {
+		
+		List<MemberVO> list=dao.memberList();	
+		model.addAttribute("list", list);
+		
+		return "test2"; // /WEB-INF/views/memberList.jsp <--- ${list}
+	}
 	
 	
 }

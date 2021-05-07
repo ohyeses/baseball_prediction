@@ -16,4 +16,5 @@ public interface MemberMapper {
 	   public int memberUpdate(MemberVO vo);
 	   public MemberVO memberContent(int num);
 	   public String memberLogin(MemberVO vo);
+	   public List<MemberVO> test();
 }
