@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+/* .contact-form {
+	width: 500px;
+	height: 660px;
+	float: left;
+	box-sizing: border-box;
+	padding: 48px 24px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 16px 16px 0 rgba(128, 24, 143, 0.4);
+} */
+.board_list, .contact-form {
+	width: 90%;
+	height: 100%; 
+	float : left;
+	box-sizing: border-box;
+	padding: 48px 24px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 16px 16px 0 rgba(128, 24, 143, 0.4);
+	box-sizing: border-box;
+	float: left;
+}
+
+.board_list table td {
+	padding-bottom: 35px;
+}
+
+.board_list tr #button {
+	padding-bottom: 40%;
+}
+
+.board_list table tr td {
+	text-align: center;
+	font-size: 15px;
+}
+
+.board_list table tbody {
+	height: 60%;
+}
+
+.board_list h2, .contact-form h2 {
+	font-size: 30px;
+	color: #000;
+	text-align: center;
+	font-weight: bold;
+	padding-bottom: 20px;
+}
+
+.board_list h2, .contact-form h2 {
+	margin: 0 0 32px 0;
+}
+
+.input-wrap {
+	margin: 6px 0 14px 0;
+	position: relative;
+	border: 0;
+	border-bottom: 1px solid #ededed;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+.input-wrap input {
+	font-size: 20px !important;
+	width: 100% !important;
+	height: 40px !important;
+	border: 0;
+	outline: 0;
+	padding: 0 16px !important;
+	margin: 0 !important;
+	position: relative;
+	z-index: 1;
+	background: none;
+	color: #161616;
+	box-sizing: border-box;
+}
+
+.input-wrap textarea {
+	font-size: 20px !important;
+	width: 100% !important;
+	height: 250px !important;
+	border: 0;
+	outline: 0;
+	padding: 16px !important;
+	box-sizing: border-box;
+	margin: 0 !important;
+	position: relative;
+	z-index: 1;
+	background: none;
+	color: #161616;
+}
+
+/* .contact-form .btn {
+	font-size: 25px;
+	margin-top: 24px;
+	width: 100%;
+	box-sizing: border-box;
+	border: 0;
+	padding: 8px 46px;
+	color: #fff;
+	background-color: #f53a00;
+	border-radius: 50px;
+	cursor: pointer;
+} */
+.board_list .btn, .contact-form .btn {
+	font-size: 15px;
+	margin-top: 24px;
+	box-sizing: border-box;
+	border: 0;
+	padding: 8px 46px;
+	color: #fff;
+	background-color: #f53a00;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+.board_list .btn-primary {
+	width: 15%;
+}
+
+.board_list .btn-delete {
+	border: 0;
+	outline: 0;
+}

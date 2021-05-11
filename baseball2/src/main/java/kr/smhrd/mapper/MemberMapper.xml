@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.smhrd.mapper.MemberMapper">
+
+    <insert id="memberInsert" parameterType="MemberVO">
+       insert into members(id, pw, name, age, ft)
+       values(#{id},#{pw},#{name},#{age},#{ft});      
+    </insert>
+    
+    <select id="idcheck" parameterType="String" resultType="Integer">
+    	select count(*) from members where id=#{id};
+    </select>
+    
+    <select id="memberLogin" parameterType="MemberVO" resultType="String">
+    	select name from members where id=#{id} and pw=#{pw};
+    </select>
+    
+    <select id="memberContent" parameterType="String" resultType="MemberVO">
+        select * from members where id=#{id};        
+    </select>
+    
+    <update id="memberUpdate" parameterType="MemberVO">
+        update members set pw=#{pw}, age=#{age}, ft=#{ft} where id=#{id};
+    </update>
+    
+    <delete id="memberDelete" parameterType="MemberVO">
+       delete from members where id=#{id};
+    </delete>
+    
+    
+</mapper>

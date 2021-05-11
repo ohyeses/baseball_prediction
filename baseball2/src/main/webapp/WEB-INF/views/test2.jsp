@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+	pageEncoding="EUC-KR"%>
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,18 @@
 <link rel="stylesheet" href="assets/css/glitch.css">
 <link rel="stylesheet" href="assets/css/img_glitch.css">
 <link rel="stylesheet" href="assets/css/modal.css">
+<link rel="stylesheet" href="assets/css/p17_style4.css">
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+     function goForm1(){
+    	// ??µî·ÏÆäÀÌÁö·Î ¿äÃ»(/mvc)
+    	 location.href="<c:url value='/board.do'/>";
+     } 
+  </script>
 
 <!-- font -->
 <link
@@ -30,80 +42,23 @@
 <!-- font-family: 'Roboto', sans-serif; -->
 <link href="https://fonts.googleapis.com/css?family=Sacramento"
 	rel="stylesheet">
-<!-- ì‹¸ì¸ê¸€ì”¨ font-family: 'Sacramento', cursive; -->
+<!-- ½ÎÀÎ±Û¾¾ font-family: 'Sacramento', cursive; -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
 
 </head>
 <body>
-<!-- ëœë‹¤ì•„ì•„ì•„ì•„ì•„ì•„ì•„ì•„ì•„ì•„ì•„ì•„ì•„ -->
+	<!-- Testing -->
 
-<!-- ì§„í–‰ë°” ì—†ì•° -->
-<!-- 	<div class="progress" id="progress">
+	<!-- ÁøÇà¹Ù ¾ø¾Ú -->
+	<!-- 	<div class="progress" id="progress">
 		<span class="progress-bar"></span> <span class="progress-text">0%</span>
 	</div> -->
 	<!--     <div class="progress2"></div> -->
 	<!-- //progress -->
 
-	<div id="line">
-		<div class="line sline"></div>
-		<div class="line mline"></div>
-		<div class="line mline"></div>
-		<div class="line sline"></div>
-		<div class="hline"></div>
-	</div>
-	<!-- //line -->
-
-	<div class="side-bar-hover">
-		<div class="hover-box">
-			<em><span>J</span><span>U</span><span>-</span><span>H</span><span>Y</span><span>E</span><span>O</span><span>N</span><span>'</span><span>S</span><br>
-			<span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span></em>
-			<p>welcome to visit my portfolio</p>
-			<p>Thank you for view my work</p>
-			<canvas id="drawing_canvas"></canvas>
-		</div>
-	</div>
-	<!-- //side-bar-hover -->
-
-	<div class="side-bar">
-		<div class="sb-svg sb-pd">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.2 90"
-				id="flag" width="100%" height="100%">
-                <path
-					d="M47.9 0h8.3v90h-8.3zM31.9 0h8.3v90h-8.3zM0 42.8h8.3V90H0zM16 42.8h8.3V90H16zM0 35.2h24.2V0H0v35.2zm13.6-14.3l-4 5.5v-6.8l-6.4-2.1 6.4-2.1V8.6l4 5.5L20 12l-4 5.5 4 5.5-6.4-2.1z"></path>
-                <path d="M4.1 6.5h16V29h-16z"></path>
-            </svg>
-		</div>
-		<div class="sb-txt sb-pd">
-			<span>WELCOME TO MY PORTFOLIO</span>
-		</div>
-		<div class="sb-sns sb-pd">
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a
-				href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a
-				href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-		</div>
-	</div>
-	<!-- //side-bar -->
-
-	<div class="phone">
-		<div class="phone-icon">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="#fff"
-				viewBox="0 0 24 24" id="phone" width="20px" height="20px">
-				<path
-					d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
-		</div>
-		<div class="phone-number">
-			<span>phone number<br>+82 10-3192-7793
-			</span>
-		</div>
-		<div class="email">
-			<span>E-mail<br>wngus3277@<br>naver.com
-			</span>
-		</div>
-	</div>
-	<!-- //phone -->
-
-	<div class="menu-wrapper">
+	<!-- //menu-wrapper -->
+		<div class="menu-wrapper">
 		<button class="menu-button wrap">
 			<span class="menu-button-item line"> <svg viewBox="0 0 80 80"
 					width="100%" height="100%">
@@ -130,7 +85,60 @@
 			</div>
 		</button>
 	</div>
-	<!-- //menu-wrapper -->
+	
+	<div class="side-bar-hover">
+		<div class="hover-box">
+			<em><span>J</span><span>U</span><span>-</span><span>H</span><span>Y</span><span>E</span><span>O</span><span>N</span><span>'</span><span>S</span><br>
+				<span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span></em>
+			<p>welcome to visit my portfolio</p>
+			<p>Thank you for view my work</p>
+			<canvas id="drawing_canvas"></canvas>
+		</div>
+	</div>
+	<!-- //side-bar-hover -->
+
+	<div class="side-bar">
+		<div class="sb-svg sb-pd">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.2 90"
+				id="flag" width="100%" height="100%">
+                <path
+					d="M47.9 0h8.3v90h-8.3zM31.9 0h8.3v90h-8.3zM0 42.8h8.3V90H0zM16 42.8h8.3V90H16zM0 35.2h24.2V0H0v35.2zm13.6-14.3l-4 5.5v-6.8l-6.4-2.1 6.4-2.1V8.6l4 5.5L20 12l-4 5.5 4 5.5-6.4-2.1z"></path>
+                <path d="M4.1 6.5h16V29h-16z"></path>
+            </svg>
+		</div>
+		<div class="sb-txt sb-pd">
+			<span>WELCOME TO MY PORTFOLIO</span>
+		</div>
+		<div class="sb-sns sb-pd">
+			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a
+				href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a
+				href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+		</div>
+	</div>
+
+	<!-- //contact -->
+
+	
+	<!-- //side-bar -->
+
+	<!-- phone ²ô±â -->
+	<!-- 	<div class="phone">
+		<div class="phone-icon">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="#fff"
+				viewBox="0 0 24 24" id="phone" width="20px" height="20px">
+				<path
+					d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"></path></svg>
+		</div>
+		<div class="phone-number">
+			<span>phone number<br>+82 10-3192-7793
+			</span>
+		</div>
+		<div class="email">
+			<span>E-mail<br>wngus3277@<br>naver.com
+			</span>
+		</div>
+	</div> -->
+	<!-- //phone -->
 
 	<div class="menu-inner">
 		<div class="box-wrap">
@@ -169,26 +177,54 @@
 							class="fa fa-share" aria-hidden="true"></i></a>
 					</div>
 					<div class="menu-right">
-						<a href="./index4.html#section2"><span>INTRO</span></a><br>
-						 <a href="./index4.html#section3"><span>CODING</span></a><br> 
-						 <a href="./index4.html#section4"><span>ANIMATION</span></a><br>
-						  <a href="./index4.html#section5"><span>CONTACT</span></a><br>
+						<a href="./index4.html#section2"><span>INTRO</span></a><br> <a
+							href="./index4.html#section3"><span>CODING</span></a><br> <a
+							href="./index4.html#section4"><span>ANIMATION</span></a><br>
+						<a href="./index4.html#section5"><span>CONTACT</span></a><br>
 						<!-- 	 <a href="#section5"><span>BOARD</span></a><br> -->
-							 <a href="test2.do" target="_blank"><span>BOARD</span></a> <br>
-							  
-							<a href="./index4.html#section5"><span>LOGIN</span></a><br>
+						<a href="test2.do" target="_blank"><span>BOARD</span></a><br>
+						<a href="./index4.html#section5"><span>LOGIN</span></a><br>
 						<!-- <a href="https://codepen.io/wngus3277" target="_blank"><span>CODEPEN</span></a> -->
-						
-						
+
+
 						<!-- 	    		</div> -->
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 		<!-- //menu-inner -->
-
+		<!-- //°Ô½ÃÆÇ board -->
+		<div class="o_container">
+	
+			<div class="sec2">
+				<div class="about show">
+	
+					<div class=contact-form>
+						<h2 style="font-size: 50px; color: #000; font-weight: bold;">°Ô½Ã¹°
+							µî·Ï</h2>
+						<form action="<c:url value='/boardInsert.do'/>" method="post">
+							<!--  <label> -->
+							<div class="input-wrap">
+								<input type="text" id="title" name="title" placeholder="Á¦¸ñ">
+							</div>
+							<!-- </label> -->
+							<div class="input-wrap">
+								<input type="text" id="writer" name="writer" placeholder="ÀÛ¼ºÀÚ">
+							</div>
+							<div class="input-wrap">
+								<textarea id="message" name="contents" placeholder="³»¿ë"></textarea>
+							</div>
+							<div class="input-wrap"></div>
+							<button type="submit" class="btn" onclick="goForm1()">µî·Ï</button>
+						</form>
+					</div>
+				</div>
+	
+			</div>
+		</div>
 		<section id="contents">
-			 <div id="section1" style=display:none>
+			<div id="section1" style="display: none">
 				<div class="background">
 					<div class="background1 right">
 						<div class="bg img1"></div>
@@ -258,90 +294,20 @@
 			</div>
 			<!-- //section1 -->
 
-			 <div id="section2">
-				<div class="o_container">
-					<div class="sec2">
-						<div class="about">
-							<span>hello !</span><span>my name is</span><span>ju-hyeon</span>
-							<div class="img">
-								<img src="assets/img/mypicture.png">
-							</div>
-							<p class="desc">I provide you. Standard, Accessibility Web
-								Design & Publish</p>
-							<div class="txt">
-								<div class="txt-left">I learned web design and web fobling
-									for the first time at the high media institute. I thought it
-									was the right job for me, and I got fun and greed. I'm trying
-									to be a good publisher. I cannot do web design and web fusing
-									yet, but I want to study web development and web development.I
-									am trying to become a publisher who is working harder than
-									experienced or majored in the web after studying for about six
-									months. It was a great time for me to make a portfolio. It was
-									a good experience for me to understand and study coding, and
-									most of all, to make and complete my portfolio. I will try and
-									study harder and become a famous publisher.</div>
-								<div class="txt-right">My hobbies are playing soccer and
-									soccer games. I used to be a player when I was in elementary
-									school and I still have a passion for soccer. My dream is to
-									succeed as a publisher, but it is my dream to go to England and
-									watch soccer game.I'm a 12-year fan of Manchester United. I
-									love soccer so much that I always recognize things other than
-									soccer articles or related to soccer. I have been studying
-									soccer tactics as a hobby for a few months. I really love
-									soccer and I think I will. I do not play other games, but I
-									like soccer games because I like soccer game. The soccer game I
-									play is a pes/winning series released by Konami.</div>
-							</div>
-
-							<div class="skill-wrap">
-								<div class="skill">
-									<ul class="clearfix">
-										<li class="pie" data-percent="100"><a
-											href="http://kimju7.dothome.co.kr/html/index.html"
-											target="_blank"><strong class="count">90</strong><span>HTML5</span></a></li>
-										<li class="pie" data-percent="100"><a
-											href="http://kimju7.dothome.co.kr/css/index.html"
-											target="_blank"><strong class="count">90</strong><span>CSS3</span></a></li>
-										<li class="pie" data-percent="100"><a
-											href="http://kimju7.dothome.co.kr/javascript/javascript.html"
-											target="_blank"><strong class="count">80</strong><span>JAVASCRIPT</span></a></li>
-										<li class="pie" data-percent="100"><a
-											href="http://kimju7.dothome.co.kr/javascript/jquery.html"
-											target="_blank"><strong class="count">80</strong><span>JQUERY</span></a></li>
-										<li class="pie" data-percent="100"><a
-											href="http://kimju7.dothome.co.kr/photoshop/index.html"
-											target="_blank"><strong class="count">70</strong><span>PHOTOSHOP</span></a></li>
-									</ul>
-								</div>
-							</div>
-
-							<div class="showme">
-								<figure class="mypicture">
-									<img src="assets/img/myphoto.png">
-								</figure>
-								<div class="sign">
-									<span>kim 7u-tan</span>
-								</div>
-								<div class="myname">
-									<div class="name">KIM JU-HYEON</div>
-									<div class="name2">Web Publisher</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div id="section2">
+				<div class="o_container"></div>
 			</div>
 			<!-- //section2 -->
 
-			<div id="section3" style=display:none>
+			<div id="section3" style="display: none">
 				<div class="o_container">
 					<div class="sec3">
 
 						<div class="s3-title">
 							<p class="s1_tit">MY WORK</p>
 							<h3 class="h3_tit">
-								<span class="coding" data-text="CODING">CODING</span><br>
-								<span class="project" data-text="PROJECT">PROJECT</span>
+								<span class="coding" data-text="CODING">CODING</span><br> <span
+									class="project" data-text="PROJECT">PROJECT</span>
 							</h3>
 							<p class="p1_desc">This is my portfolio site. I am a web
 								publisher.I can make various homepages using HTML, CSS,
@@ -373,9 +339,7 @@
 							<div class="side-text side-right">
 								<p class="s1_tit cont1">CODING1</p>
 								<h3 class="h3_tit cont1">
-									<span>GABIA</span><br>
-									<span>WEB</span><br>
-									<span>SITE</span>
+									<span>GABIA</span><br> <span>WEB</span><br> <span>SITE</span>
 								</h3>
 								<p class="p1_desc cont1">This website is one of that I
 									handed coding the site, gabia has passed the test css and the
@@ -415,8 +379,7 @@
 							<div class="side-text side-left">
 								<p class="s1_tit cont2">CODING2</p>
 								<h3 class="h3_tit cont2">
-									<span>WEB</span><br>
-									<span>STANDARD</span>
+									<span>WEB</span><br> <span>STANDARD</span>
 								</h3>
 								<p class="p1_desc cont2">Standard for viewing the same
 									results across all operating systems and all browsers. Every
@@ -457,8 +420,8 @@
 							<div class="side-text side-right">
 								<p class="s1_tit cont3">CODING3</p>
 								<h3 class="h3_tit cont3">
-									<span data-text="Responsive">RESPONSIVE</span><br>
-									<span data-text="Site">SITE</span>
+									<span data-text="Responsive">RESPONSIVE</span><br> <span
+										data-text="Site">SITE</span>
 								</h3>
 								<p class="p1_desc cont3">
 									I created a Responsive site using HTML5. <br>Created a
@@ -500,8 +463,8 @@
 							<div class="side-text side-left">
 								<p class="s1_tit cont4">CODING4</p>
 								<h3 class="h3_tit cont4">
-									<span data-text="Mobile">MOBILE</span><br>
-									<span data-text="Coding">CODING</span>
+									<span data-text="Mobile">MOBILE</span><br> <span
+										data-text="Coding">CODING</span>
 								</h3>
 								<p class="p1_desc cont4">
 									Mobile coding is also possible. <br>I coded mobile web
@@ -603,8 +566,8 @@
 							<div class="side-text side-right">
 								<p class="s1_tit cont5">CODING5</p>
 								<h3 class="h3_tit cont5">
-									<span data-text="Mobile">TSTORY</span><br>
-									<span data-text="Coding">CODING</span>
+									<span data-text="Mobile">TSTORY</span><br> <span
+										data-text="Coding">CODING</span>
 								</h3>
 								<p class="p1_desc cont5">I coded and designed T-history
 									blog. It explained and organized UI/UX design, UI/UX strategy,
@@ -626,7 +589,7 @@
 			</div>
 			<!-- //section3 -->
 
-			<div id="section4" style=display:none>
+			<div id="section4" style="display: none">
 				<div class="sec4">
 					<div class="o_container">
 						<div class="row">
@@ -643,16 +606,15 @@
 
 							<div class="ani-wrap clearfix">
 								<div class="tit tit-left">
-									TweenMax<br>
-									<em>Animation</em>
+									TweenMax<br> <em>Animation</em>
 								</div>
 								<div class="desc desc-left">
 									<h5>TimelineMax</h5>
 									<p>
-										ì´ ìš°ì£¼ì„ ì€ GSAPì˜ TweenMaxë¥¼ ì´ìš©í•œ ì• ë‹ˆë©”ì´ì…˜ì…ë‹ˆë‹¤. TweenMax ê¸°ëŠ¥ ì¤‘ TimelineMax
-										ê¸°ëŠ¥ì„ ì´ìš©í•˜ì—¬ ìš°ì£¼ì„ ì´ ìì—°ìŠ¤ëŸ½ê²Œ ì´ë™í•˜ë„ë¡ ë§Œë“¤ì—ˆìœ¼ë©°, <strong>translateY</strong>,
-										<strong>scale</strong>, <strong>ease</strong> íš¨ê³¼ë¥¼ í†µí•´ ì‚¬ì‹¤ì²˜ëŸ¼ ì›€ì§ì´ëŠ”
-										ì• ë‹ˆë©”ì´ì…˜ì„ ì™„ì„±í•˜ì˜€ìŠµë‹ˆë‹¤.
+										ÀÌ ¿ìÁÖ¼±Àº GSAPÀÇ TweenMax¸¦ ÀÌ¿ëÇÑ ¾Ö´Ï¸ŞÀÌ¼ÇÀÔ´Ï´Ù. TweenMax ±â´É Áß TimelineMax
+										±â´ÉÀ» ÀÌ¿ëÇÏ¿© ¿ìÁÖ¼±ÀÌ ÀÚ¿¬½º·´°Ô ÀÌµ¿ÇÏµµ·Ï ¸¸µé¾úÀ¸¸ç, <strong>translateY</strong>,
+										<strong>scale</strong>, <strong>ease</strong> È¿°ú¸¦ ÅëÇØ »ç½ÇÃ³·³ ¿òÁ÷ÀÌ´Â
+										¾Ö´Ï¸ŞÀÌ¼ÇÀ» ¿Ï¼ºÇÏ¿´½À´Ï´Ù.
 									</p>
 								</div>
 								<div class="iframe iframe-left">
@@ -664,15 +626,14 @@
 
 							<div class="ani-wrap clearfix">
 								<div class="tit tit-right">
-									Kraken<br>
-									<em>Animation</em>
+									Kraken<br> <em>Animation</em>
 								</div>
 								<div class="desc desc-right">
 									<h5>Kraken Animation</h5>
 									<p>
-										ì´ ìºë¦­í„°ëŠ” ì›€ì§ì„ì„ í‘œí˜„í•˜ëŠ” ì• ë‹ˆë©”ì´ì…˜ì…ë‹ˆë‹¤. ì´ ì• ë‹ˆë©”ì´ì…˜ì€ ë¬¼ë°©ìš¸ê³¼ ìºë¦­í„°ì˜ ëˆˆ, ì…, ë‹¤ë¦¬ë¥¼ <strong>animation</strong>ê³¼
-										<strong>keyframes</strong>ì„ ì‚¬ìš©í•˜ì—¬ ì‚´ì•„ìˆëŠ” ë“¯í•œ ìºë¦­í„°ì˜ ì›€ì§ì„ì„ ìì—°ìŠ¤ëŸ½ê²Œ
-										í‘œí˜„í•˜ì˜€ìŠµë‹ˆë‹¤.
+										ÀÌ Ä³¸¯ÅÍ´Â ¿òÁ÷ÀÓÀ» Ç¥ÇöÇÏ´Â ¾Ö´Ï¸ŞÀÌ¼ÇÀÔ´Ï´Ù. ÀÌ ¾Ö´Ï¸ŞÀÌ¼ÇÀº ¹°¹æ¿ï°ú Ä³¸¯ÅÍÀÇ ´«, ÀÔ, ´Ù¸®¸¦ <strong>animation</strong>°ú
+										<strong>keyframes</strong>À» »ç¿ëÇÏ¿© »ì¾ÆÀÖ´Â µíÇÑ Ä³¸¯ÅÍÀÇ ¿òÁ÷ÀÓÀ» ÀÚ¿¬½º·´°Ô
+										Ç¥ÇöÇÏ¿´½À´Ï´Ù.
 									</p>
 								</div>
 								<div class="iframe iframe-right">
@@ -684,17 +645,16 @@
 
 							<div class="ani-wrap clearfix">
 								<div class="tit tit-left">
-									Mouse<br>
-									<em>Cursor Effect</em>
+									Mouse<br> <em>Cursor Effect</em>
 								</div>
 								<div class="desc desc-left">
 									<h5>Cursor Effect</h5>
 									<p>
-										ì´ íš¨ê³¼ëŠ” TweenMaxì™€ Javascriptë¥¼ ì´ìš©í•œ ì• ë‹ˆë©”ì´ì…˜ì…ë‹ˆë‹¤. TweenMax ê¸°ëŠ¥ ì¤‘ <strong>posY</strong>,
+										ÀÌ È¿°ú´Â TweenMax¿Í Javascript¸¦ ÀÌ¿ëÇÑ ¾Ö´Ï¸ŞÀÌ¼ÇÀÔ´Ï´Ù. TweenMax ±â´É Áß <strong>posY</strong>,
 										<strong>posX</strong>, <strong> mouseX</strong>, <strong>mouseY</strong>
-										ê°’ì„ ì„¤ì •í•˜ê³  Hover me ë¼ëŠ” í…ìŠ¤íŠ¸ì— ë§ˆìš°ìŠ¤ë¥¼ ëŒ€ë©´ <strong>mouseenter</strong>ë©”ì†Œë“œë¥¼
-										ì‚¬ìš©í•˜ì—¬ ì—‘í‹°ë¸Œê°€ ë˜ë„ë¡ í•˜ê³  ë§ˆìš°ìŠ¤ê°€ ë²—ì–´ë‚˜ë©´ <strong>mouseleave</strong>ë©”ì†Œë“œì—
-										ì—‘í‹°ë¸Œê°€ ì—†ì–´ì§€ë„ë¡ í‘œí˜„í•˜ì˜€ìŠµë‹ˆë‹¤.
+										°ªÀ» ¼³Á¤ÇÏ°í Hover me ¶ó´Â ÅØ½ºÆ®¿¡ ¸¶¿ì½º¸¦ ´ë¸é <strong>mouseenter</strong>¸Ş¼Òµå¸¦
+										»ç¿ëÇÏ¿© ¿¢Æ¼ºê°¡ µÇµµ·Ï ÇÏ°í ¸¶¿ì½º°¡ ¹ş¾î³ª¸é <strong>mouseleave</strong>¸Ş¼Òµå¿¡
+										¿¢Æ¼ºê°¡ ¾ø¾îÁöµµ·Ï Ç¥ÇöÇÏ¿´½À´Ï´Ù.
 									</p>
 								</div>
 								<div class="iframe iframe-left">
@@ -706,15 +666,14 @@
 
 							<div class="ani-wrap clearfix">
 								<div class="tit tit-right">
-									Mouse Hover<br>
-									<em>Blend Effect</em>
+									Mouse Hover<br> <em>Blend Effect</em>
 								</div>
 								<div class="desc desc-right">
 									<h5>Blend Effect</h5>
 									<p>
-										ì´ íš¨ê³¼ëŠ” ê° ì´ë¯¸ì§€ì˜ <strong>class</strong>ë¥¼ ë‹¤ë¥´ê²Œ í•´ì£¼ì–´ ë§ˆìš°ìŠ¤ë¥¼ ì˜¤ë²„í–ˆì„ ë•Œ ê°
-										ì´ë¯¸ì§€ì˜ <strong>mix-blend-mode</strong>, <strong>filter</strong>,
-										<strong>background-color</strong>ê°’ì„ ë‹¤ë¥´ê²Œ ì…ë ¥í•˜ì—¬ í‘œí˜„í•˜ì˜€ìŠµë‹ˆë‹¤.
+										ÀÌ È¿°ú´Â °¢ ÀÌ¹ÌÁöÀÇ <strong>class</strong>¸¦ ´Ù¸£°Ô ÇØÁÖ¾î ¸¶¿ì½º¸¦ ¿À¹öÇßÀ» ¶§ °¢
+										ÀÌ¹ÌÁöÀÇ <strong>mix-blend-mode</strong>, <strong>filter</strong>,
+										<strong>background-color</strong>°ªÀ» ´Ù¸£°Ô ÀÔ·ÂÇÏ¿© Ç¥ÇöÇÏ¿´½À´Ï´Ù.
 									</p>
 								</div>
 								<div class="iframe iframe-right">
@@ -726,16 +685,15 @@
 
 							<div class="ani-wrap clearfix">
 								<div class="tit tit-left">
-									Mouse<br>
-									<em>Move Image</em>
+									Mouse<br> <em>Move Image</em>
 								</div>
 								<div class="desc desc-left">
 									<h5>Move Image</h5>
 									<p>
-										ì´ ì• ë‹ˆë‹ˆë©”ì´ì…˜ì€ ê°ê°ì˜ Mouse ë²„íŠ¼ì— ê°ê¸° ë‹¤ë¥¸ ì´ë¯¸ì§€ë¥¼ ì„¤ì •í•˜ê³  <strong>hover</strong>ë©”ì†Œë“œë¥¼
-										ì´ìš©í•˜ì—¬ ë²„íŠ¼ì— ì˜¤ë²„í–ˆì„ ë•Œ ê°ê¸° ë‹¤ë¥¸ ì´ë¯¸ì§€ë¥¼ ë³´ì—¬ì£¼ë©° <strong>mousemove</strong>ë©”ì†Œë“œì—
-										<strong>pageX</strong>, <strong>pageY</strong>ë¥¼ ì‚¬ìš©í•˜ì—¬ ì´ë¯¸ì§€ê°€ ë§ˆìš°ìŠ¤
-										ìŠ¤í¬ë¡¤ì„ ë”°ë¼ì˜¤ëŠ” ì• ë‹ˆë©”ì´ì…˜ì„ ì™„ì„±í•˜ì˜€ìŠµë‹ˆë‹¤.
+										ÀÌ ¾Ö´Ï´Ï¸ŞÀÌ¼ÇÀº °¢°¢ÀÇ Mouse ¹öÆ°¿¡ °¢±â ´Ù¸¥ ÀÌ¹ÌÁö¸¦ ¼³Á¤ÇÏ°í <strong>hover</strong>¸Ş¼Òµå¸¦
+										ÀÌ¿ëÇÏ¿© ¹öÆ°¿¡ ¿À¹öÇßÀ» ¶§ °¢±â ´Ù¸¥ ÀÌ¹ÌÁö¸¦ º¸¿©ÁÖ¸ç <strong>mousemove</strong>¸Ş¼Òµå¿¡
+										<strong>pageX</strong>, <strong>pageY</strong>¸¦ »ç¿ëÇÏ¿© ÀÌ¹ÌÁö°¡ ¸¶¿ì½º
+										½ºÅ©·ÑÀ» µû¶ó¿À´Â ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ¿Ï¼ºÇÏ¿´½À´Ï´Ù.
 									</p>
 								</div>
 								<div class="iframe iframe-left">
@@ -747,17 +705,15 @@
 
 							<div class="ani-wrap clearfix">
 								<div class="tit tit-right">
-									SVG<br>
-									<em>Text Animation</em>
+									SVG<br> <em>Text Animation</em>
 								</div>
 								<div class="desc desc-right">
 									<h5>Text Animation</h5>
 									<p>
-										ì´ ì• ë‹ˆë©”ì´ì…˜ì€ illustrator ì‘ì—…ìœ¼ë¡œ SVGê°’ì„ ì•Œì•„ë‚´ì–´ SVGì— <strong>stroke</strong>,
+										ÀÌ ¾Ö´Ï¸ŞÀÌ¼ÇÀº illustrator ÀÛ¾÷À¸·Î SVG°ªÀ» ¾Ë¾Æ³»¾î SVG¿¡ <strong>stroke</strong>,
 										<strong>stroke-width</strong>, <strong>stroke-dasharray</strong>,
-										<br>
-										<strong>stroke-dashoffset</strong>ì„ ì´ìš©í•˜ì—¬ ê°ê°ì˜ <strong>stroke</strong>ì™€
-										<strong>stroke-dasharray</strong>ë‹¤ë¥´ê²Œ ì…ë ¥í•˜ì—¬ ì• ë‹ˆë©”ì´ì…˜ì„ ì™„ì„±í•˜ì˜€ìŠµë‹ˆë‹¤.
+										<br> <strong>stroke-dashoffset</strong>À» ÀÌ¿ëÇÏ¿© °¢°¢ÀÇ <strong>stroke</strong>¿Í
+										<strong>stroke-dasharray</strong>´Ù¸£°Ô ÀÔ·ÂÇÏ¿© ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ¿Ï¼ºÇÏ¿´½À´Ï´Ù.
 									</p>
 								</div>
 								<div class="iframe iframe-right">
@@ -769,17 +725,16 @@
 
 							<div class="ani-wrap clearfix">
 								<div class="tit tit-left">
-									Roket<br>
-									<em>Animation</em>
+									Roket<br> <em>Animation</em>
 								</div>
 								<div class="desc desc-left">
 									<h5>Roket Animation</h5>
 									<p>
-										ì´ ì• ë‹ˆë‹ˆë©”ì´ì…˜ì€ ë¡œì¼“ì€ ê¸°ë³¸ì ì¸ <strong>animation</strong>, <strong>keyframes</strong>ì„
-										ì´ìš©í•˜ì—¬ ì‘ì—…í•œ ì• ë‹ˆë©”ì´ì…˜ì…ë‹ˆë‹¤. <strong>fire-1 ~ fire-4</strong>, <strong>spark-1
-											~ spark-4</strong>ì˜ ì—¬ëŸ¬ ê°œì˜ classë¡œ ë¡œì¼“ì˜ ë¶ˆê½ƒê³¼ ìŠ¤íŒŒí¬ë¥¼ ìì—°ìŠ¤ëŸ½ê²Œ í‘œí˜„í•˜ê³  ë°°ê²½ì€ <strong>star-1
-											~ star-20</strong>ì˜ ì—¬ëŸ¬ ê°œì˜ classë¡œ ìš°ì£¼ì˜ ë³„ì„ í‘œí˜„í•˜ì˜€ìŠµë‹ˆë‹¤. ë¡œì¼“ì´ ì›€ì§ì—¬ ë³´ì´ë„ë¡ ë³„ì„ <strong>translate</strong>,
-										<strong>scale</strong>ì„ ì´ìš©í•˜ì˜€ìŠµë‹ˆë‹¤.
+										ÀÌ ¾Ö´Ï´Ï¸ŞÀÌ¼ÇÀº ·ÎÄÏÀº ±âº»ÀûÀÎ <strong>animation</strong>, <strong>keyframes</strong>À»
+										ÀÌ¿ëÇÏ¿© ÀÛ¾÷ÇÑ ¾Ö´Ï¸ŞÀÌ¼ÇÀÔ´Ï´Ù. <strong>fire-1 ~ fire-4</strong>, <strong>spark-1
+											~ spark-4</strong>ÀÇ ¿©·¯ °³ÀÇ class·Î ·ÎÄÏÀÇ ºÒ²É°ú ½ºÆÄÅ©¸¦ ÀÚ¿¬½º·´°Ô Ç¥ÇöÇÏ°í ¹è°æÀº <strong>star-1
+											~ star-20</strong>ÀÇ ¿©·¯ °³ÀÇ class·Î ¿ìÁÖÀÇ º°À» Ç¥ÇöÇÏ¿´½À´Ï´Ù. ·ÎÄÏÀÌ ¿òÁ÷¿© º¸ÀÌµµ·Ï º°À» <strong>translate</strong>,
+										<strong>scale</strong>À» ÀÌ¿ëÇÏ¿´½À´Ï´Ù.
 									</p>
 								</div>
 								<div class="iframe iframe-left">
@@ -793,15 +748,14 @@
 
 							<div class="ani-wrap clearfix">
 								<div class="tit tit-right">
-									3D<br>
-									<em>Cube Animation</em>
+									3D<br> <em>Cube Animation</em>
 								</div>
 								<div class="desc desc-right">
 									<h5>3D Cube Animation</h5>
 									<p>
-										ì´ ì• ë‹ˆë©”ì´ì…˜ì€ 6ê°œì˜ ë‹¤ë¥¸ ë©´ì„ <strong>transform-origin</strong>, <strong>rotate</strong>,
-										<strong>translate</strong>, <strong>animation</strong>, <strong>scale</strong>ê°’ì„
-										ë‹¤ë¥´ê²Œ ì…ë ¥í•˜ì—¬ ìì—°ìŠ¤ëŸ½ê²Œ ì›€ì§ì´ëŠ” Cube Animationì„ ì™„ì„±í•˜ì˜€ìŠµë‹ˆë‹¤.
+										ÀÌ ¾Ö´Ï¸ŞÀÌ¼ÇÀº 6°³ÀÇ ´Ù¸¥ ¸éÀ» <strong>transform-origin</strong>, <strong>rotate</strong>,
+										<strong>translate</strong>, <strong>animation</strong>, <strong>scale</strong>°ªÀ»
+										´Ù¸£°Ô ÀÔ·ÂÇÏ¿© ÀÚ¿¬½º·´°Ô ¿òÁ÷ÀÌ´Â Cube AnimationÀ» ¿Ï¼ºÇÏ¿´½À´Ï´Ù.
 									</p>
 								</div>
 								<div class="iframe iframe-right">
@@ -816,7 +770,7 @@
 			</div>
 			<!-- //section4 -->
 
- 			<div id="section5" style=display:none>
+			<div id="section5" style="display: none">
 				<div class="o_container">
 					<div class="sec5">
 						<div class="sec5-title">
@@ -844,7 +798,7 @@
 						</div>
 					</div>
 				</div>
-			</div> 
+			</div>
 			<!-- //section5 -->
 
 
@@ -862,10 +816,10 @@
 		<script src="assets/js/custom4.js"></script>
 		<script>
 			$(function() {
-				imagesProgress(); //ì´ë¯¸ì§€ ë¡œë”© 
-				counter(); //ìŠ¤í‚¬ ì¹´ìš´í„°
+				imagesProgress(); //ÀÌ¹ÌÁö ·Îµù 
+				counter(); //½ºÅ³ Ä«¿îÅÍ
 
-				//section2 img ìŠ¤í¬ë¡¤ì— ë”°ë¥¸ ì´ë¯¸ì§€ ì›€ì§ì„
+				//section2 img ½ºÅ©·Ñ¿¡ µû¸¥ ÀÌ¹ÌÁö ¿òÁ÷ÀÓ
 				$(window).scroll(
 						function() {
 							var wScroll = $(this).scrollTop();
@@ -894,7 +848,7 @@
 				menuBtn.find(".menu-button.wrap").toggleClass("show2");
 			});
 
-			//ìŠ¤í¬ë¡¤ì‹œ #section3 ì´ë¯¸ì§€ ì›€ì§ì„ ë³€í™”
+			//½ºÅ©·Ñ½Ã #section3 ÀÌ¹ÌÁö ¿òÁ÷ÀÓ º¯È­
 			$(window).scroll(function() {
 				var wScroll = $(this).scrollTop();
 				var offset = (wScroll - $(window).height()) * 0.1;
@@ -910,8 +864,5 @@
 				});
 			});
 		</script>
-
-
-
 </body>
 </html>
