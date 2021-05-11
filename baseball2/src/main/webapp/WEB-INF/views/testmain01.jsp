@@ -226,8 +226,6 @@
 				</div>
 			</c:if>    
 			</div>
-			
-			
 		</div>
 		
 	</div>
@@ -418,8 +416,7 @@
 								</c:forEach>
 
 								<tr id="button">
-									<td colspan="6" align="right"><input type="button"
-										value="글쓰기" class="btn btn-primary" onclick="goForm()" /></td>
+									<td colspan="6" align="right"><input type="button" value="글쓰기" class="btn btn-primary" onclick="goForm()" /></td>
 								</tr>
 							</table>
 						</div>

@@ -42,11 +42,6 @@ public class BoardController {
 	
 	
 	
-	@RequestMapping("/boardRegister.do")
-	public String boardRegister() {
-				
-		return "boardRegister";
-	}
 	
 	@RequestMapping("/test2.do")
 	public String test2(Model model) {
@@ -65,6 +60,11 @@ public class BoardController {
 		
 		return "testmain01";
 	}
+	//게시물 작성 페이지
+	@RequestMapping("/boardRegister.do")
+	public String boardRegister() {
+		return "boardRegister";
+	}
 	//게시물 수정 페이지
 	@RequestMapping("/boardContent.do")
 	public String boardContent(int num, Model model) {
@@ -72,6 +72,8 @@ public class BoardController {
 		model.addAttribute("vo", vo);
 		return "boardContent";
 	}
+	//상세보기
+	
 	//상세보기에서 목록으로
 	@RequestMapping("/boardList.do")
 	public String boardList(Model model) {

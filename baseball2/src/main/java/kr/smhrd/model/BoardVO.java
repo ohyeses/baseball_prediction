@@ -4,19 +4,19 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("BoardVO")
 public class BoardVO {
-	private int idx;
+	private int num;
 	private String title;
-	private String contents;
-	private int count;
+	private String content;
+	private int cnt;
 	private String writer;
-	private String indate;
+	private String send_date;
 	
 	
-	public int getIdx() {
-		return idx;
+	public int getNum() {
+		return num;
 	}
-	public void setIdx(int idx) {
-		this.idx = idx;
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public String getTitle() {
 		return title;
@@ -24,17 +24,17 @@ public class BoardVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContents() {
-		return contents;
+	public String getContent() {
+		return content;
 	}
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public int getCount() {
-		return count++;
+	public int getCnt() {
+		return cnt++;
 	}
-	public void setCount(int count) {
-		this.count = count++;
+	public void setCnt(int count) {
+		this.cnt = cnt++;
 	}
 	public String getWriter() {
 		return writer;
@@ -42,11 +42,11 @@ public class BoardVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public String getIndate() {
-		return indate;
+	public String getSend_date() {
+		return send_date;
 	}
-	public void setIndate(String indate) {
-		this.indate = indate;
+	public void setSend_date(String send_date) {
+		this.send_date = send_date;
 	}
 	
 	

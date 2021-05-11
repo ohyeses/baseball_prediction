@@ -20,35 +20,33 @@
 
 - 게시물등록 -
 <form action="<c:url value='/boardInsert.do'/>" method="post">
-<table class="table table-bordered" style="undefined;table-layout: fixed; width: 468px">
-<colgroup>
-<col style="width: 90px">
-<col style="width: 378px">
-</colgroup>
-<thead>
-  <tr>
-    <th class="tg-c3ow">제목</th>
-    <th class="tg-0pky"><input type="text" name="title"/></th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-c3ow">내용</td>
-    <td class="tg-0pky"><textarea rows="5" cols="47" name="contents"></textarea></td>
-  </tr>
-  <tr>
-    <td class="tg-c3ow">작성자</td>
-    <td class="tg-0pky"><input type="text" name="writer"/></td>
-  </tr>
-
-
-  <tr>
-    <td class="tg-0lax" colspan="2" align="center">
-       <input type="submit" value="등록" class="btn btn-success"/>
-       <input type="reset" value="취소" class="btn btn-warning" onclick="goList()"/>
-    </td>
-  </tr>
-</tbody>
+	<table class="table table-bordered" style="undefined;table-layout: fixed; width: 468px">
+	<colgroup>
+	<col style="width: 90px">
+	<col style="width: 378px">
+	</colgroup>
+	<thead>
+		<tr>
+			<th class="tg-c3ow">제목</th>
+			<th class="tg-0pky"><input type="text" name="title"/></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="tg-c3ow">내용</td>
+			<td class="tg-0pky"><textarea rows="5" cols="47" name="contents"></textarea></td>
+		</tr>
+		<tr>
+			<td class="tg-c3ow">작성자</td>
+			<td class="tg-0pky"></td>
+		</tr>
+		<tr>
+			<td class="tg-0lax" colspan="2" align="center">
+	       <input type="submit" value="등록" class="btn btn-success"/>
+	       <input type="reset" value="취소" class="btn btn-warning" onclick="goList()"/>
+	    </td>
+	  </tr>
+	</tbody>
 </table>
 </form>
 
