@@ -404,15 +404,16 @@
 								</tr>
 								<c:forEach var="vo" items="${list}">
 									<tr>
-										<td>${vo.idx}</td>
+										<td>${vo.num}</td>
 										<td>
-											<a href="<c:url value='/boardContent.do'/>?num=${vo.idx}">${vo.title}</a>
+											<a href="<c:url value='/boardContent.do'/>?num=${vo.num}">${vo.title}</a>
 										</td>
-										<td>${vo.count}</td>
+										<td>${vo.cnt}</td>
 										<td>${vo.writer}</td>
-										<td>${vo.indate}</td>
-										<td><input type="button" value="삭제" class="btn-delete"
-											onclick="goDel(${vo.idx})" /></td>
+										<td>${vo.send_date}</td>
+										<td>
+											<input type="button" value="삭제" class="btn-delete" onclick="goDel(${vo.num})" />
+										</td>
 									</tr>
 								</c:forEach>
 

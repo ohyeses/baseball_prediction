@@ -20,14 +20,6 @@ public class BoardController {
 	@Resource(name="boardMapper")
 	private BoardMapper dao;	
 	
-	// 게시판관리 컨트롤러
-	@RequestMapping("/boardList.do")
-	public String boardList(Model model) {
-		List<BoardVO> list=dao.boardList();	
-		model.addAttribute("list", list);
-		
-		return "boardList"; // /WEB-INF/views/memberList.jsp <--- ${list}
-	}
 	
 	// new
 	@RequestMapping("/boardInsert.do")
@@ -48,12 +40,7 @@ public class BoardController {
 		return "redirect:/board.do";
 	}
 	
-	@RequestMapping("/boardContent.do")
-	public String boardContent(int num, Model model) {
-		BoardVO vo=dao.boardContent(num);
-		model.addAttribute("vo", vo);
-		return "boardContent";
-	}
+	
 	
 	@RequestMapping("/boardRegister.do")
 	public String boardRegister() {
@@ -64,29 +51,34 @@ public class BoardController {
 	@RequestMapping("/test2.do")
 	public String test2(Model model) {
 		
-		/*
-		 * List<MemberVO> list=dao.memberList(); model.addAttribute("list", list);
-		 */
-		/* 이것때매 안됐음 Board면 BoardList 가져오기*/
-		
 		List<BoardVO> list=dao.boardList();	
 		model.addAttribute("list", list);
 		
-		return "test2"; // /WEB-INF/views/memberList.jsp <--- ${list}
+		return "test2";
 	}
 	//메인 페이지 접속
 	@RequestMapping("/testmain01.do")
 	public String board(Model model) {
 		
-		/*
-		 * List<MemberVO> list=dao.memberList(); model.addAttribute("list", list);
-		 */
-		/* 이것때매 안됐음 Board면 BoardList 가져오기*/
-		
 		List<BoardVO> list=dao.boardList();	
 		model.addAttribute("list", list);
 		
-		return "testmain01"; // /WEB-INF/views/memberList.jsp <--- ${list}
+		return "testmain01";
+	}
+	//게시물 수정 페이지
+	@RequestMapping("/boardContent.do")
+	public String boardContent(int num, Model model) {
+		BoardVO vo=dao.boardContent(num);
+		model.addAttribute("vo", vo);
+		return "boardContent";
+	}
+	//상세보기에서 목록으로
+	@RequestMapping("/boardList.do")
+	public String boardList(Model model) {
+		List<BoardVO> list=dao.boardList();	
+		model.addAttribute("list", list);
+		
+		return "testmain01#section2"; // /WEB-INF/views/memberList.jsp <--- ${list}
 	}
 	
 	

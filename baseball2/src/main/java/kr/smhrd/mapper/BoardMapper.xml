@@ -4,27 +4,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.smhrd.mapper.BoardMapper">
 
-	<!-- insert 수정 -->
+	<!-- 등록 insert -->
 	<insert id="boardInsert" parameterType="kr.smhrd.model.BoardVO"> 
-		insert into board(writer, title, content, send_date) 
-		values(#{writer},#{title},#{content},#{send_date})
+		insert into board(num, writer, title, content, send_date) 
+		values(default,#{writer},#{title},#{content},default)
 	</insert>
-
+	<!-- 삭제 -->
 	<delete id="boardDelete" parameterType="Integer">
 		delete from board where
 		writer=#{writer}
 	</delete>
-
+	<!-- 수정 페이지 -->
 	<select id="boardContent" parameterType="Integer" resultType="kr.smhrd.model.BoardVO">
 		select * from board
-		where writer=#{writer}
-		
+		where num=#{num}
 	</select>
-
+	<!-- 수정 -->
 	<update id="boardUpdate" parameterType="kr.smhrd.model.BoardVO">
 		update board set
 		title=#{title}, content=#{content}
-		where writer=#{writer}
-		
+		where num=#{num}
 	</update>
+	
+	<select id="memberMyList">
+		select writer, title, content, send_date 
+		from board
+		where writer=#{writer}
+	</select>
+	
+	
 </mapper>
