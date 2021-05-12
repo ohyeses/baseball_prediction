@@ -10,7 +10,6 @@ package kr.smhrd.myapp;
 
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,9 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.smhrd.mapper.BoardMapper;
 import kr.smhrd.mapper.MemberMapper;
-import kr.smhrd.model.BoardVO;
 import kr.smhrd.model.MemberVO;
 
 @Controller
@@ -39,7 +36,7 @@ public class MemberController {
 	@RequestMapping("/memberInsert.do")
 	public String memberInsert(MemberVO vo) {
 		dao.memberInsert(vo);
-		return "testmain01";
+		return "redirect:/testmain01.do";
 	}
 	//중복확인
 	@RequestMapping("/idcheck.do")
@@ -69,7 +66,7 @@ public class MemberController {
 			session.setAttribute("msg", "사용자 정보가 올바르지 않습니다");
 		}
 		
-		return "testmain01";
+		return "redirect:/testmain01.do";
 	}
 	
 	//로그아웃

@@ -12,7 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript">
      function goList(){
-    	location.href="<c:url value='/boardList.do'/>"; 
+    	location.href="<c:url value='/testmain01.do#section2'/>"; 
      }  
   </script>
 </head>
@@ -34,11 +34,11 @@
 	<tbody>
 		<tr>
 			<td class="tg-c3ow">내용</td>
-			<td class="tg-0pky"><textarea rows="5" cols="47" name="contents"></textarea></td>
+			<td class="tg-0pky"><textarea rows="5" cols="47" name="content"></textarea></td>
 		</tr>
 		<tr>
 			<td class="tg-c3ow">작성자</td>
-			<td class="tg-0pky"></td>
+			<td class="tg-0pky"><input type="hidden" value="${id}" name="writer"/>${id}</td>
 		</tr>
 		<tr>
 			<td class="tg-0lax" colspan="2" align="center">

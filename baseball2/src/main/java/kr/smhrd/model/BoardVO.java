@@ -31,10 +31,10 @@ public class BoardVO {
 		this.content = content;
 	}
 	public int getCnt() {
-		return cnt++;
+		return cnt;
 	}
-	public void setCnt(int count) {
-		this.cnt = cnt++;
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 	public String getWriter() {
 		return writer;

@@ -33,7 +33,9 @@ CREATE TABLE WEATHER (
 
 INSERT INTO MEMBERS VALUES('test', '123','김동식',20,'기아')
 INSERT INTO WEATHER VALUES(INDEX_NUM.NEXTVAL, 'SEOUL','2021-03-22',20,21,30)
-INSERT INTO BOARD VALUES(default, 0,'test','a','asdasd',default)
+INSERT INTO BOARD VALUES(default, 0,'test','d','asdasd',default)
+insert into board(cnt, writer, title, content) 
+values(0,'qwe','임시','테스트')
 /* SEQUENCE TABLE*/
 
 CREATE SEQUENCE NUM START WITH 1 INCREMENT BY 1;

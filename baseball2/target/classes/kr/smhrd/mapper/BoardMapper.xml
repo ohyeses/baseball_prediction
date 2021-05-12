@@ -6,18 +6,25 @@
 
 	<!-- 등록 insert -->
 	<insert id="boardInsert" parameterType="kr.smhrd.model.BoardVO"> 
-		insert into board(num, writer, title, content, send_date) 
-		values(default,#{writer},#{title},#{content},default)
+		insert into board(cnt, writer, title, content) 
+		values(0,#{writer},#{title},#{content})
 	</insert>
-	<!-- 삭제 -->
-	<delete id="boardDelete" parameterType="Integer">
-		delete from board where
-		writer=#{writer}
-	</delete>
-	<!-- 수정 페이지 -->
+	<!-- 게시물 상세보기 페이지 -->
 	<select id="boardContent" parameterType="Integer" resultType="kr.smhrd.model.BoardVO">
 		select * from board
 		where num=#{num}
+	</select>
+	<!-- 조회수 증가 -->
+	<update id="boardViewCnt" parameterType="Integer">
+		update board
+		set cnt=cnt+1
+		where num=#{num}
+	</update>
+	<!-- 개인목차 -->
+	<select id="memberMyList" parameterType="String" resultType="hashmap">
+		select num, writer, cnt, title, send_date
+		from board
+		where writer=#{writer}
 	</select>
 	<!-- 수정 -->
 	<update id="boardUpdate" parameterType="kr.smhrd.model.BoardVO">
@@ -25,12 +32,11 @@
 		title=#{title}, content=#{content}
 		where num=#{num}
 	</update>
-	
-	<select id="memberMyList">
-		select writer, title, content, send_date 
-		from board
-		where writer=#{writer}
-	</select>
-	
+	<!-- 삭제 -->
+	<delete id="boardDelete" parameterType="Integer">
+		delete from board where
+		num=#{num}
+	</delete>
+
 	
 </mapper>

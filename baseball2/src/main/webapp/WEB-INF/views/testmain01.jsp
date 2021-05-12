@@ -53,6 +53,8 @@
 		div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#baadad; border:1px solid #ccc; }
 		div.modalContent button.modal_cancel { margin-left:20px; }
 		div.modalContent button.idchecksubmit { position: relative; background-color: #f1f1f1; font-size: 16px; padding: 10px 20px;  cursor: pointer;  border-radius: 5px;  text-align: center; margin:0px 0; }
+		
+		button.boardselect {font-size:15px; padding:5px 10px; margin:10px 0; background:#baadad;}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- 로그인 스크립트 -->
@@ -62,6 +64,13 @@
 			<c:if test="${! empty msg}">
 				alert("${msg}");
 				<c:remove var='msg' scope='session'/> 
+			</c:if>    	 
+		});
+		//내글보기 페이지 전환
+		$(document).ready(function(){
+			<c:if test="${! empty page2}">
+				location.href="#section2";
+				<c:remove var='page2' scope='session'/> 
 			</c:if>    	 
 		});
 		//로그인 미기입부 확인
@@ -102,7 +111,7 @@
 		}
 		//회원정보 수정 페이지
 		function contentpg(){
-			location.href="<c:url value='/memberContent.do'/>?id="+(id="${id}");
+			location.href="<c:url value='/memberContent.do'/>?id=${id}";
 		}
 		//회원 탈퇴 페이지 활성화 버튼
 		function memderdel(){
@@ -113,17 +122,16 @@
 			$(".replyModal01").attr("style", "display:none;");
 			$(".replyModal02").attr("style", "display:none;");
 		}
+		//개인 목차 전환
+		function memListView(){
+			location.href="<c:url value='/memberMyList.do'/>?writer="+(writer="${id}");
+		}
+		//게시물작성 페이지 이동
+		function goForm(){
+			location.href="<c:url value='/boardRegister.do'/>";
+		} 
 	</script> 
-	<script type="text/javascript">
-	     function goForm(){
-	    	// ??등록페이지로 요청(/mvc)
-	    	location.href="<c:url value='/test2.do'/>";
-	     } 
-	     function goDel(num){
-	     	// ??삭제페이지로 요청   get(querystring:KEY=VALUE&KEY=VALUE~~~)
-	     	location.href="<c:url value='/boardDelete.do'/>?num="+num;  // num=2
-	      }
-  </script>
+
 </head>
 <body>
 	
@@ -386,6 +394,7 @@
 				<div class="sec2">
 					<div class="about show">
 
+						
 						<div class="board_list">
 							<h2>게시물 목록</h2>
 							<!-- 게시판 board -->
@@ -397,31 +406,43 @@
 									<td>조회수</td>
 									<td>등록자</td>
 									<td>등록일</td>
-									<td>삭제</td>
-
+									<td>상세보기</td>
 								</tr>
 								<c:forEach var="vo" items="${list}">
 									<tr>
 										<td>${vo.num}</td>
-										<td>
-											<a href="<c:url value='/boardContent.do'/>?num=${vo.num}">${vo.title}</a>
-										</td>
+										<td>${vo.title}</td>
 										<td>${vo.cnt}</td>
 										<td>${vo.writer}</td>
 										<td>${vo.send_date}</td>
 										<td>
-											<input type="button" value="삭제" class="btn-delete" onclick="goDel(${vo.num})" />
+											<a href="<c:url value='/boardContent.do'/>?num=${vo.num}">내용 보기  </a>
+											<c:if test="${id eq vo.writer}">
+											<a href="<c:url value='/boardDelete.do'/>?num=${vo.num}">/ 삭제</a>
+											</c:if>
 										</td>
 									</tr>
 								</c:forEach>
 
+								
+								<c:if test="${id!='' && id!=null}">
 								<tr id="button">
 									<td colspan="6" align="right"><input type="button" value="글쓰기" class="btn btn-primary" onclick="goForm()" /></td>
 								</tr>
+								</c:if>
 							</table>
 						</div>
+						
+						
 					</div>
-
+					<c:if test="${id!='' && id!=null}">
+					<div>
+						<form action="<c:url value='/boardList.do'/>">
+							<button type="submit" class="boardselect" >전체 글</button>
+						</form>
+						<button type="submit" class="boardselect" onclick="memListView()">작성 글</button>
+					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -632,7 +653,6 @@
 							<a href="http://wngus-3277.tistory.com/" target="_blank">
 								<div class="s1_btn cont5">
 									<p>+</p> 
-									<span data-text="VIEW">VIEW</span> <span data-text="MY">MY</span> <span data-text="WORK">WORK</span>
 								</div>
 							</a>
 						</div>
