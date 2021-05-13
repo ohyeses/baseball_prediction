@@ -1,326 +1,10 @@
-// canvas settings
-var viewWidth = 768,
-    viewHeight = 768,
-    drawingCanvas = document.getElementById("drawing_canvas"),
-    ctx,
-    timeStep = (1/60),
-    time = 0;
-
-var nodes = [],
-    signals = [];
-
-var signalCount = 0;
-
-window.onload = function() {
-    initDrawingCanvas();
-    createNodes();
-    connectNodes();
-
-    transmit();
-    setInterval(transmit, 1500);
-
-    requestAnimationFrame(loop);
-};
-
-function initDrawingCanvas() {
-    drawingCanvas.width = viewWidth;
-    drawingCanvas.height = viewHeight;
-    ctx = drawingCanvas.getContext('2d');
-}
-
-function createNodes() {
-    var rad = viewWidth * 0.5 - 10;
-
-    for (var i = 0; i < 300; i++) {
-        var q = Math.random() * (Math.PI * 2);
-        var r = Math.sqrt(Math.random());
-        var x = (rad * r) * Math.cos(q) + viewWidth * 0.5;
-        var y = (rad * r) * Math.sin(q) + viewWidth * 0.5;
-
-        nodes[i] = new Node(x, y);
-    }
-}
-
-function connectNodes() {
-    var connection,
-        j,
-        connectCount;
-
-    for (var i = 0; i < nodes.length; i++) {
-        j = 0;
-
-        connectCount = Math.floor(randomRange(3, 6));
-
-        while (j < connectCount) {
-            connection = getRandom(nodes);
-
-            if (nodes[i] !== connection) {
-                nodes[i].connections.push(connection);
-                j++;
-            }
-        }
-    }
-}
-
-function transmit() {
-    signals.push(new Signal(getRandom(nodes)));
-    signalCount++;
-}
-
-function update() {
-    nodes.forEach(function(n) {
-        n.update();
-    });
-
-    signals.forEach(function(s) {
-        if (s.update() === true) {
-            signals.splice(signals.indexOf(s), 1);
-        }
-    });
-}
-
-function draw() {
-    ctx.clearRect(0, 0, viewWidth, viewHeight);
-
-    nodes.forEach(function(n) {
-        n.draw();
-    });
-
-    signals.forEach(function(s) {
-        s.draw();
-    });
-}
-
-function loop() {
-    update();
-    draw();
-    time += timeStep;
-    requestAnimationFrame(loop);
-}
-
-function Node(x, y) {
-    this.x = this._x = x;
-    this.y = this._y = y;
-
-    this.connections = [];
-
-    this.r = randomRange(-10, 10);
-}
-Node.prototype = {
-    update:function() {
-        this.x = this._x + Math.sin(time) * this.r;
-        this.y = this._y + Math.cos(time) * this.r;
-    },
-    draw:function() {
-        ctx.strokeStyle = '#fff';
-        ctx.fillStyle = '#fff';
-        ctx.lineWidth = 0.05;
-
-        ctx.fillRect(this.x, this.y, 1, 1);
-
-        for (var i = 0; i < this.connections.length; i++) {
-            ctx.beginPath();
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(this.connections[i].x, this.connections[i].y);
-            ctx.stroke();
-        }
-    }
-};
-
-function Signal(start) {
-    this.start = start;
-    this.parts = [];
-    this.completeParts = [];
-    this.strength = 4.0;
-    this.jumps = 0;
-    
-    var tint = (signalCount % 12) * 30;
-    // var tint = Math.floor(Math.random() * 360);
-    console.log(tint);
-    this.style = 'hsl(' + tint + ',100%,50%)';
-
-    for (var i = 0; i < start.connections.length; i++) {
-        this.parts.push(new SignalPart(this.start, this.start.connections[i], this.strength, this.style));
-    }
-}
-Signal.prototype = {
-    update:function() {
-        var complete = false;
-        this.completeParts.length = 0;
-
-        for (var i = this.parts.length - 1; i >= 0; i--) {
-            this.parts[i].time += timeStep;
-
-            if (this.parts[i].complete) {
-                this.completeParts.push(this.parts.splice(i, 1)[0]);
-            }
-        }
-        
-        if (this.completeParts.length > 0) {
-            this.jumps++;
-            this.strength--;
-            complete = this.jumps === 3;
-        }
-      
-        if (complete === false) {
-            var part,
-              end,
-              connection;
-
-            for (var j = 0; j < this.completeParts.length; j++) {
-                part = this.completeParts[j];
-                end = part.end;
-
-                for (var k = 0; k < end.connections.length; k++) {
-                    connection = end.connections[k];
-
-                    this.parts.push(new SignalPart(end, connection, this.strength, this.style));
-                }
-            }
-        }
-      
-        return complete;
-    },
-    draw:function() {
-        for (var i = 0; i < this.parts.length; i++) {
-            this.parts[i].draw();
-        }
-    }
-};
-
-function SignalPart(start, end, strength, style) {
-    this.start = start;
-    this.end = end;
-    this.strength = strength;
-    this.style = style;
-    this._time = 0;
-    this.prevTime = 0;
-    this.duration = 2;
-    this.complete = false;
-
-    this.p0 = {x:0, y:0};
-    this.p1 = {x:0, y:0};
-}
-SignalPart.prototype = {
-    set time(v) {
-        this.prevTime = this._time;
-        this._time = v >= this.duration ? this.duration : v;
-        this.complete = this._time === this.duration;
-    },
-    get time() {
-        return this._time;
-    },
-    draw:function() {
-        var t0 = Ease.outCubic(this.prevTime, 0, 1, this.duration);
-        var t1 = Ease.outQuad(this.time, 0, 1, this.duration);
-        lerp(this.start, this.end, t0, this.p0);
-        lerp(this.start, this.end, t1, this.p1);
-
-        ctx.strokeStyle = this.style;
-        ctx.lineWidth = this.strength * 0.25;
-        ctx.lineCap = 'round';
-        ctx.beginPath();
-        ctx.moveTo(this.p0.x, this.p0.y);
-        ctx.lineTo(this.p1.x, this.p1.y);
-        ctx.stroke();
-    }
-};
-
-
-
-function randomRange(min, max) {
-    return min + Math.random() * (max - min);
-}
-
-function getRandom(a) {
-    return a[Math.floor(Math.random() * a.length)];
-}
-
-function lerp(n1, n2, t, p) {
-    p = p || {x:0, y:0};
-
-    p.x = n1.x + t * (n2.x - n1.x);
-    p.y = n1.y + t * (n2.y - n1.y);
-
-    return p;
-}
-
-/**
- * easing equations from http://gizma.com/easing/
- * t = current time
- * b = start value
- * c = delta value
- * d = duration
- */
-var Ease = {
-    inCubic:function (t, b, c, d) {
-        t /= d;
-        return c*t*t*t + b;
-    },
-    outCubic:function(t, b, c, d) {
-        t /= d;
-        t--;
-        return c*(t*t*t + 1) + b;
-    },
-    inQuad: function (t, b, c, d) {
-        return c*(t/=d)*t + b;
-    },
-    outQuad: function (t, b, c, d) {
-        return -c *(t/=d)*(t-2) + b;
-    },
-    inOutCubic:function(t, b, c, d) {
-        t /= d/2;
-        if (t < 1) return c/2*t*t*t + b;
-        t -= 2;
-        return c/2*(t*t*t + 2) + b;
-    }
-};
 
 
 
 $("body").addClass("active");
-//시작 할때 프로그램바 작동부 
-//imageProgress
-/*function imagesProgress(){
-	var $container = $("#progress"),
-        $container2 = $(".progress2"),
-		$progressBar = $container.find(".progress-bar"),
-		$progressText = $container.find(".progress-text"),
-		imgLoad = imagesLoaded("body"),	
-		imgTotal = imgLoad.images.length,	
-		imgLoaded = 0,										
-		current = 0,							
-		progressTimer = setInterval(updateProgress, 1000 / 60);
-	
-	imgLoad.on("progress", function(){
-		imgLoaded++;
-	});
 
-	function updateProgress(){
-		var target = ( imgLoaded / imgTotal) * 100;
-		
-		current += ( target - current) * 0.1;
-		$progressBar.css({ width: current + '%' });
-		$progressText.text( Math.floor(current) + '%' );
-		
-		if(current >= 100){
-			clearInterval(progressTimer);
-			$container.addClass("progress-complete");
-			$progressBar.add($progressText)
-				.delay(500)
-				.animate({opacity: 0},250,function(){
-					$container.animate({top: '-110%'},2000,'easeInOutQuint');
-                    $container2.animate({bottom: '-110%'},2000,'easeInOutQuint');
-				});
-			$("body").addClass("active");
-		}
-		if(current > 99.9){
-			current = 100;
-		}
-	}	
-}*/
 
-function counter() {
+/*function counter() {
     if ($('.about .count').size()) {
         $c = $('.about .count');
 
@@ -367,7 +51,7 @@ function counter() {
             });
         }).triggerHandler('scroll');
     }
-}
+}*/
 
 //고정된 사이드 메뉴들
 $(function(){
@@ -471,270 +155,130 @@ $(window).scroll(function(){
     var wScroll = $(this).scrollTop();
 
     //section2 이동시 스크롤 값
-	if(wScroll >= $(".about").offset().top -$(window).height()/1.5){
+	if(wScroll >= $(".about").offset().top -$(window).height()/50){
 		$(".about").addClass("show");
 	} else {
         $(".about").removeClass("show");
     }
-    if(wScroll >= $(".img").offset().top -$(window).height()/1.4){
-		$(".img").addClass("show");
-	} else {
-        $(".img").removeClass("show");
-    }
-    if(wScroll >= $(".about .skill-wrap").offset().top -$(window).height()/1.5){
-		$(".about .skill-wrap").addClass("show");
-	}else {
-        $(".about .skill-wrap").removeClass("show");
-    }
-    if(wScroll >= $(".about .desc").offset().top -$(window).height()/1.5){
-		$(".about .desc").addClass("show");
-	}else {
-        $(".about .desc").removeClass("show");
-    }
-    if(wScroll >= $(".txt").offset().top -$(window).height()/1.5){
-		$(".txt").addClass("show");
-	}else {
-        $(".txt").removeClass("show");
-    }
-    if(wScroll >= $(".showme").offset().top -$(window).height()/1.5){
-		$(".showme").addClass("show");
-	}else {
-        $(".showme").removeClass("show");
-    }
+    
 
-    //section3 이동시 스크롤 값
-    //title
-    if(wScroll >= $(".s1_tit").offset().top -$(window).height()/1.2){
-		$(".s1_tit").addClass("show");
-	}else {
-        $(".s1_tit").removeClass("show");
-    }
-    if(wScroll >= $(".h3_tit").offset().top -$(window).height()/1.5){
-		$(".h3_tit").addClass("show");
-	}else {
-        $(".h3_tit").removeClass("show");
-    }
-    if(wScroll >= $(".p1_desc").offset().top -$(window).height()/1.2){
-		$(".p1_desc").addClass("show");
-	}else {
-        $(".p1_desc").removeClass("show");
-    }
-    if(wScroll >= $(".p2_desc").offset().top -$(window).height()/1.2){
-		$(".p2_desc").addClass("show");
-	}else {
-        $(".p2_desc").removeClass("show");
-    }
+//section3 이동시 스크롤 값
+    
     // cont1
-    if(wScroll >= $(".s3-cont1 .s3-img1.visual-middle").offset().top -$(window).height()/1.4){
-		$(".s3-cont1 .s3-img1.visual-middle").addClass("show");
+	if(wScroll >= $(".s3-cont1 .s3-img1.visual-middle").offset().top -$(window).height()/1.2){
+	    $(".s3-cont1 .s3-img1.visual-middle").addClass("show");
 	}else {
-        $(".s3-cont1 .s3-img1.visual-middle").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont1 .s3-img2.visual-up").offset().top -$(window).height()/1.2){
-		$(".s3-cont1 .s3-img2.visual-up").addClass("show");
-	}else {
-        $(".s3-cont1 .s3-img2.visual-up").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont1 .s3-img3.visual-fast").offset().top -$(window).height()/1.4){
-		$(".s3-cont1 .s3-img3.visual-fast").addClass("show");
-	}else {
-        $(".s3-cont1 .s3-img3.visual-fast").removeClass("show");
-    }
-    if(wScroll >= $(".s1_tit.cont1").offset().top -$(window).height()/1.2){
-		$(".s1_tit.cont1").addClass("show");
-	}else {
-        $(".s1_tit.cont1").removeClass("show");
-    }
-    if(wScroll >= $(".h3_tit.cont1").offset().top -$(window).height()/1.5){
-		$(".h3_tit.cont1").addClass("show");
-	}else {
-        $(".h3_tit.cont1").removeClass("show");
-    }
-    if(wScroll >= $(".p1_desc.cont1").offset().top -$(window).height()/1.2){
-		$(".p1_desc.cont1").addClass("show");
-	}else {
-        $(".p1_desc.cont1").removeClass("show");
-    }
-    if(wScroll >= $(".s1_tit.ta_right").offset().top -$(window).height()/1.2){
-		$(".s1_tit.ta_right").addClass("show");
-	}else {
-        $(".s1_tit.ta_right").removeClass("show");
-    }
-    if(wScroll >= $(".s1_btn.cont1").offset().top -$(window).height()/1.4){
-		$(".s1_btn.cont1").addClass("show");
-	}else {
-        $(".s1_btn.cont1").removeClass("show");
-    }
-     //cont2
-    if(wScroll >= $(".s3-cont2 .s3-img1.visual-middle").offset().top -$(window).height()/1.4){
-		$(".s3-cont2 .s3-img1.visual-middle").addClass("show");
-	}else {
-        $(".s3-cont2 .s3-img1.visual-middle").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont2 .s3-img2.visual-up").offset().top -$(window).height()/1.2){
-		$(".s3-cont2 .s3-img2.visual-up").addClass("show");
-	}else {
-        $(".s3-cont2 .s3-img2.visual-up").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont2 .s3-img3.visual-fast").offset().top -$(window).height()/1.6){
-		$(".s3-cont2 .s3-img3.visual-fast").addClass("show");
-	}else {
-        $(".s3-cont2 .s3-img3.visual-fast").removeClass("show");
-    }
-    if(wScroll >= $(".s1_tit.cont2").offset().top -$(window).height()/1.2){
-		$(".s1_tit.cont2").addClass("show");
-	}else {
-        $(".s1_tit.cont2").removeClass("show");
-    }
-    if(wScroll >= $(".h3_tit.cont2").offset().top -$(window).height()/1.5){
-		$(".h3_tit.cont2").addClass("show");
-	}else {
-        $(".h3_tit.cont2").removeClass("show");
-    }
-    if(wScroll >= $(".p1_desc.cont2").offset().top -$(window).height()/1.2){
-		$(".p1_desc.cont2").addClass("show");
-	}else {
-        $(".p1_desc.cont2").removeClass("show");
-    }
-    if(wScroll >= $(".s1_tit.ta_left").offset().top -$(window).height()/1.2){
-		$(".s1_tit.ta_left").addClass("show");
-	}else {
-        $(".s1_tit.ta_left").removeClass("show");
-    }
-    if(wScroll >= $(".s1_btn.cont2").offset().top -$(window).height()/1.4){
-		$(".s1_btn.cont2").addClass("show");
-	}else {
-        $(".s1_btn.cont2").removeClass("show");
-    }
-    //cont3
-	if(wScroll >= $(".s3-cont3 .s3-img1.visual-middle").offset().top -$(window).height()/1.6){
-		$(".s3-cont3 .s3-img1.visual-middle").addClass("show");
-	}else {
-	    $(".s3-cont3 .s3-img1.visual-middle").removeClass("show");
+	    $(".s3-cont1 .s3-img1.visual-middle").removeClass("show");
 	}
-	if(wScroll >= $(".s3-cont3 .s3-img2.visual-up").offset().top -$(window).height()/1.4){
-		$(".s3-cont3 .s3-img2.visual-up").addClass("show");
+	if(wScroll >= $(".s3-cont1 .s3-img2.visual-up").offset().top -$(window).height()/1.5){
+	    $(".s3-cont1 .s3-img2.visual-up").addClass("show");
 	}else {
-	    $(".s3-cont3 .s3-img2.visual-up").removeClass("show");
+	    $(".s3-cont1 .s3-img2.visual-up").removeClass("show");
 	}
-	if(wScroll >= $(".s3-cont3 .s3-img3.visual-fast").offset().top -$(window).height()/1.6){
-		$(".s3-cont3 .s3-img3.visual-fast").addClass("show");
+	if(wScroll >= $(".s3-cont1 .s3-img3.visual-fast").offset().top -$(window).height()/1.2){
+	    $(".s3-cont1 .s3-img3.visual-fast").addClass("show");
 	}else {
-	    $(".s3-cont3 .s3-img3.visual-fast").removeClass("show");
+	    $(".s3-cont1 .s3-img3.visual-fast").removeClass("show");
 	}
-	if(wScroll >= $(".s1_tit.cont3").offset().top -$(window).height()/1.2){
-		$(".s1_tit.cont3").addClass("show");
+	
+	
+	if(wScroll >= $(".s1_tit.cont1").offset().top -$(window).height()/1.2){
+	    $(".s1_tit.cont1").addClass("show");
 	}else {
-	    $(".s1_tit.cont3").removeClass("show");
+	    $(".s1_tit.cont1").removeClass("show");
 	}
-	if(wScroll >= $(".h3_tit.cont3").offset().top -$(window).height()/1.5){
-		$(".h3_tit.cont3").addClass("show");
+	if(wScroll >= $(".h3_tit.cont1").offset().top -$(window).height()/1.4){
+	    $(".h3_tit.cont1").addClass("show");
 	}else {
-	    $(".h3_tit.cont3").removeClass("show");
+	    $(".h3_tit.cont1").removeClass("show");
 	}
-	if(wScroll >= $(".p1_desc.cont3").offset().top -$(window).height()/1.2){
-		$(".p1_desc.cont3").addClass("show");
+	if(wScroll >= $(".p1_desc.cont1").offset().top -$(window).height()/1.2){
+	    $(".p1_desc.cont1").addClass("show");
 	}else {
-	    $(".p1_desc.cont3").removeClass("show");
+	    $(".p1_desc.cont1").removeClass("show");
 	}
-	if(wScroll >= $(".s1_tit.ta_right.cont3").offset().top -$(window).height()/1.2){
-		$(".s1_tit.ta_right.cont3").addClass("show");
+	if(wScroll >= $(".s1_tit.ta_right").offset().top -$(window).height()/1.4){
+	    $(".s1_tit.ta_right").addClass("show");
 	}else {
-	    $(".s1_tit.ta_right.cont3").removeClass("show");
+	    $(".s1_tit.ta_right").removeClass("show");
 	}
-	if(wScroll >= $(".s1_btn.cont3").offset().top -$(window).height()/1.2){
-		$(".s1_btn.cont3").addClass("show");
+
+	 //cont2
+	if(wScroll >= $(".s3-cont2 .s3-img1.visual-middle").offset().top -$(window).height()/1.2){
+	    $(".s3-cont2 .s3-img1.visual-middle").addClass("show");
 	}else {
-	    $(".s1_btn.cont3").removeClass("show");
+	    $(".s3-cont2 .s3-img1.visual-middle").removeClass("show");
 	}
-	//cont4
-    if(wScroll >= $(".s3-cont4 .s3-img1.visual-middle").offset().top -$(window).height()/1.6){
-		$(".s3-cont4 .s3-img1.visual-middle").addClass("show");
+	if(wScroll >= $(".s3-cont2 .s3-img2.visual-up").offset().top -$(window).height()/1.2){
+	    $(".s3-cont2 .s3-img2.visual-up").addClass("show");
 	}else {
-        $(".s3-cont4 .s3-img1.visual-middle").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont4 .s3-img2.visual-up").offset().top -$(window).height()/1.4){
-		$(".s3-cont4 .s3-img2.visual-up").addClass("show");
+	    $(".s3-cont2 .s3-img2.visual-up").removeClass("show");
+	}
+	if(wScroll >= $(".s3-cont2 .s3-img3.visual-fast").offset().top -$(window).height()/1.2){
+	    $(".s3-cont2 .s3-img3.visual-fast").addClass("show");
 	}else {
-        $(".s3-cont4 .s3-img2.visual-up").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont4 .s3-img3.visual-fast").offset().top -$(window).height()/1.6){
-		$(".s3-cont4 .s3-img3.visual-fast").addClass("show");
+	    $(".s3-cont2 .s3-img3.visual-fast").removeClass("show");
+	}
+
+	
+	
+	if(wScroll >= $(".s1_tit.cont2").offset().top ){
+		console.log(wScroll);
+	    $(".s1_tit.cont2").addClass("show");
+	    $(".s1_tit.cont_pl").addClass("show");
 	}else {
-        $(".s3-cont4 .s3-img3.visual-fast").removeClass("show");
-    }
-    if(wScroll >= $(".s1_tit.cont4").offset().top -$(window).height()/1.2){
-		$(".s1_tit.cont4").addClass("show");
+	    $(".s1_tit .cont2").removeClass("show");
+	    $(".s1_tit .cont_pl").removeClass("show");
+	}
+	if(wScroll >= $(".h3_tit.cont2").offset().top -$(window).height()/1.4){
+	    $(".h3_tit.cont2").addClass("show");
+	    $(".h3_tit.cont1_pl").addClass("show");
 	}else {
-        $(".s1_tit.cont4").removeClass("show");
-    }
-    if(wScroll >= $(".h3_tit.cont4").offset().top -$(window).height()/1.5){
-		$(".h3_tit.cont4").addClass("show");
+	    $(".h3_tit.cont2").removeClass("show");
+	    $(".h3_tit.cont1_pl").removeClass("show");
+	}
+	if(wScroll >= $(".p1_desc.cont2").offset().top -$(window).height()/1.2){
+	    $(".p1_desc.cont2").addClass("show");
+	    $(".p1_desc.cont1_pl").addClass("show");
 	}else {
-        $(".h3_tit.cont4").removeClass("show");
-    }
-    if(wScroll >= $(".p1_desc.cont4").offset().top -$(window).height()/1.2){
-		$(".p1_desc.cont4").addClass("show");
+	    $(".p1_desc.cont2").removeClass("show");
+	    $(".p1_desc.cont1_pl").removeClass("show");
+	}
+	if(wScroll >= $(".s1_tit.ta_left").offset().top -$(window).height()/1.6){
+	    $(".s1_tit.ta_left").addClass("show");
+	    $(".s1_tit.ta_pl").addClass("show");
 	}else {
-        $(".p1_desc.cont4").removeClass("show");
-    }
-    if(wScroll >= $(".s1_tit.ta_left.cont4").offset().top -$(window).height()/1.2){
-		$(".s1_tit.ta_left.cont4").addClass("show");
+	    $(".s1_tit.ta_left").removeClass("show");
+	    $(".s1_tit.ta_pl").removeClass("show");
+	}
+
+
+	//title
+	if(wScroll >= $(".s1_tit").offset().top -$(window).height()/1.2){
+	    $(".s1_tit").addClass("show");
 	}else {
-        $(".s1_tit.ta_left.cont4").removeClass("show");
-    }
-    if(wScroll >= $(".s1_btn.cont4").offset().top -$(window).height()/1.2){
-		$(".s1_btn.cont4").addClass("show");
+	    $(".s1_tit").removeClass("show");
+	}
+	if(wScroll >= $(".h3_tit").offset().top -$(window).height()/1.5){
+	    $(".h3_tit").addClass("show");
 	}else {
-        $(".s1_btn.cont4").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont4-box").offset().top -$(window).height()/1.2){
-        $(".s3-cont4-box").addClass("show");
-    }else {
-        $(".s3-cont4-box").removeClass("show");
-    }
-    //cont5
-    if(wScroll >= $(".s3-cont5 .s3-img1.visual-middle").offset().top -$(window).height()/1.6){
-		$(".s3-cont5 .s3-img1.visual-middle").addClass("show");
+	    $(".h3_tit").removeClass("show");
+	}
+	if(wScroll >= $(".p1_desc").offset().top -$(window).height()/1.2){
+	    $(".p1_desc").addClass("show");
 	}else {
-        $(".s3-cont5 .s3-img1.visual-middle").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont5 .s3-img2.visual-up").offset().top -$(window).height()/1.4){
-		$(".s3-cont5 .s3-img2.visual-up").addClass("show");
+	    $(".p1_desc").removeClass("show");
+	}
+	if(wScroll >= $(".p2_desc").offset().top -$(window).height()/1.2){
+	    $(".p2_desc").addClass("show");
 	}else {
-        $(".s3-cont5 .s3-img2.visual-up").removeClass("show");
-    }
-    if(wScroll >= $(".s3-cont5 .s3-img3.visual-fast").offset().top -$(window).height()/1.6){
-		$(".s3-cont5 .s3-img3.visual-fast").addClass("show");
-	}else {
-        $(".s3-cont5 .s3-img3.visual-fast").removeClass("show");
-    }
-    if(wScroll >= $(".s1_tit.cont5").offset().top -$(window).height()/1.2){
-		$(".s1_tit.cont5").addClass("show");
-	}else {
-        $(".s1_tit.cont5").removeClass("show");
-    }
-    if(wScroll >= $(".h3_tit.cont5").offset().top -$(window).height()/1.5){
-		$(".h3_tit.cont5").addClass("show");
-	}else {
-        $(".h3_tit.cont5").removeClass("show");
-    }
-    if(wScroll >= $(".p1_desc.cont5").offset().top -$(window).height()/1.2){
-		$(".p1_desc.cont5").addClass("show");
-	}else {
-        $(".p1_desc.cont5").removeClass("show");
-    }
-    if(wScroll >= $(".s1_tit.ta_right.cont5").offset().top -$(window).height()/1.2){
-		$(".s1_tit.ta_right.cont5").addClass("show");
-	}else {
-        $(".s1_tit.ta_right.cont5").removeClass("show");
-    }
-    if(wScroll >= $(".s1_btn.cont5").offset().top -$(window).height()/1.2){
-		$(".s1_btn.cont5").addClass("show");
-	}else {
-        $(".s1_btn.cont5").removeClass("show");
-    }
-    //section4
+	    $(".p2_desc").removeClass("show");
+	}
+    
+    
+    
+    
+//section4
     if(wScroll >= $(".ani-title p").offset().top -$(window).height()/1.4){
 		$(".ani-title p").addClass("show");
 	}else {
@@ -985,68 +529,8 @@ $(".iframe-right").hover(function(){
 	$(".desc-right").css({"top":"40%"});
 });	
 
-//모바일 이미지 클릭했을 때 이미지 변화 (사용 안함)
-/*$(".cont4-box:nth-child(1)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box1.png)' });
-});
-$(".cont4-box:nth-child(2)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box2.png)' });
-});
-$(".cont4-box:nth-child(3)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box3.png)' });
-});
-$(".cont4-box:nth-child(4)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box4.png)' });
-});
-$(".cont4-box:nth-child(5)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box5.png)' });
-});
-$(".cont4-box:nth-child(6)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box6.png)' });
-});
-$(".cont4-box:nth-child(7)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box7.png)' });
-});
-$(".cont4-box:nth-child(8)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box8.png)' });
-});
-$(".cont4-box:nth-child(9)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box9.png)' });
-});
-$(".cont4-box:nth-child(10)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box10.png)' });
-});
 
-$(".cont4-box:nth-child(11)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box01.png)' });
-});
-$(".cont4-box:nth-child(12)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box02.png)' });
-});
-$(".cont4-box:nth-child(13)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box03.png)' });
-});
-$(".cont4-box:nth-child(14)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box04.png)' });
-});
-$(".cont4-box:nth-child(15)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box05.png)' });
-});
-$(".cont4-box:nth-child(16)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box06.png)' });
-});
-$(".cont4-box:nth-child(17)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box07.png)' });
-});
-$(".cont4-box:nth-child(18)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box08.png)' });
-});
-$(".cont4-box:nth-child(19)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box09.png)' });
-});
-$(".cont4-box:nth-child(20)").click(function(){
-    $(".mobile").css({ 'background-image':'url(assets/img/box010.png)' });
-});*/
+
 
 //section3 윈도우 팝업 창
 function popupOpen(){

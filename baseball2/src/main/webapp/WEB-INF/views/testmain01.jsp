@@ -48,16 +48,14 @@
 		div.replyModal01 { position:relative; z-index:1; display: none; }
 		div.replyModal02 { position:relative; z-index:1; display: none; }
 		div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
-		div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:500px; height:550px; padding:20px 10px; background:#fff; border:2px solid #666; }
-		div.modalContent table { position: relative; top: 50px; }
+		div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); background:#E6E6E6; border:2px solid #666; }
+		div.modeljoin { width:500px; height:500px; padding:20px 10px;  }
+		div.modeldel{ width:500px; height:300px; padding:20px 10px;  }
+		div.modalContent table { position: relative; top: 80px; }
 		div.modalContent th { font-size: 20px; border-spacing:0px 0px; border-bottom: 1px solid #1B456B; border-top: 1px solid #1B456B; padding-top: 10px; padding-bottom: 10px;}
 		div.modalContent th.text-tg-join { text-align: right; }
 		div.modalContent input { width: 100%; border: 0; font-size: 20px;}
-		div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#baadad; border:1px solid #ccc; }
-		div.modalContent button.modal_cancel { margin-left:20px; }
-		div.modalContent button.idchecksubmit { position: relative; background-color: #f1f1f1; font-size: 16px; padding: 10px 20px;  cursor: pointer;  border-radius: 5px;  text-align: center; margin:0px 0; }
 		
-		button.boardselect {font-size:15px; padding:5px 10px; margin:10px 0; background:#baadad;}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- 로그인 스크립트 -->
@@ -67,14 +65,16 @@
 			<c:if test="${! empty msg}">
 				alert("${msg}");
 				<c:remove var='msg' scope='session'/> 
-			</c:if>    	 
-		});
-		//내글보기 페이지 전환
-		$(document).ready(function(){
+			</c:if>    
+			//내글보기 페이지 전환
 			<c:if test="${! empty page2}">
 				location.href="#section2";
 				<c:remove var='page2' scope='session'/> 
-			</c:if>    	 
+			</c:if> 
+			//게시물 버튼 활성화 조건
+			<c:if test="${id!='' && id!=null}">
+				$(".about").show();
+			</c:if>
 		});
 		//로그인 미기입부 확인
 		function check(){
@@ -133,12 +133,12 @@
 		function goForm(){
 			location.href="<c:url value='/boardRegister.do'/>";
 		} 
+		
 	</script> 
 
 </head>
 <body>
-	
-	    
+	 
 
 	<!-- 왼쪽 상단 클릭시 보이는 부분 -->
     <div class="side-bar-hover">
@@ -189,16 +189,16 @@
 				<span style="font-size: 35px">LOGIN<br></span>
 				<form class="form-inline" action="<c:url value='/memberLogin.do'/>" method="post">
 					<div class="form-group">
-						<label for="user_id">ID:</label><br>
+						<label for="user_id">ID:</label>
 						<input type="text" class="form-control" id="id" name="id">
 					</div>
 					<div class="form-group">
-						<label for="pw">PW:</label><br>
+						<label for="pw">PW:</label>
 						<input type="password" class="form-control" id="pw" name="pw">
 					</div>
 					<div class="email">
-						<button type="submit" class="btn btn-default" onclick="return check()">로그인</button>
-						<button style="margin-left: 20px" type="button" class="singup" onclick="signUp()">회원가입</button>
+						<button style="position: relative; left: -20px; " type="submit" class="boardselect boardselect_member" onclick="return check()">로그인</button>
+						<button style="position: relative; left: -20px; " type="button" class="boardselect boardselect_member" onclick="signUp()">회원가입</button>
 					</div>
 				</form>
 			</c:if>
@@ -208,15 +208,15 @@
 					<span style="font-size: 35px">MEMBER<br></span>
 					<p><strong>${name}</strong>님 <br>환영합니다.</p>
 					<br>
-					<button style="position: absolute; right: 5px;" type="button" class="btn btn-default" onclick="out()">로그아웃</button>
+					<button style="position: absolute; bottom: 38%; right: 5px;" type="button" class="boardselect boardselect_member" onclick="out()">로그아웃</button>
 					<br>
 				</div> 
 				<div class="email">
 					<span style="position: absolute; right: 5px;">개인정보 관리</span>
 					<br>
-					<button style="position: absolute; right: 5px;" type="button" class="btn btn-default" onclick="contentpg()">회원정보 수정</button>
+					<button style="position: absolute; right: 0px;" type="button" class="boardselect boardselect_member" onclick="contentpg()">회원정보 수정</button>
 					<br>
-					<button style="position: absolute; right: 5px;" type="button" class="btn btn-default" onclick="memderdel()">회원 탈퇴</button>
+					<button style="position: relative; top: 5px; right: -19px;" type="button" class="boardselect boardselect_member" onclick="memderdel()">회원 탈퇴</button>
 					<br>
 				</div>
 			</c:if>    
@@ -294,9 +294,9 @@
 	    		<div class="menu-right">
 						<a href="#section1"><span>INTRO</span></a><br> 
 						<a href="#section2"><span>BOARD</span></a><br>
-						<a href="./index4.html#section3"><span>CODING</span></a><br> 
-						<a href="./index4.html#section4"><span>ANIMATION</span></a><br>
-						<a href="./index4.html#section5"><span>CONTACT</span></a><br>
+						<a href="#section3"><span>CODING</span></a><br> 
+						<a href="#section4"><span>ANIMATION</span></a><br>
+						<a href="#section5"><span>CONTACT</span></a><br>
 				</div>
 		    </div>
 		</div>
@@ -374,9 +374,8 @@
 		<div id="section2">
 			<div class="o_container">
 				<div class="sec2">
-					<div class="about show">
+					<div >
 
-						
 						<div class="board_list">
 							<h2>게시물 목록</h2>
 							<!-- 게시판 board -->
@@ -414,49 +413,14 @@
 								</c:if>
 							</table>
 						</div>
-						
-						
 					</div>
-					<c:if test="${id!='' && id!=null}">
-					<div>
+					
+					<div class="about" style="display: none;">
 						<form action="<c:url value='/boardList.do'/>">
-							<button type="submit" class="boardselect" >전체 글</button>
+							<button type="submit" class="boardselect boardselect_list" >전체 글</button>
 						</form>
-						<button type="submit" class="boardselect" onclick="memListView()">작성 글</button>
+						<button type="submit" class="boardselect boardselect_list" onclick="memListView()">작성 글</button>
 					</div>
-					</c:if>
-					
-					
-	                <div class="about show">
-	                    <span></span>
-	                    <div class="img show">
-	                    </div>
-	                    <p class="desc show"></p>
-	                    <div class="txt show">
-	                        <div class="txt-left"></div>
-	                        <div class="txt-right"></div>
-	                    </div>
-
-	                    <div class="skill-wrap">
-							<div class="skill">
-								<ul class="clearfix">
-								</ul>
-							</div>
-						</div>
-
-	                    <div class="showme">
-							<figure class="mypicture">
-							</figure>
-							<div class="sign">
-								<span></span>
-							</div>
-							<div class="myname">
-								<div class="name"></div>
-								<div class="name2"></div>
-							</div>
-						</div>	
-	                </div>
-					
 					
 				</div>
 			</div>
@@ -467,17 +431,9 @@
 		<div id="section3">
 	    	<div class="o_container">
 	            <div class="sec3">
-
-	                <div class="s3-title">
-						<p class="s1_tit">MY WORK</p>
-						<h3 class="h3_tit">
-							<span class="coding" data-text="CODING">CODING</span><br><span class="project" data-text="PROJECT">PROJECT</span>
-						</h3>
-						<p class="p1_desc">This is my portfolio site. I am a web publisher.I can make various homepages using HTML, CSS, javascripts, and JQuery. I gained a lot of skill and experience while taking classes. I hope my portfolio will be pleased with you. Have a good time.</p>
-						<p class="p2_desc">This section shows my coding ability.</p>
-					</div>
-
+	            
 					<div class="s3-cont1 cont-wrap" id="cont1">
+						<!-- 흰색 흔적 -->
 						<div class="s3-img1 visual-middle">
 							<div class="glitch gabia" id="base"></div>
 							<div class="glitch gabia" id="red"></div>
@@ -496,6 +452,9 @@
 							<div class="glitch gabia3" id="cyan"></div>
 							<div class="glitch gabia3" id="transparent"></div>
 						</div>
+						<!-- /흰색 흔적 -->
+						
+						
 						<div class="side-text side-right">
 							<p class="s1_tit cont1">CODING1</p>
 							<h3 class="h3_tit cont1">
@@ -503,16 +462,13 @@
 							</h3>
 							<p class="p1_desc cont1">This website is one of that I handed coding the site, gabia has passed the test css and the web standards test, and it has been fully implemented by cross-browser.</p>
 							<p class="s1_tit ta_right">kimju7.dothome.co.kr</p>
-							<a href="http://kimju7.dothome.co.kr/gabia/gabia5/index.html" target="_blank">
-								<div class="s1_btn cont1">
-									<p>+</p> 
-									<span data-text="VIEW">VIEW</span> <span data-text="MY">MY</span> <span data-text="WORK">WORK</span>
-								</div>
-							</a>
+							
 						</div>
 					</div>
-
+					
+					
 					<div class="s3-cont2 cont-wrap" id="cont2">
+						<!-- 흰색 흔적 -->
 						<div class="s3-img1 visual-middle">
 							<div class="glitch standard" id="base"></div>
 							<div class="glitch standard" id="red"></div>
@@ -531,147 +487,43 @@
 							<div class="glitch standard3" id="cyan"></div>
 							<div class="glitch standard3" id="transparent"></div>
 						</div>
+						<!-- /흰색 흔적 -->
+						
+						
+						
+						
 						<div class="side-text side-left">
-							<p class="s1_tit cont2">CODING2</p>
+							<p class="s1_tit cont2">HOME</p>
 							<h3 class="h3_tit cont2">
 								<span>WEB</span><br><span>STANDARD</span>
 							</h3>
 							<p class="p1_desc cont2">Standard for viewing the same results across all operating systems and all browsers. Every website should be free from any technology environment. Websites must be able to easily get all the information that's available to them without having to be professional.</p>
 							<p class="s1_tit ta_left">kimju7.dothome.co.kr</p>
-							<a href="http://kimju7.dothome.co.kr/webstandard/web/index.html" target="_blank">
-								<div class="s1_btn cont2">
-									<p>+</p> 
-									<span data-text="VIEW">VIEW</span> <span data-text="MY">MY</span> <span data-text="WORK">WORK</span>
-								</div>
-							</a>
 						</div>
+						
+						<!-- 추가 -->
+						<div class="side-text-pl side-right">
+							<p class="s1_tit cont_pl">AWAY</p>
+							<h3 class="h3_tit cont1_pl">
+								<span>GABIA</span><br><span>WEB</span><br><span>SITE</span>
+							</h3>
+							<p class="p1_desc cont1_pl">This website is one of that I handed coding the site, gabia has passed the test css and the web standards test, and it has been fully implemented by cross-browser.</p>
+							<p class="s1_tit ta_pl">kimju7.dothome.co.kr</p>
+						</div>
+						
+						
+						
+					</div>
+					
+					<div class="s3-title">
+						<p class="s1_tit">MY WORK</p>
+						<h3 class="h3_tit">
+							<span class="coding" data-text="CODING">CODING</span><br><span class="project" data-text="PROJECT">PROJECT</span>
+						</h3>
+						<p class="p1_desc">This is my portfolio site. I am a web publisher.I can make various homepages using HTML, CSS, javascripts, and JQuery. I gained a lot of skill and experience while taking classes. I hope my portfolio will be pleased with you. Have a good time.</p>
+						<p class="p2_desc">This section shows my coding ability.</p>
 					</div>
 
-					<div class="s3-cont3 cont-wrap" id="cont3">
-						<div class="s3-img1 visual-middle">
-							<div class="glitch html5" id="base"></div>
-							<div class="glitch html5" id="red"></div>
-							<div class="glitch html5" id="cyan"></div>
-							<div class="glitch html5" id="transparent"></div>
-						</div>
-						<div class="s3-img2 visual-up">
-							<div class="glitch html5_2" id="base"></div>
-							<div class="glitch html5_2" id="red"></div>
-							<div class="glitch html5_2" id="cyan"></div>
-							<div class="glitch html5_2" id="transparent"></div>
-						</div>
-						<div class="s3-img3 visual-fast">
-							<div class="glitch html5_3" id="base"></div>
-							<div class="glitch html5_3" id="red"></div>
-							<div class="glitch html5_3" id="cyan"></div>
-							<div class="glitch html5_3" id="transparent"></div>
-						</div>
-						<div class="side-text side-right">
-							<p class="s1_tit cont3">CODING3</p>
-							<h3 class="h3_tit cont3">
-								<span data-text="Responsive">RESPONSIVE</span><br><span data-text="Site">SITE</span>
-							</h3>
-							<p class="p1_desc cont3">I created a Responsive site using HTML5. <br>Created a outliner and used the jquery slider plugin. <br>I also made use of mousehover. <br>It is supported from ie9, and the responsive is supported as well.</p>
-							<p class="s1_tit ta_right cont3">kimju7.dothome.co.kr</p>
-							<a href="http://kimju7.dothome.co.kr/html5/html5/index.html" target="_blank">
-								<div class="s1_btn cont3">
-									<p>+</p> 
-									<span data-text="VIEW">VIEW</span> <span data-text="MY">MY</span> <span data-text="WORK">WORK</span>
-								</div>
-							</a>
-						</div>
-					</div>
-
-					<div class="s3-cont4 cont-wrap" id="cont4">
-						<div class="s3-img1 visual-middle">
-							<div class="glitch mobile" id="base"></div>
-							<div class="glitch mobile" id="red"></div>
-							<div class="glitch mobile" id="cyan"></div>
-							<div class="glitch mobile" id="transparent"></div>
-						</div>
-						<div class="s3-img2 visual-up">
-							<div class="glitch mobile2" id="base"></div>
-							<div class="glitch mobile2" id="red"></div>
-							<div class="glitch mobile2" id="cyan"></div>
-							<div class="glitch mobile2" id="transparent"></div>
-						</div>
-						<div class="s3-img3 visual-fast">
-							<div class="glitch mobile3" id="base"></div>
-							<div class="glitch mobile3" id="red"></div>
-							<div class="glitch mobile3" id="cyan"></div>
-							<div class="glitch mobile3" id="transparent"></div>
-						</div>
-						<div class="side-text side-left">
-							<p class="s1_tit cont4">CODING4</p>
-							<h3 class="h3_tit cont4">
-								<span data-text="Mobile">MOBILE</span><br><span data-text="Coding">CODING</span>
-							</h3>
-							<p class="p1_desc cont4">Mobile coding is also possible. <br>I coded mobile web site 'SOONJUNGAPP'. <br>It is total of 32 pages and jquery such as sidemenu were actively used.</p>
-							<p class="s1_tit ta_left cont4">kimju7.dothome.co.kr</p>
-							<a href="javascript:popupOpen();" target="_blank">
-								<div class="s1_btn cont4">
-									<p>+</p> 
-									<span data-text="VIEW">VIEW</span> <span data-text="MY">MY</span> <span data-text="WORK">WORK</span>
-								</div>
-							</a>
-						</div>
-						<div class="s3-cont4-box">
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-							<div class="cont4-box"><img src="" alt="mobile image"></div>
-						</div>
-					</div>
-
-					<div class="s3-cont5 cont-wrap" id="cont5">
-						<div class="s3-img1 visual-middle">
-							<div class="glitch tstory" id="base"></div>
-							<div class="glitch tstory" id="red"></div>
-							<div class="glitch tstory" id="cyan"></div>
-							<div class="glitch tstory" id="transparent"></div>
-						</div>
-						<div class="s3-img2 visual-up">
-							<div class="glitch tstory2" id="base"></div>
-							<div class="glitch tstory2" id="red"></div>
-							<div class="glitch tstory2" id="cyan"></div>
-							<div class="glitch tstory2" id="transparent"></div>
-						</div>
-						<div class="s3-img3 visual-fast">
-							<div class="glitch tstory3" id="base"></div>
-							<div class="glitch tstory3" id="red"></div>
-							<div class="glitch tstory3" id="cyan"></div>
-							<div class="glitch tstory3" id="transparent"></div>
-						</div>
-						<div class="side-text side-right">
-							<p class="s1_tit cont5">CODING5</p>
-							<h3 class="h3_tit cont5">
-								<span data-text="Mobile">TSTORY</span><br><span data-text="Coding">CODING</span>
-							</h3>
-							<p class="p1_desc cont5">I coded and designed T-history blog. It explained and organized UI/UX design, UI/UX strategy, cultural contents planning, smart cultural contents development, and service operation.</p>
-							<p class="s1_tit ta_right cont5">kimju7.dothome.co.kr</p>
-							<a href="http://wngus-3277.tistory.com/" target="_blank">
-								<div class="s1_btn cont5">
-									<p>+</p> 
-								</div>
-							</a>
-						</div>
-					</div>
 
 	            </div>
 	        </div>
@@ -781,6 +633,7 @@
 		<div id="section5">
 			<div class="o_container">
 		    	<div class="sec5">
+		    	
 		    		<div class="sec5-title show">
 		    			<span>CONTACT BY</span>
 		    			<span>PUBLISHER</span>
@@ -811,14 +664,14 @@
 	
 	<!-- 회원가입 창 -->
 	<div class="replyModal01">
-		<div class="modalContent">
+		<div class="modalContent modeljoin">
 			<form action="<c:url value='/memberInsert.do'/>" method="post">
 				<table class="table table-bordered" >
 					<tr>
 						<th class="text-tg-join">아이디 : </th>
 						<th class="tg-0pky" colspan="2">
 							<input style="width:70%; float: left;" type="text" minlength="3" maxlength="20" name="id" id="userid"/>
-							<button style="float: right;" type="button" value="중복확인" class="idchecksubmit" id="idck">중복 확인</button>
+							<button style="float: right;" type="button" value="중복확인" class="boardselect idchecksubmit" id="idck">중복 확인</button>
 						</th>
 					</tr>
 					<tr>
@@ -839,8 +692,8 @@
 					</tr>
 					<tr>
 						<th class="tg-0lax" colspan="2" align="center">
-							<button type="submit" value="가입" class="btn btn-success" onclick="return idchtr()">가입</button>
-							<button type="reset" value="취소" class="btn btn-warning" onclick="pageclose()">취소</button>
+							<button type="submit" value="가입" class="boardselect boardselect_list" onclick="return idchtr()">가입</button>
+							<button type="reset" value="취소" class="boardselect boardselect_list" onclick="pageclose()">취소</button>
 						</th>
 					</tr>
 				</table>
@@ -852,10 +705,10 @@
 	
 	<!-- 회원 탈퇴 창 -->
 	<div class="replyModal02">
-		<div class="modalContent">
+		<div class="modalContent madeldel">
 			<form action="<c:url value='/memberDelete.do'/>" method="post">
 				<input type="hidden" name="id" value="${id}"/> 
-				<table class="table table-bordered">
+				<table class="table table-bordered del">
 					<tr>
 						<th colspan="2" align="center">
 							${name}님 탈퇴하시겠습니까
@@ -863,8 +716,8 @@
 					</tr>
 					<tr>
 						<th colspan="2" align="center">
-							<button type="submit" value="탈퇴" class="btn btn-success">탈퇴</button>
-							<button type="reset" value="취소" class="btn btn-warning" onclick="pageclose()">취소</button>
+							<button type="submit" value="탈퇴" class="boardselect boardselect_list">탈퇴</button>
+							<button type="reset" value="취소" class="boardselect boardselect_list" onclick="pageclose()">취소</button>
 						</th>
 					</tr>
 				</table>
@@ -894,7 +747,7 @@
 	<script>
 		$(function(){
             //imagesProgress();		//이미지 로딩 
-            counter();					//스킬 카운터
+            //counter();					//스킬 카운터
 
 			//section2 img 스크롤에 따른 이미지 움직임
             $(window).scroll(function(){
