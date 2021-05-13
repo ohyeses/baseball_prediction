@@ -11,16 +11,19 @@
 	<title>프로젝트</title>
 
 	<!-- css -->
-	<link rel="stylesheet" href="assets/css/reset.css">
-	<link rel="stylesheet" href="assets/css/style4.css">
-	<link rel="stylesheet" href="assets/css/font-awesome.css">
-	<link rel="stylesheet" href="assets/css/animate.css" >
-	<link rel="stylesheet" href="assets/css/slick.css" >
-	<link rel="stylesheet" href="assets/css/slick-theme.css" >
+	<link rel="stylesheet" href="assets/css/reset.css"><!-- 화면 여백 지움 -->
+	<link rel="stylesheet" href="assets/css/style4.css"><!-- 전체 스타일 -->
+	<link rel="stylesheet" href="assets/css/p17_style4.css"><!-- 2페이지 표 스타일 -->
+	
+	
 	<link rel="stylesheet" href="assets/css/glitch.css" >
-	<link rel="stylesheet" href="assets/css/img_glitch.css" >
-	<link rel="stylesheet" href="assets/css/modal.css" >
-	<link rel="stylesheet" href="assets/css/p17_style4.css">
+	<link rel="stylesheet" href="assets/css/slick-theme.css" >
+	<link rel="stylesheet" href="assets/css/slick.css" >
+	<link rel="stylesheet" href="assets/css/animate.css" >
+	<link rel="stylesheet" href="assets/css/font-awesome.css">
+	
+	<!-- 2차 css -->
+	<link rel="stylesheet" href="assets/css/team.css" />
 
 	<!-- font -->
 	<link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
@@ -135,23 +138,7 @@
 </head>
 <body>
 	
-	<!-- 첫 페이지 로딩 부분 -->
-	<div class="progress" id="progress"> 
-		<span class="progress-bar"></span>
-		<span class="progress-text">0%</span>
-	</div>
-<!--     <div class="progress2"></div> -->
-    <!-- //progress -->
-    
-    <!-- 화면 분할선 -->
-    <div id="line">
-        <div class="line sline"></div>
-        <div class="line mline"></div>
-        <div class="line mline"></div>
-        <div class="line sline"></div>
-        <div class="hline"></div>
-    </div>
-    <!-- //line -->
+	    
 
 	<!-- 왼쪽 상단 클릭시 보이는 부분 -->
     <div class="side-bar-hover">
@@ -306,15 +293,10 @@
 	    		<!-- 클릭시 이동하는 부분 -->
 	    		<div class="menu-right">
 						<a href="#section1"><span>INTRO</span></a><br> 
+						<a href="#section2"><span>BOARD</span></a><br>
 						<a href="./index4.html#section3"><span>CODING</span></a><br> 
 						<a href="./index4.html#section4"><span>ANIMATION</span></a><br>
 						<a href="./index4.html#section5"><span>CONTACT</span></a><br>
-						<!-- 	 <a href="#section5"><span>BOARD</span></a><br> -->
-						<a href="#section2"><span>BOARD</span></a><br>
-						<!-- <a href="https://codepen.io/wngus3277" target="_blank"><span>CODEPEN</span></a> -->
-
-
-						<!-- 	    		</div> -->
 				</div>
 		    </div>
 		</div>
@@ -443,6 +425,39 @@
 						<button type="submit" class="boardselect" onclick="memListView()">작성 글</button>
 					</div>
 					</c:if>
+					
+					
+	                <div class="about show">
+	                    <span></span>
+	                    <div class="img show">
+	                    </div>
+	                    <p class="desc show"></p>
+	                    <div class="txt show">
+	                        <div class="txt-left"></div>
+	                        <div class="txt-right"></div>
+	                    </div>
+
+	                    <div class="skill-wrap">
+							<div class="skill">
+								<ul class="clearfix">
+								</ul>
+							</div>
+						</div>
+
+	                    <div class="showme">
+							<figure class="mypicture">
+							</figure>
+							<div class="sign">
+								<span></span>
+							</div>
+							<div class="myname">
+								<div class="name"></div>
+								<div class="name2"></div>
+							</div>
+						</div>	
+	                </div>
+					
+					
 				</div>
 			</div>
 		</div>
@@ -601,26 +616,26 @@
 							</a>
 						</div>
 						<div class="s3-cont4-box">
-							<div class="cont4-box"><img src="assets/img/box1.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box2.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box3.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box4.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box5.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box6.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box7.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box8.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box9.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box10.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box01.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box02.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box03.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box04.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box05.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box06.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box07.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box08.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box09.png" alt="mobile image"></div>
-							<div class="cont4-box"><img src="assets/img/box010.png" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
+							<div class="cont4-box"><img src="" alt="mobile image"></div>
 						</div>
 					</div>
 
@@ -682,7 +697,7 @@
                                 <h5>TimelineMax</h5>
                                 <p>이 우주선은 GSAP의 TweenMax를 이용한 애니메이션입니다. TweenMax 기능 중 TimelineMax 기능을 이용하여 우주선이 자연스럽게 이동하도록 만들었으며, <strong>translateY</strong>, <strong>scale</strong>, <strong>ease</strong> 효과를 통해 사실처럼 움직이는 애니메이션을 완성하였습니다.</p>
                             </div>
-                            <div class="iframe iframe-left"><iframe src="subhtml/ani2.html" frameborder="0" scrolling="no"></iframe></div>
+                            <div class="iframe iframe-left"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/VBmQVV" target="_blank" class="code code-left">Code View</a>
                         </div>
 
@@ -692,7 +707,7 @@
                                 <h5>Kraken Animation</h5>
                                 <p>이 캐릭터는 움직임을 표현하는 애니메이션입니다. 이 애니메이션은 물방울과 캐릭터의 눈, 입, 다리를 <strong>animation</strong>과 <strong>keyframes</strong>을 사용하여 살아있는 듯한 캐릭터의 움직임을 자연스럽게 표현하였습니다.</p>
                             </div>
-                            <div class="iframe iframe-right"><iframe src="subhtml/ani1.html" frameborder="0" scrolling="no"></iframe></div>
+                            <div class="iframe iframe-right"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/pKPNPW" target="_blank" class="code code-right">Code View</a>
                         </div>
 
@@ -702,7 +717,7 @@
                                 <h5>Cursor Effect</h5>
                                 <p>이 효과는 TweenMax와 Javascript를 이용한 애니메이션입니다. TweenMax 기능 중 <strong>posY</strong>, <strong>posX</strong>, <strong>	mouseX</strong>, <strong>mouseY</strong> 값을 설정하고 Hover me 라는 텍스트에 마우스를 대면 <strong>mouseenter</strong>메소드를 사용하여 엑티브가 되도록 하고 마우스가 벗어나면 <strong>mouseleave</strong>메소드에 엑티브가 없어지도록 표현하였습니다.</p>
                             </div>
-                            <div class="iframe iframe-left"><iframe src="subhtml/ani3.html" frameborder="0" scrolling="no"></iframe></div>
+                            <div class="iframe iframe-left"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/xJoKeE" target="_blank" class="code code-left">Code View</a>
                         </div>
 
@@ -712,7 +727,7 @@
                                 <h5>Blend Effect</h5>
                                 <p>이 효과는 각 이미지의 <strong>class</strong>를 다르게 해주어 마우스를 오버했을 때 각 이미지의 <strong>mix-blend-mode</strong>, <strong>filter</strong>, <strong>background-color</strong>값을 다르게 입력하여 표현하였습니다.</p>
                             </div>
-                            <div class="iframe iframe-right"><iframe src="subhtml/ani4.html" frameborder="0" scrolling="no"></iframe></div>
+                            <div class="iframe iframe-right"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/eKvNbo" target="_blank" class="code code-right">Code View</a>
                         </div>
 
@@ -722,7 +737,7 @@
                                 <h5>Move Image</h5>
                                 <p>이 애니니메이션은 각각의 Mouse 버튼에 각기 다른 이미지를 설정하고 <strong>hover</strong>메소드를 이용하여 버튼에 오버했을 때 각기 다른 이미지를 보여주며 <strong>mousemove</strong>메소드에 <strong>pageX</strong>, <strong>pageY</strong>를 사용하여 이미지가 마우스 스크롤을 따라오는 애니메이션을 완성하였습니다.</p>
                             </div>
-                            <div class="iframe iframe-left"><iframe src="subhtml/ani5.html" frameborder="0" scrolling="no"></iframe></div>
+                            <div class="iframe iframe-left"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/pZePJY" target="_blank" class="code code-left">Code View</a>
                         </div>
 
@@ -732,7 +747,7 @@
                                 <h5>Text Animation</h5>
                                 <p>이 애니메이션은 illustrator 작업으로 SVG값을 알아내어 SVG에 <strong>stroke</strong>, <strong>stroke-width</strong>, <strong>stroke-dasharray</strong>, <br><strong>stroke-dashoffset</strong>을 이용하여 각각의 <strong>stroke</strong>와 <strong>stroke-dasharray</strong>다르게 입력하여 애니메이션을 완성하였습니다.</p>
                             </div>
-                            <div class="iframe iframe-right"><iframe src="subhtml/ani6.html" frameborder="0" scrolling="no"></iframe></div>
+                            <div class="iframe iframe-right"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/LBZmZy" target="_blank" class="code code-right">Code View</a>
                         </div>
 
@@ -742,7 +757,7 @@
                                 <h5>Roket Animation</h5>
                                 <p>이 애니니메이션은 로켓은 기본적인 <strong>animation</strong>, <strong>keyframes</strong>을 이용하여 작업한 애니메이션입니다. <strong>fire-1 ~ fire-4</strong>, <strong>spark-1 ~ spark-4</strong>의 여러 개의 class로 로켓의 불꽃과 스파크를 자연스럽게 표현하고 배경은 <strong>star-1 ~ star-20</strong>의 여러 개의 class로 우주의 별을 표현하였습니다. 로켓이 움직여 보이도록 별을 <strong>translate</strong>, <strong>scale</strong>을 이용하였습니다.  </p>
                             </div>
-                            <div class="iframe iframe-left"><iframe src="subhtml/ani7.html" frameborder="0" scrolling="no"></iframe></div>
+                            <div class="iframe iframe-left"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/MXOBjp?editors=1100" target="_blank" class="code code-left">
                             <span>Code View</span>
                         	</a>
@@ -754,7 +769,7 @@
                                 <h5>3D Cube Animation</h5>
                                 <p>이 애니메이션은 6개의 다른 면을 <strong>transform-origin</strong>, <strong>rotate</strong>, <strong>translate</strong>, <strong>animation</strong>, <strong>scale</strong>값을 다르게 입력하여 자연스럽게 움직이는 Cube Animation을 완성하였습니다.</p>
                             </div>
-                            <div class="iframe iframe-right"><iframe src="subhtml/ani8.html" frameborder="0" scrolling="no"></iframe></div>
+                            <div class="iframe iframe-right"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/GGvVMy" target="_blank" class="code code-right">Code View</a>
                         </div>
                     </div>
@@ -766,17 +781,16 @@
 		<div id="section5">
 			<div class="o_container">
 		    	<div class="sec5">
-		    		<div class="h3_tit cont1 show">
-		    			<span>CONTACT BY</span><br>
+		    		<div class="sec5-title show">
+		    			<span>CONTACT BY</span>
 		    			<span>PUBLISHER</span>
 		    		</div>
-		    		<div class="">
-		    			
+		    		<div class="contact-img show">
 		    		</div>
-		    		<div class="">
+		    		<div class="contactMe-left show">
 		    			<span>72 Bundang-gu, Seongnam-si, Gyeonggi</span>
 		    		</div>
-		    		<div class="p1_desc cont2 show">
+		    		<div class="contactMe-right show">
 		    			<div class="home">
 		    				<strong>HOME</strong><br>
 		    				<strong>031-5569-8877</strong>
@@ -866,17 +880,20 @@
 	
 	
 	<script src="assets/js/idcheck.js"></script>
-	<script src="assets/js/jquery-1.12.4.js"></script>
-	<script src="assets/js/jquery-ui-1.12.1.min.js"></script>
-	<script src="assets/js/imagesloaded.pkgd.min.js"></script>
-	<script src="assets/js/modernizr.min.js"></script>
-	<script src="assets/js/slick.js"></script>
-	<script src="assets/js/slick.min.js"></script>
-	<script src="assets/js/easypiechart.min.js"></script>
 	<script src="assets/js/custom4.js"></script>
+	<script src="assets/js/jquery-1.12.4.js"></script>
+	
+	
+	<script src="assets/js/easypiechart.min.js"></script>
+	<script src="assets/js/slick.min.js"></script>
+	<script src="assets/js/slick.js"></script>
+	<script src="assets/js/modernizr.min.js"></script>
+	<script src="assets/js/imagesloaded.pkgd.min.js"></script>
+	<script src="assets/js/jquery-ui-1.12.1.min.js"></script>
+	
 	<script>
 		$(function(){
-            imagesProgress();		//이미지 로딩 
+            //imagesProgress();		//이미지 로딩 
             counter();					//스킬 카운터
 
 			//section2 img 스크롤에 따른 이미지 움직임
@@ -915,5 +932,9 @@
 
 		
 	</script>
+	
+	<!-- 2차 Scripts -->
+	
+	
 </body>
 </html>

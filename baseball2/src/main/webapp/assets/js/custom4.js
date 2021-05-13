@@ -276,8 +276,12 @@ var Ease = {
     }
 };
 
+
+
+$("body").addClass("active");
+//시작 할때 프로그램바 작동부 
 //imageProgress
-function imagesProgress(){
+/*function imagesProgress(){
 	var $container = $("#progress"),
         $container2 = $(".progress2"),
 		$progressBar = $container.find(".progress-bar"),
@@ -314,7 +318,7 @@ function imagesProgress(){
 			current = 100;
 		}
 	}	
-}
+}*/
 
 function counter() {
     if ($('.about .count').size()) {
@@ -981,8 +985,8 @@ $(".iframe-right").hover(function(){
 	$(".desc-right").css({"top":"40%"});
 });	
 
-//모바일 이미지 클릭했을 때 이미지 변화
-$(".cont4-box:nth-child(1)").click(function(){
+//모바일 이미지 클릭했을 때 이미지 변화 (사용 안함)
+/*$(".cont4-box:nth-child(1)").click(function(){
     $(".mobile").css({ 'background-image':'url(assets/img/box1.png)' });
 });
 $(".cont4-box:nth-child(2)").click(function(){
@@ -1042,7 +1046,7 @@ $(".cont4-box:nth-child(19)").click(function(){
 });
 $(".cont4-box:nth-child(20)").click(function(){
     $(".mobile").css({ 'background-image':'url(assets/img/box010.png)' });
-});
+});*/
 
 //section3 윈도우 팝업 창
 function popupOpen(){
