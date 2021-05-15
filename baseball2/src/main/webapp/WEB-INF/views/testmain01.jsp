@@ -216,7 +216,7 @@
 				<div class="email">
 					<span style="position: absolute; right: 5px;">개인정보 관리</span>
 					<br>
-					<button style="position: absolute; right: 0px;" type="button" class="boardselect boardselect_member" onclick="contentpg()">회원정보 수정</button>
+					<button style="position: absolute; right: -10px;" type="button" class="boardselect boardselect_member" onclick="contentpg()">회원정보 수정</button>
 					<br>
 					<button style="position: relative; top: 5px; right: -19px;" type="button" class="boardselect boardselect_member" onclick="memderdel()">회원 탈퇴</button>
 					<br>

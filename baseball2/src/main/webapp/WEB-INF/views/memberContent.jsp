@@ -28,21 +28,48 @@
 	        }
 	    }
 	    
-	    /* 회원가입 디자인 */
-		div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,255,0.3); z-index:-1; }
-		div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:500px; height:550px; padding:20px 10px; background:#fff; border:2px solid #666; }
-		div.modalContent table { position: relative; top: 50px; }
+		body { position:fixed; top:0; left:0; width:100%; height:100%; background:#ddd8d8; z-index:-1; }
+		div.modalContent { position:fixed; margin:5rem; padding:5rem; width:90%; height:90%; background:#f4f4f4; border:2px solid #666; }
+		div.modalContent p {font-size: 3rem;}
+		div.modalContent table { position: relative; top: 5rem; border:1px solid #666; }
 		div.modalContent td { font-size: 20px; border-spacing:0px 0px; border-bottom: 1px solid #1B456B; border-top: 1px solid #1B456B; padding-top: 10px; padding-bottom: 10px;}
 		div.modalContent td.text-tg-join { text-align: right; }
 		div.modalContent input { width: 100%; border: 0; font-size: 20px;}
-		div.modalContent button { font-size:20px; padding: 20px 10px; margin:10px 0; background:#baadad; border:1px solid #ccc; }
-		div.modalContent button.modal_cancel { margin-left:20px; }
+		div.modalContent textarea {height:40rem; width: 100%; border: 0; font-size: 20px; text-align: right;}
+		div.modalContent button { 
+			display: inline-block;
+			background: transparent;
+			text-transform: uppercase;
+			font-weight: 700;
+			font-style: normal;
+			letter-spacing: 0.3em;
+			color: rgba(223,190,106,0.7);/* 글자 색 */
+			border-radius: 0;
+			transition: all 0.7s ease-out;
+			background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0.7), rgba(34,34,34,0.7));
+			background-position: 1% 50%;
+			background-size: 300% 300%;
+			text-decoration: none;
+			margin: 0.625rem;
+			border: none;
+			border: 1px solid rgba(223,190,106,0.3);
+			padding: 18px 80px 20px;
+			font-size: 20px;/*원본 0.625rem */
+			width: 70%;
+		}
+		div.modalContent button:hover {
+			color: #fff;
+			border: 1px solid rgba(223,190,106,0);
+			color: $white;
+			background-position: 99% 50%;
+		}
 	</style>
   
 </head>
 <body>
 
 <div class="modalContent">
+	<p>- 회원 정보 수정 -</p>
 	<form action="<c:url value='/memberUpdate.do'/>" method="post">
 		<input type="hidden" name="id" value="${vo.id}"/> 
 		<table class="table table-bordered">
@@ -69,9 +96,9 @@
 	 
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="수정" class="btn btn-primary"/>
-					<input type="reset" value="취소" class="btn btn-warning"/>
-					<input type="button" value="메인" class="btn btn-success" onclick="goList()"/>
+					<button type="submit" value="수정" class="btn btn-primary">수정</button>
+					<button type="reset" value="취소" class="btn btn-warning">취소</button>
+					<button type="button" value="메인" class="btn btn-success" onclick="goList()">메인</button>
 				</td>
 			</tr>
 		</table>
