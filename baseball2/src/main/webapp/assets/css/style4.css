@@ -27,6 +27,7 @@ body.scroll {overflow: hidden;}
 .side-bar-hover .hover-box p {text-align: center; color: #fff; font-size: 40px; display: block; text-transform: uppercase; opacity: 0; transform: translateY(50px); transition:  all 0.5s cubic-bezier(.215,.61,.355,1);}
 .side-bar-hover .hover-box #drawing_canvas {position: absolute;margin: auto;width: 100%;height: 100%;top: 0;bottom: 0;left: 0;right: 0; z-index: -1;}
 
+
 .side-bar-hover.show {transform: translateY(0%); transition:  transform 0.7s cubic-bezier(.215,.61,.355,1);}
 .side-bar-hover.show .hover-box em > span:nth-child(1) {opacity: 1; transform: translateY(0px); transition:  all 0.3s 0.7s cubic-bezier(.215,.61,.355,1);}
 .side-bar-hover.show .hover-box em > span:nth-child(2) {opacity: 1; transform: translateY(0px); transition:  all 0.3s 0.75s cubic-bezier(.215,.61,.355,1);}
@@ -154,7 +155,7 @@ body.scroll {overflow: hidden;}
 .menu .menu-left a:hover i {opacity: 1; transform: translateX(0px); transition: all 0.5s cubic-bezier(.645,.045,.355,1);}
 .menu .menu-left a i {padding-left: 10px; font-size: 20px;opacity: 0; transform: translateX(-10px); transition: all 0.5s cubic-bezier(.645,.045,.355,1);}
 .menu .menu-right {width: 50%; position: absolute; top: 8vh; left: 50%; overflow: hidden;}
-.menu .menu-right a {display: inline-block; color: #000; font-size: 120px; font-weight: 500; line-height: 1.2;}
+.menu .menu-right a {display: inline-block; color: #000; font-size: 100px; font-weight: 500; line-height: 1.2;}
 .menu .menu-right a span {transition: color 0.3s cubic-bezier(.645,.045,.355,1);}
 .menu .menu-right a span:hover {color: #3672ed;}
 
@@ -242,11 +243,11 @@ body.active .overlay                                        {width: 0; }
 .main-btn-wrap:hover .main-btnhover  {top: 0%;}
 
 /***** section1 animation *****/
-.main-btn-wrap                          {opacity: 0; transition: transform 0.8s 4.1s ease,opacity 0.8s 4.1s ease; transform: translate(-50%,-50px);}
-.main-title h1 span:nth-child(1) {opacity: 0; transition: transform 0.8s 2.4s ease,opacity 0.8s 2.4s ease; transform: translatex(-100%);}
-.main-title h1 span:nth-child(2) {opacity: 0; transition: transform 0.8s 2.7s ease,opacity 0.8s 1.7s ease; transform: translatex(-100%);}
-.main-title h1 span:nth-child(3) {opacity: 0; transition: transform 0.8s 3.0s ease,opacity 0.8s 1.7s ease; transform: translatex(-100%);}
-.main-title h1 span:nth-child(4) {opacity: 0; transition: transform 0.8s 3.3s ease,opacity 0.8s 1.7s ease; transform: translatex(-100%);}
+.main-btn-wrap                          {opacity: 0; transition: transform 0.8s 3.2s ease,opacity 0.8s 3.2s ease; transform: translate(-50%,-50px);}
+.main-title h1 span:nth-child(1) {opacity: 0; transition: transform 0.8s 2.0s ease,opacity 0.8s 2.4s ease; transform: translatex(-100%);}
+.main-title h1 span:nth-child(2) {opacity: 0; transition: transform 0.8s 2.3s ease,opacity 0.8s 1.7s ease; transform: translatex(-100%);}
+.main-title h1 span:nth-child(3) {opacity: 0; transition: transform 0.8s 2.6s ease,opacity 0.8s 1.7s ease; transform: translatex(-100%);}
+.main-title h1 span:nth-child(4) {opacity: 0; transition: transform 0.8s 2.9s ease,opacity 0.8s 1.7s ease; transform: translatex(-100%);}
 
 body.active .main-btn-wrap                                {opacity: 1; transform: translatex(-50%);}
 body.active .main-title h1 span:nth-child(1)      {opacity: 1; transform: translatex(0%);}
@@ -255,7 +256,7 @@ body.active .main-title h1 span:nth-child(3)      {opacity: 1; transform: transl
 body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: translatex(0%);}
 
 /***************************** section2 ***********************************/
-.about   {font-size: 9rem; line-height: 0.9; display: block; text-transform: uppercase;font-weight: 500;}
+.about   {font-size: 9rem; line-height: 0.9; display: block; text-transform: uppercase;font-weight: 500; position: static;}
 
 .sec2 .skill {text-align: center;  padding: 10% 0;}
 .sec2 .skill li {float: left; width: 20%; position: relative; }
@@ -264,7 +265,7 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 .sec2 .skill li a span {font-size: 26px; color: #000; display: block;}
 
 /*** section2 animation ***/
-.about    {opacity: 0; transition: opacity 0.8s 0.5s   cubic-bezier(.215,.61,.355,1), transform 0.2s 0.3s   cubic-bezier(0, 0.64, 0.34, 1.03); transform: translatex(-200px);}
+.about    {opacity: 0; transition: opacity 0.5s 0.5s   cubic-bezier(.215,.61,.355,1), transform 0.2s 0.3s   cubic-bezier(0, 0.64, 0.34, 1.03); transform: translatex(-200px);}
 .about.show               {opacity: 1; transform: translatex(0px);}
 
 .about .desc.show                          {opacity: 1; transform: translatey(0px);}
@@ -276,6 +277,7 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 .s1_tit                {color: #0D8797; font-size: 2rem; letter-spacing: 0.2em; text-transform: uppercase; }
 .h3_tit                {color: #fff; font-size: 8rem; line-height: 1; font-weight: 300;}
 .h3_tit span       {position: relative; color: #fff; font-size: 8rem; line-height: 1; font-weight: 500;}
+
 .p1_desc            {color: #fff; font-size: 22px; line-height: 22px; }
 .p2_desc            {color: #0D8797; font-size: 26px; text-transform: uppercase;}
 .ta_right             {text-align: right !important;}
@@ -306,6 +308,7 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 /* /흰색 이미지 */
 
 .sec3 .s3-cont1 .side-text                       {position: absolute; right: 0; top: 0; width: 40%; height: 1000px; text-align: right; overflow: hidden;}
+.sec3 .s3-cont1 .side-text-pl                        {position: absolute; left: 0; top: 0; width: 40%; height: 1000px; text-align: left;  }
 
 
 /* cont2 */
@@ -477,20 +480,12 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 /*************************************  meida  ****************************************/
 @media (max-width: 1400px){
     .sec2 .about {padding: 10% 0 10% 0; }
-    .sec2 .about > span {font-size: 8rem; line-height: 0.9;}
-    .sec2 .about .img {height: 500px;}
-    .sec2 .about .img img {width: 60%; padding-top: 250px;}
-    .sec2 .about .desc  {width: 50%; font-size: 50px; }
 }
 @media (max-width: 1200px){
     .menu .menu-right {top: 20vh;}
     .menu .menu-right a {font-size: 100px;}
 
     .sec2 .about   {padding-top: 10%;}
-    .sec2 .about > span {font-size: 6rem; line-height: 0.9;}
-    .sec2 .about > span:nth-child(3) {padding-bottom: 7%;}
-    .sec2 .about .img {height: 450px;}
-    .sec2 .about .img img {width: 50%; padding-top: 230px;}
     .sec2 .skill li {width: 33%;}
     .sec2 .skill li:nth-child(4) {width: 50%; margin-top: 5%;}
     .sec2 .skill li:nth-child(5) {width: 50%; margin-top: 5%;}
@@ -528,14 +523,6 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
     #section1 .main-btn-wrap .main-btnhover {padding-top: 15px;}
     body.active .menu-wrapper .menu-button.wrap  {opacity: 1; transform: translate(-27.5px,-31.5px);}
 
-    .sec2 .about > span {font-size: 4rem; line-height: 0.9; padding-left: 0;}
-    .sec2 .about > span:nth-child(3) {padding-bottom: 5%;}
-    .sec2 .about .img  {top: 60px; height: 300px;}
-    .sec2 .about .desc {font-size: 30px;}
-    .sec2 .about .txt {padding: 0;}
-    .sec2 .about .txt .txt-left  {width: 100%; padding: 0;}
-    .sec2 .about .txt .txt-right {width: 100%;}
-    .sec2 .about .showme {padding-top: 10%;}
 
     .sec3 .cont-wrap .side-text                    {width: 100%; text-align: center;  }
     .sec3 .cont-wrap .side-text .s1_tit         {text-align: center !important; padding: 5% 0;}
@@ -570,9 +557,6 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 
     #section1 .main-contents .main-title h1{font-size: 80px; }
 
-    .sec2 .about .img {top: 360px; width: 115%; height: 400px;}
-    .sec2 .about .desc {width: 100%;}
-    .sec2 .about .txt {padding-top: 100%;}
     .sec2 .skill li {width: 50%;}
     .sec2 .skill li:nth-child(3) {margin-top: 5%;}
     .sec2 .skill li:nth-child(5) {width: 100%;}
@@ -616,8 +600,6 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
     .menu .menu-left a {font-size: 20px;}
     .menu .menu-right {transform: none; top: 16vh; left: 11.01vw;}
     .menu .menu-right a {font-size: 60px;}
-    .sec2 .about .img {height: 280px;}
-    .sec2 .about .txt   {padding-top: 90%;}
     .sec2 .skill {padding-bottom: 20%;}
     .sec2 .skill li {width: 50%;}
     .sec2 .skill li:nth-child(2n):after {width: 0; height: 0;}
@@ -661,7 +643,6 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
     #section1 .main-btn-wrap {display: none; }
     body.active .menu-wrapper .menu-button.wrap {opacity: 1; transform: translate(-18.5px,-23.5px);}
 
-    .sec2 .about .img {top: 320px; height: 250px;}
     .sec2 .skill li {width: 100%; margin-top: 5%;}
     .sec2 .skill li:nth-child(4) {width: 100%;}
 
@@ -708,8 +689,6 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 @media (max-width: 400px){
 	#section1 .main-contents .main-title h1 {font-size: 75px;}
 
-	.sec2 .about .img {top: 355px;}
-	.sec2 .about .txt {padding-top: 100%;}
 	.about .showme .myname .name {font-size: 26px;}
 	.about .showme .myname .name2 {font-size: 22px;}
 }
@@ -742,6 +721,13 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 		padding: 5px 20px 5px;
 		font-size: 8px;
 	}
+	button.baseballdeep{
+		padding: 18px 80px 20px;
+		font-size: 15px;
+		background: linear-gradient(270deg, rgba(223,190,106,0.8), rgba(146,111,52,0.8), rgba(34,34,34,0.7), rgba(34,34,34,0.7));
+		
+	}
+	
 	button.idchecksubmit{
 		height: 100%; border: 0; font-size: 15px;
 		padding: 6px 10px 6px;
@@ -753,3 +739,31 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 		color: $white;
 		background-position: 99% 50%;
 	}
+	/* 날짜, 지역, 팀 선택부 */
+	.h3_tit_pl span       {position: relative; color: #fff; font-size: 3rem; line-height: 1; font-weight: 500;}
+	
+	.select-data{
+		text-align: center;
+		height: 2rem;
+		width: 10rem;
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+		margin-bottom: 3rem;
+		margin-left: 1.5rem;
+		background-size: 100%;
+		background-color: white;
+		color: black;
+		border: 3px solid #0D8797;
+		background-clip: content-box;
+		
+	}
+	.ui-datepicker-trigger{
+		max-height: 10px;
+		max-width: 10px;
+	}
+	
+	.emblem-st-img{
+		height: 19rem;
+		width: 26rem;
+	}
+	

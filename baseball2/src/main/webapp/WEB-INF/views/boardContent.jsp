@@ -26,7 +26,7 @@
 <form action="<c:url value='/boardUpdate.do'/>" method="post">
 	<input type="hidden" name="num" value="${vo.num}"/> 
 	
-	<table class="table table-bordered">
+	<table class="table table-hover table-bordered">
 	
 	<colgroup>
 	<col style="width: 90px">

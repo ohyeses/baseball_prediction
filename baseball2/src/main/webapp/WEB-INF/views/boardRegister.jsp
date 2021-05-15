@@ -10,8 +10,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 	<link rel="stylesheet" href="assets/css/reset.css"><!-- 화면 여백 지움 -->
-	<link rel="stylesheet" href="assets/css/style4.css"><!-- 전체 스타일 -->
-	<link rel="stylesheet" href="assets/css/p17_style4.css"><!-- 2페이지 표 스타일 -->
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -25,7 +23,7 @@
 
 - 게시물등록 -
 <form action="<c:url value='/boardInsert.do'/>" method="post">
-	<table class="table table-bordered" style="undefined;table-layout: fixed; width: 468px">
+	<table class="table table-hover table-bordered" ><!-- style="undefined;table-layout: fixed; width: 468px" -->
 	<colgroup>
 	<col style="width: 90px">
 	<col style="width: 378px">

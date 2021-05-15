@@ -25,6 +25,7 @@
 		select num, writer, cnt, title, send_date
 		from board
 		where writer=#{writer}
+		order by num desc
 	</select>
 	<!-- 수정 -->
 	<update id="boardUpdate" parameterType="kr.smhrd.model.BoardVO">

@@ -1,3 +1,250 @@
+// canvas settings
+var viewWidth = 768,
+    viewHeight = 768,
+    drawingCanvas = document.getElementById("drawing_canvas"),
+    ctx,
+    timeStep = (1/60),
+    time = 0;
+
+var nodes = [],
+    signals = [];
+
+var signalCount = 0;
+
+window.onload = function() {
+    initDrawingCanvas();
+    createNodes();
+    connectNodes();
+
+    transmit();
+    setInterval(transmit, 1500);
+
+    requestAnimationFrame(loop);
+};
+
+function initDrawingCanvas() {
+    drawingCanvas.width = viewWidth;
+    drawingCanvas.height = viewHeight;
+    ctx = drawingCanvas.getContext('2d');
+}
+
+function createNodes() {
+    var rad = viewWidth * 0.5 - 10;
+
+    for (var i = 0; i < 300; i++) {
+        var q = Math.random() * (Math.PI * 2);
+        var r = Math.sqrt(Math.random());
+        var x = (rad * r) * Math.cos(q) + viewWidth * 0.5;
+        var y = (rad * r) * Math.sin(q) + viewWidth * 0.5;
+
+        nodes[i] = new Node(x, y);
+    }
+}
+function connectNodes() {
+    var connection,
+        j,
+        connectCount;
+
+    for (var i = 0; i < nodes.length; i++) {
+        j = 0;
+
+        connectCount = Math.floor(randomRange(3, 6));
+
+        while (j < connectCount) {
+            connection = getRandom(nodes);
+
+            if (nodes[i] !== connection) {
+                nodes[i].connections.push(connection);
+                j++;
+            }
+        }
+    }
+}
+function transmit() {
+    signals.push(new Signal(getRandom(nodes)));
+    signalCount++;
+}
+function update() {
+    nodes.forEach(function(n) {
+        n.update();
+    });
+    signals.forEach(function(s) {
+        if (s.update() === true) {
+            signals.splice(signals.indexOf(s), 1);
+        }
+    });
+}
+function draw() {
+    ctx.clearRect(0, 0, viewWidth, viewHeight);
+
+    nodes.forEach(function(n) {
+        n.draw();
+    });
+    signals.forEach(function(s) {
+        s.draw();
+    });
+}
+function loop() {
+    update();
+    draw();
+    time += timeStep;
+    requestAnimationFrame(loop);
+}
+function Node(x, y) {
+    this.x = this._x = x;
+    this.y = this._y = y;
+
+    this.connections = [];
+
+    this.r = randomRange(-10, 10);
+}
+Node.prototype = {
+    update:function() {
+        this.x = this._x + Math.sin(time) * this.r;
+        this.y = this._y + Math.cos(time) * this.r;
+    },
+    draw:function() {
+        ctx.strokeStyle = '#fff';
+        ctx.fillStyle = '#fff';
+        ctx.lineWidth = 0.05;
+        ctx.fillRect(this.x, this.y, 1, 1);
+        for (var i = 0; i < this.connections.length; i++) {
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.connections[i].x, this.connections[i].y);
+            ctx.stroke();
+        }
+    }
+};
+function Signal(start) {
+    this.start = start;
+    this.parts = [];
+    this.completeParts = [];
+    this.strength = 4.0;
+    this.jumps = 0;
+    var tint = (signalCount % 12) * 30;
+    this.style = 'hsl(' + tint + ',100%,50%)';
+    for (var i = 0; i < start.connections.length; i++) {
+        this.parts.push(new SignalPart(this.start, this.start.connections[i], this.strength, this.style));
+    }
+}
+Signal.prototype = {
+    update:function() {
+        var complete = false;
+        this.completeParts.length = 0;
+        for (var i = this.parts.length - 1; i >= 0; i--) {
+            this.parts[i].time += timeStep;
+            if (this.parts[i].complete) {
+                this.completeParts.push(this.parts.splice(i, 1)[0]);
+            }
+        }
+        if (this.completeParts.length > 0) {
+            this.jumps++;
+            this.strength--;
+            complete = this.jumps === 3;
+        }
+        if (complete === false) {
+            var part,
+              end,
+              connection;
+            for (var j = 0; j < this.completeParts.length; j++) {
+                part = this.completeParts[j];
+                end = part.end;
+                for (var k = 0; k < end.connections.length; k++) {
+                    connection = end.connections[k];
+                    this.parts.push(new SignalPart(end, connection, this.strength, this.style));
+                }
+            }
+        }
+        return complete;
+    },
+    draw:function() {
+        for (var i = 0; i < this.parts.length; i++) {
+            this.parts[i].draw();
+        }
+    }
+};
+function SignalPart(start, end, strength, style) {
+    this.start = start;
+    this.end = end;
+    this.strength = strength;
+    this.style = style;
+    this._time = 0;
+    this.prevTime = 0;
+    this.duration = 2;
+    this.complete = false;
+
+    this.p0 = {x:0, y:0};
+    this.p1 = {x:0, y:0};
+}
+SignalPart.prototype = {
+    set time(v) {
+        this.prevTime = this._time;
+        this._time = v >= this.duration ? this.duration : v;
+        this.complete = this._time === this.duration;
+    },
+    get time() {
+        return this._time;
+    },
+    draw:function() {
+        var t0 = Ease.outCubic(this.prevTime, 0, 1, this.duration);
+        var t1 = Ease.outQuad(this.time, 0, 1, this.duration);
+        lerp(this.start, this.end, t0, this.p0);
+        lerp(this.start, this.end, t1, this.p1);
+
+        ctx.strokeStyle = this.style;
+        ctx.lineWidth = this.strength * 0.25;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(this.p0.x, this.p0.y);
+        ctx.lineTo(this.p1.x, this.p1.y);
+        ctx.stroke();
+    }
+};
+function randomRange(min, max) {
+    return min + Math.random() * (max - min);
+}
+function getRandom(a) {
+    return a[Math.floor(Math.random() * a.length)];
+}
+function lerp(n1, n2, t, p) {
+    p = p || {x:0, y:0};
+    p.x = n1.x + t * (n2.x - n1.x);
+    p.y = n1.y + t * (n2.y - n1.y);
+    return p;
+}
+/**
+ * easing equations from http://gizma.com/easing/
+ * t = current time
+ * b = start value
+ * c = delta value
+ * d = duration
+ */
+var Ease = {
+    inCubic:function (t, b, c, d) {
+        t /= d;
+        return c*t*t*t + b;
+    },
+    outCubic:function(t, b, c, d) {
+        t /= d;
+        t--;
+        return c*(t*t*t + 1) + b;
+    },
+    inQuad: function (t, b, c, d) {
+        return c*(t/=d)*t + b;
+    },
+    outQuad: function (t, b, c, d) {
+        return -c *(t/=d)*(t-2) + b;
+    },
+    inOutCubic:function(t, b, c, d) {
+        t /= d/2;
+        if (t < 1) return c/2*t*t*t + b;
+        t -= 2;
+        return c/2*(t*t*t + 2) + b;
+    }
+};
+/*/왼쪽 상단 배경이미지 */
+
 
 
 
@@ -99,6 +346,7 @@ $(window).scroll(function(){
 	var wScroll = $(this).scrollTop();
 	wScroll = parseInt(wScroll);
 	
+	
 	if(wScroll >= cont.eq(0).offset().top){
 		sideBar.find(".sb-svg").removeClass("show");
 		sideBar.find(".sb-txt").removeClass("show");
@@ -107,7 +355,7 @@ $(window).scroll(function(){
 		phone.find(".phone-number").removeClass("show");
 		menuBtn.find(".menu-button.wrap").removeClass("show");
 	}
-	if(wScroll >= cont.eq(1).offset().top){
+	if(wScroll >= cont.eq(1).offset().top - $(window).height()/2){
 		sideBar.find(".sb-svg").addClass("show");
 		sideBar.find(".sb-txt").addClass("show");
 		sideBar.find(".sb-sns i").addClass("show");
@@ -115,7 +363,7 @@ $(window).scroll(function(){
 		phone.find(".phone-number").addClass("show");
 		menuBtn.find(".menu-button.wrap").addClass("show");
 	}
-	if(wScroll >= cont.eq(2).offset().top){
+	if(wScroll >= cont.eq(2).offset().top - $(window).height()/2){
 		sideBar.find(".sb-svg").removeClass("show");
 		sideBar.find(".sb-txt").removeClass("show");
 		sideBar.find(".sb-sns i").removeClass("show");
@@ -123,7 +371,7 @@ $(window).scroll(function(){
 		phone.find(".phone-number").removeClass("show");
 		menuBtn.find(".menu-button.wrap").removeClass("show");
 	}
-	if(wScroll >= cont.eq(3).offset().top){
+	if(wScroll >= cont.eq(3).offset().top - $(window).height()/2){
 		sideBar.find(".sb-svg").addClass("show");
 		sideBar.find(".sb-txt").addClass("show");
 		sideBar.find(".sb-sns i").addClass("show");
@@ -155,34 +403,39 @@ $(window).scroll(function(){
     var wScroll = $(this).scrollTop();
 
     //section2 이동시 스크롤 값
-	if(wScroll >= $(".about").offset().top -$(window).height()/50){
+	if(wScroll >= $(".about").offset().top -$(window).height()/3){
 		$(".about").addClass("show");
 	} else {
         $(".about").removeClass("show");
     }
     
 
-//section3 이동시 스크롤 값
-    
+	//section3 이동시 스크롤 값
+	
+	//title
+	/*if(wScroll >= $(".s1_tit").offset().top -$(window).height()/1.2){
+	    $(".s1_tit").addClass("show");
+	}else {
+	    $(".s1_tit").removeClass("show");
+	}
+	if(wScroll >= $(".h3_tit").offset().top -$(window).height()/1.5){
+	    $(".h3_tit").addClass("show");
+	}else {
+	    $(".h3_tit").removeClass("show");
+	}
+	if(wScroll >= $(".p1_desc").offset().top -$(window).height()/1.2){
+	    $(".p1_desc").addClass("show");
+	}else {
+	    $(".p1_desc").removeClass("show");
+	}
+	if(wScroll >= $(".p2_desc").offset().top -$(window).height()/1.2){
+	    $(".p2_desc").addClass("show");
+	}else {
+	    $(".p2_desc").removeClass("show");
+	}*/
+	
     // cont1
-	if(wScroll >= $(".s3-cont1 .s3-img1.visual-middle").offset().top -$(window).height()/1.2){
-	    $(".s3-cont1 .s3-img1.visual-middle").addClass("show");
-	}else {
-	    $(".s3-cont1 .s3-img1.visual-middle").removeClass("show");
-	}
-	if(wScroll >= $(".s3-cont1 .s3-img2.visual-up").offset().top -$(window).height()/1.5){
-	    $(".s3-cont1 .s3-img2.visual-up").addClass("show");
-	}else {
-	    $(".s3-cont1 .s3-img2.visual-up").removeClass("show");
-	}
-	if(wScroll >= $(".s3-cont1 .s3-img3.visual-fast").offset().top -$(window).height()/1.2){
-	    $(".s3-cont1 .s3-img3.visual-fast").addClass("show");
-	}else {
-	    $(".s3-cont1 .s3-img3.visual-fast").removeClass("show");
-	}
-	
-	
-	if(wScroll >= $(".s1_tit.cont1").offset().top -$(window).height()/1.2){
+	if(wScroll >= $(".s1_tit.cont1").offset().top -$(window).height()/1.6){
 	    $(".s1_tit.cont1").addClass("show");
 	}else {
 	    $(".s1_tit.cont1").removeClass("show");
@@ -202,33 +455,17 @@ $(window).scroll(function(){
 	}else {
 	    $(".s1_tit.ta_right").removeClass("show");
 	}
-
-	 //cont2
-	if(wScroll >= $(".s3-cont2 .s3-img1.visual-middle").offset().top -$(window).height()/1.2){
-	    $(".s3-cont2 .s3-img1.visual-middle").addClass("show");
-	}else {
-	    $(".s3-cont2 .s3-img1.visual-middle").removeClass("show");
-	}
-	if(wScroll >= $(".s3-cont2 .s3-img2.visual-up").offset().top -$(window).height()/1.2){
-	    $(".s3-cont2 .s3-img2.visual-up").addClass("show");
-	}else {
-	    $(".s3-cont2 .s3-img2.visual-up").removeClass("show");
-	}
-	if(wScroll >= $(".s3-cont2 .s3-img3.visual-fast").offset().top -$(window).height()/1.2){
-	    $(".s3-cont2 .s3-img3.visual-fast").addClass("show");
-	}else {
-	    $(".s3-cont2 .s3-img3.visual-fast").removeClass("show");
-	}
-
 	
 	
-	if(wScroll >= $(".s1_tit.cont2").offset().top ){
-		console.log(wScroll);
+	
+	
+	//cont2
+	if(wScroll >= $(".s1_tit.cont2").offset().top -$(window).height()/1.2){
 	    $(".s1_tit.cont2").addClass("show");
 	    $(".s1_tit.cont_pl").addClass("show");
 	}else {
-	    $(".s1_tit .cont2").removeClass("show");
-	    $(".s1_tit .cont_pl").removeClass("show");
+	    $(".s1_tit.cont2").removeClass("show");
+	    $(".s1_tit.cont_pl").removeClass("show");
 	}
 	if(wScroll >= $(".h3_tit.cont2").offset().top -$(window).height()/1.4){
 	    $(".h3_tit.cont2").addClass("show");
@@ -253,32 +490,12 @@ $(window).scroll(function(){
 	}
 
 
-	//title
-	if(wScroll >= $(".s1_tit").offset().top -$(window).height()/1.2){
-	    $(".s1_tit").addClass("show");
-	}else {
-	    $(".s1_tit").removeClass("show");
-	}
-	if(wScroll >= $(".h3_tit").offset().top -$(window).height()/1.5){
-	    $(".h3_tit").addClass("show");
-	}else {
-	    $(".h3_tit").removeClass("show");
-	}
-	if(wScroll >= $(".p1_desc").offset().top -$(window).height()/1.2){
-	    $(".p1_desc").addClass("show");
-	}else {
-	    $(".p1_desc").removeClass("show");
-	}
-	if(wScroll >= $(".p2_desc").offset().top -$(window).height()/1.2){
-	    $(".p2_desc").addClass("show");
-	}else {
-	    $(".p2_desc").removeClass("show");
-	}
+	
     
     
     
     
-//section4
+	//section4
     if(wScroll >= $(".ani-title p").offset().top -$(window).height()/1.4){
 		$(".ani-title p").addClass("show");
 	}else {

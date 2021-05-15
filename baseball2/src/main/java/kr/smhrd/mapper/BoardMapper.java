@@ -11,7 +11,7 @@ import kr.smhrd.model.BoardVO;
 @Mapper
 public interface BoardMapper {
 		//전체 목록
-		@Select("select num, writer, cnt, title, content, send_date from board")
+		@Select("select num, writer, cnt, title, content, send_date from board order by num desc")
 		public List<BoardVO> boardList();
 		//게시글 작성
 		public int boardInsert(BoardVO vo);

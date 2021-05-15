@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="assets/css/reset.css"><!-- 화면 여백 지움 -->
 	<link rel="stylesheet" href="assets/css/style4.css"><!-- 전체 스타일 -->
 	<link rel="stylesheet" href="assets/css/p17_style4.css"><!-- 2페이지 표 스타일 -->
+	<link rel="stylesheet" href="assets/css/jquery-ui.css"><!-- 달력 -->
 	
 	
 	<link rel="stylesheet" href="assets/css/glitch.css" >
@@ -24,6 +25,8 @@
 	
 	<!-- 2차 css -->
 	<link rel="stylesheet" href="assets/css/team.css" />
+	
+	
 
 	<!-- font -->
 	<link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
@@ -49,8 +52,8 @@
 		div.replyModal02 { position:relative; z-index:1; display: none; }
 		div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
 		div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); background:#E6E6E6; border:2px solid #666; }
-		div.modeljoin { width:500px; height:500px; padding:20px 10px;  }
-		div.modeldel{ width:500px; height:300px; padding:20px 10px;  }
+		div.modeljoin { width:500px; height: 500px; padding:20px 10px;  }
+		div.modeldel { width:500px; height: 300px; padding:20px 10px;  }
 		div.modalContent table { position: relative; top: 80px; }
 		div.modalContent th { font-size: 20px; border-spacing:0px 0px; border-bottom: 1px solid #1B456B; border-top: 1px solid #1B456B; padding-top: 10px; padding-bottom: 10px;}
 		div.modalContent th.text-tg-join { text-align: right; }
@@ -60,7 +63,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<!-- 로그인 스크립트 -->
 	<script type="text/javascript">
-		//로그인 실패시 동작부
+		//세션 감지 동작부
 		$(document).ready(function(){
 			<c:if test="${! empty msg}">
 				alert("${msg}");
@@ -133,7 +136,6 @@
 		function goForm(){
 			location.href="<c:url value='/boardRegister.do'/>";
 		} 
-		
 	</script> 
 
 </head>
@@ -287,14 +289,14 @@
             <div class="menu">
         	<div class="o_container">
 	    		<div class="menu-left">
-		    		<a href="" target="_blank"><span>링크 없음 지울 것</span><i class="fa fa-share" aria-hidden="true"></i></a><br>
-		    		<a href="" target="_blank"><span>링크 없음 지울 것</span><i class="fa fa-share" aria-hidden="true"></i></a>
+		    		<a href="" target="_blank"><span> </span></a>
+		    		<a href="https://sports.news.naver.com/kbaseball/schedule/index.nhn" target="_blank"><span>경기 일정</span><i class="fa fa-share" aria-hidden="true"></i></a><br>
 	    		</div>
 	    		<!-- 클릭시 이동하는 부분 -->
 	    		<div class="menu-right">
-						<a href="#section1"><span>INTRO</span></a><br> 
-						<a href="#section2"><span>BOARD</span></a><br>
-						<a href="#section3"><span>CODING</span></a><br> 
+						<a href="#section1"><span>메인페이지</span></a><br> 
+						<a href="#section2"><span>게시판</span></a><br>
+						<a href="#section3"><span>경기예측</span></a><br> 
 						<a href="#section4"><span>ANIMATION</span></a><br>
 						<a href="#section5"><span>CONTACT</span></a><br>
 				</div>
@@ -374,52 +376,46 @@
 		<div id="section2">
 			<div class="o_container">
 				<div class="sec2">
-					<div >
-
-						<div class="board_list">
-							<h2>게시물 목록</h2>
-							<!-- 게시판 board -->
-
-							<table class="table table-hover table-bordered">
-								<tr>
-									<td>게시물번호</td>
-									<td>제목</td>
-									<td>조회수</td>
-									<td>등록자</td>
-									<td>등록일</td>
-									<td>상세보기</td>
-								</tr>
-								<c:forEach var="vo" items="${list}">
-									<tr>
-										<td>${vo.num}</td>
-										<td>${vo.title}</td>
-										<td>${vo.cnt}</td>
-										<td>${vo.writer}</td>
-										<td>${vo.send_date}</td>
-										<td>
-											<a href="<c:url value='/boardContent.do'/>?num=${vo.num}">내용 보기  </a>
-											<c:if test="${id eq vo.writer}">
-											<a href="<c:url value='/boardDelete.do'/>?num=${vo.num}">/ 삭제</a>
-											</c:if>
-										</td>
-									</tr>
-								</c:forEach>
-
-								
-								<c:if test="${id!='' && id!=null}">
-								<tr id="button">
-									<td colspan="6" align="right"><input type="button" value="글쓰기" class="btn btn-primary" onclick="goForm()" /></td>
-								</tr>
-								</c:if>
-							</table>
-						</div>
-					</div>
 					
-					<div class="about" style="display: none;">
-						<form action="<c:url value='/boardList.do'/>">
+					<div class="board_list" style=" padding-top: 10%;  ">
+						<h2>게시물 목록</h2>
+						<!-- 게시판 board -->
+						<table class="table table-hover table-bordered">
+							<tr>
+								<td>게시물번호</td>
+								<td>제목</td>
+								<td>조회수</td>
+								<td>등록자</td>
+								<td>등록일</td>
+								<td>상세보기</td>
+							</tr>
+							<c:forEach var="vo" items="${list}">
+								<tr>
+									<td>${vo.num}</td>
+									<td>${vo.title}</td>
+									<td>${vo.cnt}</td>
+									<td>${vo.writer}</td>
+									<td>${vo.send_date}</td>
+									<td>
+										<a href="<c:url value='/boardContent.do'/>?num=${vo.num}">내용 보기  </a>
+										<c:if test="${id eq vo.writer}">
+											<a href="<c:url value='/boardDelete.do'/>?num=${vo.num}">/ 삭제</a>
+										</c:if>
+									</td>
+								</tr>
+							</c:forEach>
+							
+								
+						</table>
+						<c:if test="${id!='' && id!=null}">
+							<input type="button" value="글쓰기" class="btn btn-primary" onclick="goForm()" style="position: absolute; margin-left: 45%;"/>
+						</c:if>
+					</div>
+					<div class="about" style="display: none; width: 245px;">
+						<form action="<c:url value='/boardList.do'/>" >
 							<button type="submit" class="boardselect boardselect_list" >전체 글</button>
 						</form>
-						<button type="submit" class="boardselect boardselect_list" onclick="memListView()">작성 글</button>
+						<button type="button" class="boardselect boardselect_list" onclick="memListView()">작성 글</button>
 					</div>
 					
 				</div>
@@ -431,98 +427,121 @@
 		<div id="section3">
 	    	<div class="o_container">
 	            <div class="sec3">
-	            
-					<div class="s3-cont1 cont-wrap" id="cont1">
-						<!-- 흰색 흔적 -->
-						<div class="s3-img1 visual-middle">
-							<div class="glitch gabia" id="base"></div>
-							<div class="glitch gabia" id="red"></div>
-							<div class="glitch gabia" id="cyan"></div>
-							<div class="glitch gabia" id="transparent"></div>
-						</div>
-						<div class="s3-img2 visual-up">
-							<div class="glitch gabia2" id="base"></div>
-							<div class="glitch gabia2" id="red"></div>
-							<div class="glitch gabia2" id="cyan"></div>
-							<div class="glitch gabia2" id="transparent"></div>
-						</div>
-						<div class="s3-img3 visual-fast">
-							<div class="glitch gabia3" id="base"></div>
-							<div class="glitch gabia3" id="red"></div>
-							<div class="glitch gabia3" id="cyan"></div>
-							<div class="glitch gabia3" id="transparent"></div>
-						</div>
-						<!-- /흰색 흔적 -->
-						
-						
-						<div class="side-text side-right">
-							<p class="s1_tit cont1">CODING1</p>
-							<h3 class="h3_tit cont1">
-								<span>GABIA</span><br><span>WEB</span><br><span>SITE</span>
-							</h3>
-							<p class="p1_desc cont1">This website is one of that I handed coding the site, gabia has passed the test css and the web standards test, and it has been fully implemented by cross-browser.</p>
-							<p class="s1_tit ta_right">kimju7.dothome.co.kr</p>
-							
-						</div>
-					</div>
-					
-					
-					<div class="s3-cont2 cont-wrap" id="cont2">
-						<!-- 흰색 흔적 -->
-						<div class="s3-img1 visual-middle">
-							<div class="glitch standard" id="base"></div>
-							<div class="glitch standard" id="red"></div>
-							<div class="glitch standard" id="cyan"></div>
-							<div class="glitch standard" id="transparent"></div>
-						</div>
-						<div class="s3-img2 visual-up">
-							<div class="glitch standard2" id="base"></div>
-							<div class="glitch standard2" id="red"></div>
-							<div class="glitch standard2" id="cyan"></div>
-							<div class="glitch standard2" id="transparent"></div>
-						</div>
-						<div class="s3-img3 visual-fast">
-							<div class="glitch standard3" id="base"></div>
-							<div class="glitch standard3" id="red"></div>
-							<div class="glitch standard3" id="cyan"></div>
-							<div class="glitch standard3" id="transparent"></div>
-						</div>
-						<!-- /흰색 흔적 -->
-						
-						
-						
-						
-						<div class="side-text side-left">
-							<p class="s1_tit cont2">HOME</p>
-							<h3 class="h3_tit cont2">
-								<span>WEB</span><br><span>STANDARD</span>
-							</h3>
-							<p class="p1_desc cont2">Standard for viewing the same results across all operating systems and all browsers. Every website should be free from any technology environment. Websites must be able to easily get all the information that's available to them without having to be professional.</p>
-							<p class="s1_tit ta_left">kimju7.dothome.co.kr</p>
-						</div>
-						
-						<!-- 추가 -->
-						<div class="side-text-pl side-right">
-							<p class="s1_tit cont_pl">AWAY</p>
-							<h3 class="h3_tit cont1_pl">
-								<span>GABIA</span><br><span>WEB</span><br><span>SITE</span>
-							</h3>
-							<p class="p1_desc cont1_pl">This website is one of that I handed coding the site, gabia has passed the test css and the web standards test, and it has been fully implemented by cross-browser.</p>
-							<p class="s1_tit ta_pl">kimju7.dothome.co.kr</p>
-						</div>
-						
-						
-						
-					</div>
-					
-					<div class="s3-title">
+	            	<!-- <div class="s3-title">
 						<p class="s1_tit">MY WORK</p>
 						<h3 class="h3_tit">
 							<span class="coding" data-text="CODING">CODING</span><br><span class="project" data-text="PROJECT">PROJECT</span>
 						</h3>
 						<p class="p1_desc">This is my portfolio site. I am a web publisher.I can make various homepages using HTML, CSS, javascripts, and JQuery. I gained a lot of skill and experience while taking classes. I hope my portfolio will be pleased with you. Have a good time.</p>
 						<p class="p2_desc">This section shows my coding ability.</p>
+					</div> -->
+	            	
+	            	
+	            	<!-- cont1 -->
+					<div class="s3-cont1 cont-wrap" id="cont1">
+						<div class="side-text-pl side-left">
+						
+						<form action="">
+							<div class="h3_tit_pl cont1">
+								<span>STEP 1. 날짜 선택하기 </span><br>
+								<input type="text" id="datepicker" class="select-data">
+							</div>
+							<div class="h3_tit_pl cont1">
+								<span>STEP 2. 지역 선택하기 </span><br>
+								<select class="select-data">
+									<option value="" disabled selected>지역 선택</option>
+									<option value="서울">서울</option>
+									<option value="광주">광주</option>
+									<option value="부산">부산</option>
+									<option value="창원">창원</option>
+									<option value="인천">인천</option>
+									<option value="대전">대전</option>
+									<option value="대구">대구</option>
+									<option value="수원">수원</option>
+								</select>
+							</div>
+							<div class="h3_tit_pl cont1">
+								<span>STEP 3. 팀 선택하기 </span><br>
+								<span>HOME . </span>
+								<select onchange = "homeselectteam(this)" class="select-data">
+									<option value="" >팀 선택</option>
+									<option value="KIA">기아 타이거즈</option>
+									<option value="DU">두산 베어스</option>
+									<option value="LG">LG 트윈스</option>
+									<option value="SL">삼성 라이온즈</option>
+									<option value="SK">SSG 랜더스</option>
+									<option value="HE">한화 이글스</option>
+									<option value="NC">NC 다이노스</option>
+									<option value="GI">롯데 자이언츠</option>
+									<option value="KH">키움 히어로즈</option>
+									<option value="KT">KT 위즈</option>
+								</select>
+								<br>
+								<span>AWAY . </span>
+								<select onchange = "awayselectteam(this)" class="select-data">
+									<option value="" >팀 선택</option>
+									<option value="KIA">기아 타이거즈</option>
+									<option value="DU">두산 베어스</option>
+									<option value="LG">LG 트윈스</option>
+									<option value="SL">삼성 라이온즈</option>
+									<option value="SK">SSG 랜더스</option>
+									<option value="HE">한화 이글스</option>
+									<option value="NC">NC 다이노스</option>
+									<option value="GI">롯데 자이언츠</option>
+									<option value="KH">키움 히어로즈</option>
+									<option value="KT">KT 위즈</option>
+								</select>
+							</div>
+							<button class="boardselect baseballdeep" > 결과 보기</button>
+						</form>
+							
+						</div>
+						
+						
+						<div class="side-text side-right">
+							<p class="s1_tit cont1">데이터 선택</p>
+							<h3 class="h3_tit cont1">
+								<span>Scrowll</span><br><span>down</span><br>
+							</h3>
+							<p class="p1_desc cont1">선택 후 스크롤을 내려주세요</p>
+							<p class="s1_tit ta_right"></p>
+							
+						</div>
 					</div>
+					
+					
+					<!-- cont2 -->
+					<div class="s3-cont2 cont-wrap" id="cont2">
+						
+						
+						<div class="side-text side-left">
+							<p class="s1_tit cont2">HOME</p>
+							<h3 class="h3_tit cont2">
+								<img id="home-emblem-img" class="emblem-st-img" src="assets/baseball/kbo_emblem.jpg">
+								<span style="font-size: 5rem;">WIN</span>
+							</h3>
+							<p class="p1_desc cont2">abcd</p>
+							<p class="s1_tit ta_left"></p>
+						</div>
+						
+						<div class="h3_tit" style="height: 500px; text-align: center; ">
+							<br><br><br>
+							<span>VS</span>
+						</div>
+						
+						<div class="side-text-pl side-right">
+							<p class="s1_tit cont_pl">AWAY</p>
+							<h3 class="h3_tit cont1_pl">
+								<img id="away-emblem-img" class="emblem-st-img" src="assets/baseball/kbo_emblem.jpg">
+								<span style="font-size: 5rem;">WIN</span>
+							</h3>
+							<p class="p1_desc cont1_pl">abcd</p>
+							<p class="s1_tit ta_pl"></p>
+						</div>
+					</div>
+					
+					
+	            	
 
 
 	            </div>
@@ -705,7 +724,7 @@
 	
 	<!-- 회원 탈퇴 창 -->
 	<div class="replyModal02">
-		<div class="modalContent madeldel">
+		<div class="modalContent modeldel">
 			<form action="<c:url value='/memberDelete.do'/>" method="post">
 				<input type="hidden" name="id" value="${id}"/> 
 				<table class="table table-bordered del">
@@ -735,28 +754,16 @@
 	<script src="assets/js/idcheck.js"></script>
 	<script src="assets/js/custom4.js"></script>
 	<script src="assets/js/jquery-1.12.4.js"></script>
+	<script src="assets/js/datepicker-test.js"></script>
 	
-	
+	<script src="assets/js/jquery-ui-1.12.1.min.js"></script>
 	<script src="assets/js/easypiechart.min.js"></script>
 	<script src="assets/js/slick.min.js"></script>
 	<script src="assets/js/slick.js"></script>
 	<script src="assets/js/modernizr.min.js"></script>
 	<script src="assets/js/imagesloaded.pkgd.min.js"></script>
-	<script src="assets/js/jquery-ui-1.12.1.min.js"></script>
 	
 	<script>
-		$(function(){
-            //imagesProgress();		//이미지 로딩 
-            //counter();					//스킬 카운터
-
-			//section2 img 스크롤에 따른 이미지 움직임
-            $(window).scroll(function(){
-				var wScroll = $(this).scrollTop();
-				$(".about .img img").css({ 'transform':'translatey(-'+ wScroll/2 +'px) scale(3)' });
-				// $(".menu-right").css({ 'transform':'translatey(-'+ wScroll/4 +'px)' });
-			});
-        });
-
 		var cont = $("#contents > div");
 		var sideBar = $(".side-bar");
 		var phone = $(".phone");
@@ -772,18 +779,67 @@
 			phone.find(".phone-number").toggleClass("show2");
 			menuBtn.find(".menu-button.wrap").toggleClass("show2");
 		});
-
-		//스크롤시 #section3 이미지 움직임 변화
-        $(window).scroll(function(){
-			var wScroll = $(this).scrollTop();
-			var offset = (wScroll  - $(window).height()) * 0.1;
-
-			$(".visual-middle").css({ 'transform':'translateY(-'+ offset +'px)' });
-			$(".visual-up").css({ 'transform':'translateY(-'+ offset*4 +'px)' });
-			$(".visual-fast").css({ 'transform':'translateY(-'+ offset*8 +'px)' });
-		});
-
-		
+        
+        //홈팀 이미지 변경
+        function homeselectteam(e){
+        	/* 중복팀 선택 불가 */
+			$("select option").prop('disabled',false);
+			$("select option[value*="+e.value+"]").prop('disabled',true);
+        	
+        	if(e.value == "KIA") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_HT.png');
+			}else if (e.value == "DU") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_OB.png');
+			}else if (e.value == "LG") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_LG.png');
+			}else if (e.value == "SL") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_SS.png');
+			}else if (e.value == "SK") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_SK.png');
+			}else if (e.value == "HE") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_HH.png');
+			}else if (e.value == "NC") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_NC.png');
+			}else if (e.value == "GI" ) {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_LT.png');
+			}else if (e.value == "KH") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_WO.png');
+			}else if (e.value == "KT") {
+				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_KT.png');
+			}else{
+				$("#home-emblem-img").attr("src", 'assets/baseball/kbo_emblem.jpg');
+			}
+        }
+      //어웨이팀 이미지 변경
+		function awayselectteam(e){
+			$("select option").prop('disabled',false);
+			$("select option[value*="+e.value+"]").prop('disabled',true);
+			
+			if(e.value == "KIA") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_HT.png');
+			}else if (e.value == "DU") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_OB.png');
+			}else if (e.value == "LG") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_LG.png');
+			}else if (e.value == "SL") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_SS.png');
+			}else if (e.value == "SK") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_SK.png');
+			}else if (e.value == "HE") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_HH.png');
+			}else if (e.value == "NC") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_NC.png');
+			}else if (e.value == "GI" ) {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_LT.png');
+			}else if (e.value == "KH") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_WO.png');
+			}else if (e.value == "KT") {
+				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_KT.png');
+			}else{
+				$("#away-emblem-img").attr("src", 'assets/baseball/kbo_emblem.jpg');
+			}
+		}
+        
 	</script>
 	
 	<!-- 2차 Scripts -->
