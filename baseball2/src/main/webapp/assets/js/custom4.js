@@ -379,14 +379,16 @@ $(window).scroll(function(){
 		phone.find(".phone-number").addClass("show");
 		menuBtn.find(".menu-button.wrap").addClass("show");
 	}
-	if(wScroll >= cont.eq(4).offset().top - $(window).height()/2){
+	
+	//4page 누락
+	/*if(wScroll >= cont.eq(4).offset().top - $(window).height()/2){
 		sideBar.find(".sb-svg").removeClass("show");
 		sideBar.find(".sb-txt").removeClass("show");
 		sideBar.find(".sb-sns i").removeClass("show");
 		phone.find(".phone-icon svg").removeClass("show");
 		phone.find(".phone-number").removeClass("show");
 		menuBtn.find(".menu-button.wrap").removeClass("show");
-	}
+	}*/
 
 
 	if(wScroll >= cont.eq(2).offset().top - $(window).height()/2 ){
@@ -403,11 +405,16 @@ $(window).scroll(function(){
     var wScroll = $(this).scrollTop();
 
     //section2 이동시 스크롤 값
-	if(wScroll >= $(".about").offset().top -$(window).height()/3){
-		$(".about").addClass("show");
-	} else {
-        $(".about").removeClass("show");
-    }
+	try{
+		if(wScroll >= $(".about").offset().top -$(window).height()/3){
+			$(".about").addClass("show");
+		} else {
+	        $(".about").removeClass("show");
+	    }
+	}catch (e) {
+		
+	}
+	
     
 
 	//section3 이동시 스크롤 값
@@ -496,7 +503,7 @@ $(window).scroll(function(){
     
     
 	//section4
-    if(wScroll >= $(".ani-title p").offset().top -$(window).height()/1.4){
+    /*if(wScroll >= $(".ani-title p").offset().top -$(window).height()/1.4){
 		$(".ani-title p").addClass("show");
 	}else {
 	    $(".ani-title p").removeClass("show");
@@ -687,7 +694,9 @@ $(window).scroll(function(){
 		$(".contactMe-right").addClass("show");
 	}else {
         $(".contactMe-right").removeClass("show");
-    }
+    }*/
+	
+	
 });
 
 //section5

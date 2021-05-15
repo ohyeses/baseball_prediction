@@ -36,7 +36,7 @@
 		div.modalContent td { font-size: 20px; border-spacing:0px 0px; border-bottom: 1px solid #1B456B; border-top: 1px solid #1B456B; padding-top: 10px; padding-bottom: 10px;}
 		div.modalContent td.text-tg-join { text-align: right; }
 		div.modalContent input { width: 100%; border: 0; font-size: 20px;}
-		div.modalContent textarea {height:40rem; width: 100%; border: 0; font-size: 20px; text-align: right;}
+		div.modalContent textarea {height:40rem; width: 100%; border: 0; font-size: 20px; text-align: left;}
 		div.modalContent button { 
 			display: inline-block;
 			background: transparent;

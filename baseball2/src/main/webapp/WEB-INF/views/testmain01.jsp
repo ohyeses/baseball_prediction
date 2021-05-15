@@ -23,10 +23,6 @@
 	<link rel="stylesheet" href="assets/css/animate.css" >
 	<link rel="stylesheet" href="assets/css/font-awesome.css">
 	
-	<!-- 2차 css -->
-	<link rel="stylesheet" href="assets/css/team.css" />
-	
-	
 
 	<!-- font -->
 	<link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
@@ -58,6 +54,7 @@
 		div.modalContent th { font-size: 20px; border-spacing:0px 0px; border-bottom: 1px solid #1B456B; border-top: 1px solid #1B456B; padding-top: 10px; padding-bottom: 10px;}
 		div.modalContent th.text-tg-join { text-align: right; }
 		div.modalContent input { width: 100%; border: 0; font-size: 20px;}
+		div.modalContent select { width: 100%; border: 0; font-size: 20px;}
 		
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -74,10 +71,6 @@
 				location.href="#section2";
 				<c:remove var='page2' scope='session'/> 
 			</c:if> 
-			//게시물 버튼 활성화 조건
-			<c:if test="${id!='' && id!=null}">
-				$(".about").show();
-			</c:if>
 		});
 		//로그인 미기입부 확인
 		function check(){
@@ -136,6 +129,7 @@
 		function goForm(){
 			location.href="<c:url value='/boardRegister.do'/>";
 		} 
+		
 	</script> 
 
 </head>
@@ -210,15 +204,15 @@
 					<span style="font-size: 35px">MEMBER<br></span>
 					<p><strong>${name}</strong>님 <br>환영합니다.</p>
 					<br>
-					<button style="position: absolute; bottom: 38%; right: 5px;" type="button" class="boardselect boardselect_member" onclick="out()">로그아웃</button>
+					<button style="position: absolute; bottom:70px; right: 5px;" type="button" class="boardselect boardselect_member" onclick="out()">로그아웃</button>
 					<br>
 				</div> 
 				<div class="email">
-					<span style="position: absolute; right: 5px;">개인정보 관리</span>
+					<span style="position: absolute; right: 15px;">개인정보 관리</span>
 					<br>
-					<button style="position: absolute; right: -10px;" type="button" class="boardselect boardselect_member" onclick="contentpg()">회원정보 수정</button>
+					<button style="position: absolute; top: 15px; right: 5px;" type="button" class="boardselect boardselect_member" onclick="contentpg()">회원정보 수정</button>
 					<br>
-					<button style="position: relative; top: 5px; right: -19px;" type="button" class="boardselect boardselect_member" onclick="memderdel()">회원 탈퇴</button>
+					<button style="position: absolute; top: 45px; right: 5px;" type="button" class="boardselect boardselect_member" onclick="memderdel()">회원 탈퇴</button>
 					<br>
 				</div>
 			</c:if>    
@@ -411,12 +405,17 @@
 							<input type="button" value="글쓰기" class="btn btn-primary" onclick="goForm()" style="position: absolute; margin-left: 45%;"/>
 						</c:if>
 					</div>
-					<div class="about" style="display: none; width: 245px;">
-						<form action="<c:url value='/boardList.do'/>" >
-							<button type="submit" class="boardselect boardselect_list" >전체 글</button>
-						</form>
-						<button type="button" class="boardselect boardselect_list" onclick="memListView()">작성 글</button>
-					</div>
+					
+					<!-- 게시물 버튼 활성화 조건 -->
+					<c:if test="${id!='' && id!=null}">
+						<div class="about" style="width: 245px;">
+							<form action="<c:url value='/boardList.do'/>" >
+								<button type="submit" class="boardselect boardselect_list" >전체 글</button>
+							</form>
+							<button type="button" class="boardselect boardselect_list" onclick="memListView()">작성 글</button>
+						</div>
+					</c:if>
+					
 					
 				</div>
 			</div>
@@ -441,14 +440,13 @@
 					<div class="s3-cont1 cont-wrap" id="cont1">
 						<div class="side-text-pl side-left">
 						
-						<form action="">
 							<div class="h3_tit_pl cont1">
 								<span>STEP 1. 날짜 선택하기 </span><br>
 								<input type="text" id="datepicker" class="select-data">
 							</div>
 							<div class="h3_tit_pl cont1">
 								<span>STEP 2. 지역 선택하기 </span><br>
-								<select class="select-data">
+								<select class="select-data location">
 									<option value="" disabled selected>지역 선택</option>
 									<option value="서울">서울</option>
 									<option value="광주">광주</option>
@@ -463,7 +461,7 @@
 							<div class="h3_tit_pl cont1">
 								<span>STEP 3. 팀 선택하기 </span><br>
 								<span>HOME . </span>
-								<select onchange = "homeselectteam(this)" class="select-data">
+								<select onchange = "homeselectteam(this)" class="select-data home_team">
 									<option value="" >팀 선택</option>
 									<option value="KIA">기아 타이거즈</option>
 									<option value="DU">두산 베어스</option>
@@ -476,9 +474,10 @@
 									<option value="KH">키움 히어로즈</option>
 									<option value="KT">KT 위즈</option>
 								</select>
+								<a style="display: none;" id="selecthome"></a>
 								<br>
 								<span>AWAY . </span>
-								<select onchange = "awayselectteam(this)" class="select-data">
+								<select onchange = "awayselectteam(this)" class="select-data away_team">
 									<option value="" >팀 선택</option>
 									<option value="KIA">기아 타이거즈</option>
 									<option value="DU">두산 베어스</option>
@@ -491,9 +490,16 @@
 									<option value="KH">키움 히어로즈</option>
 									<option value="KT">KT 위즈</option>
 								</select>
+								<a style="display: none;" id="selectaway"></a>
 							</div>
-							<button class="boardselect baseballdeep" > 결과 보기</button>
-						</form>
+							<c:choose>
+								<c:when test="${id!='' && id!=null}">
+									<button type="button" id="submit-python" class="boardselect baseballdeep">결과 보기</button>
+								</c:when>
+								<c:when test="${id=='' || id==null}">
+									<button type="button" class="boardselect baseballdeep" onclick="alert('로그인 시 이용 가능합니다.');">결과 보기</button>
+								</c:when>
+							</c:choose>
 							
 						</div>
 						
@@ -518,9 +524,9 @@
 							<p class="s1_tit cont2">HOME</p>
 							<h3 class="h3_tit cont2">
 								<img id="home-emblem-img" class="emblem-st-img" src="assets/baseball/kbo_emblem.jpg">
-								<span style="font-size: 5rem;">WIN</span>
+								<span style="font-size: 5rem;" id="result_text"></span>
 							</h3>
-							<p class="p1_desc cont2">abcd</p>
+							<p class="p1_desc cont2">확률</p>
 							<p class="s1_tit ta_left"></p>
 						</div>
 						
@@ -533,9 +539,9 @@
 							<p class="s1_tit cont_pl">AWAY</p>
 							<h3 class="h3_tit cont1_pl">
 								<img id="away-emblem-img" class="emblem-st-img" src="assets/baseball/kbo_emblem.jpg">
-								<span style="font-size: 5rem;">WIN</span>
+								<span style="font-size: 5rem;" id="result"></span>
 							</h3>
-							<p class="p1_desc cont1_pl">abcd</p>
+							<p class="p1_desc cont1_pl">확률</p>
 							<p class="s1_tit ta_pl"></p>
 						</div>
 					</div>
@@ -549,7 +555,7 @@
 	    </div>
 	    <!-- //section3 -->
 
-	    <div id="section4">
+	    <!-- <div id="section4">
 	    	<div class="sec4">
                 <div class="o_container">
                     <div class="row">
@@ -646,7 +652,7 @@
                     </div>
                 </div>
             </div>
-	    </div>
+	    </div> -->
 		<!-- //section4 -->
 
 		<div id="section5">
@@ -707,7 +713,21 @@
 					</tr>
 					<tr>
 						<th class="text-tg-join">응원하는 구단 : </th>
-						<th class="tg-0lax"><input type="text" name="ft"/></th>
+						<th class="tg-0lax">
+							<select name="ft">
+								<option  value="" disabled selected >응원하는 팀</option>
+								<option value = "KIA 타이거즈"> 기아 타이거즈 </option>
+								<option value = "두산 베어스"> 두산 베어스 </option>
+								<option value = "LG 트윈스">  LG 트윈스 </option>
+								<option value = "삼성 라이온즈"> 삼성 라이온즈 </option>
+								<option value = "SK 와이번스"> SK 와이번스 </option>
+								<option value = "한화 이글스"> 한화 이글스 </option>
+								<option value = "NC 다이노스"> NC 다이노스 </option>
+								<option value = "롯데 자이언츠"> 롯데 자이언츠 </option>
+								<option value = "키움 히어로즈"> 키움 히어로즈 </option>
+								<option value = "KT 위즈"> KT 위즈</option>
+							</select>
+						</th>
 					</tr>
 					<tr>
 						<th class="tg-0lax" colspan="2" align="center">
@@ -751,10 +771,11 @@
 	
 	
 	
-	<script src="assets/js/idcheck.js"></script>
-	<script src="assets/js/custom4.js"></script>
+	<script src="assets/js/idcheck.js"></script><!-- 중복검사 -->
+	<script src="assets/js/custom4.js"></script><!-- 애니메이션 동작 -->
 	<script src="assets/js/jquery-1.12.4.js"></script>
-	<script src="assets/js/datepicker-test.js"></script>
+	<script src="assets/js/datepicker-test.js"></script><!-- 팀 select문 동작 -->
+	<script src="assets/js/pythondeeplearning.js"></script><!-- 플라스크 -->
 	
 	<script src="assets/js/jquery-ui-1.12.1.min.js"></script>
 	<script src="assets/js/easypiechart.min.js"></script>
@@ -785,6 +806,7 @@
         	/* 중복팀 선택 불가 */
 			$("select option").prop('disabled',false);
 			$("select option[value*="+e.value+"]").prop('disabled',true);
+			$("#selecthome").val(e.value);
         	
         	if(e.value == "KIA") {
 				$("#home-emblem-img").attr("src", 'assets/baseball/emblem_HT.png');
@@ -814,6 +836,7 @@
 		function awayselectteam(e){
 			$("select option").prop('disabled',false);
 			$("select option[value*="+e.value+"]").prop('disabled',true);
+			$("#selectaway").val(e.value);
 			
 			if(e.value == "KIA") {
 				$("#away-emblem-img").attr("src", 'assets/baseball/emblem_HT.png');
@@ -840,9 +863,9 @@
 			}
 		}
         
+		
 	</script>
 	
-	<!-- 2차 Scripts -->
 	
 	
 </body>

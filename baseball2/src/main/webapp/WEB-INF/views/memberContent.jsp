@@ -35,7 +35,7 @@
 		div.modalContent td { font-size: 20px; border-spacing:0px 0px; border-bottom: 1px solid #1B456B; border-top: 1px solid #1B456B; padding-top: 10px; padding-bottom: 10px;}
 		div.modalContent td.text-tg-join { text-align: right; }
 		div.modalContent input { width: 100%; border: 0; font-size: 20px;}
-		div.modalContent textarea {height:40rem; width: 100%; border: 0; font-size: 20px; text-align: right;}
+		div.modalContent select { width: 100%; border: 0; font-size: 20px;}
 		div.modalContent button { 
 			display: inline-block;
 			background: transparent;
@@ -91,7 +91,21 @@
 			</tr>    
 			<tr>
 				<td>응원하는 팀</td>
-				<td><input type="text" name="ft" value="${vo.ft}" /></td>
+				<td>
+					<select name="ft">
+						<option  value="${vo.ft}" disabled selected >${vo.ft}</option>
+						<option value = "KIA 타이거즈"> 기아 타이거즈 </option>
+						<option value = "두산 베어스"> 두산 베어스 </option>
+						<option value = "LG 트윈스">  LG 트윈스 </option>
+						<option value = "삼성 라이온즈"> 삼성 라이온즈 </option>
+						<option value = "SK 와이번스"> SK 와이번스 </option>
+						<option value = "한화 이글스"> 한화 이글스 </option>
+						<option value = "NC 다이노스"> NC 다이노스 </option>
+						<option value = "롯데 자이언츠"> 롯데 자이언츠 </option>
+						<option value = "키움 히어로즈"> 키움 히어로즈 </option>
+						<option value = "KT 위즈"> KT 위즈</option>
+					</select>
+				</td>
 			</tr> 
 	 
 			<tr>
