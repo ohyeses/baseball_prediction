@@ -4,10 +4,10 @@
 
 
 		$('#submit-python').click(function(){
-			var select_day = $("#datepicker").val();
-			var location = $(".location").val();
-			var home_team = $("#selecthome").val();
-			var away_team = $("#selectaway").val();
+			var select_day = $("#datepicker").val();	//날짜
+			var location = $(".location").val();		//지역
+			var home_team = $("#selecthome").val();		//홈팀
+			var away_team = $("#selectaway").val();		//어웨이팀
 			$('#result_text').text("");
 			$('#result').text("");
 			
@@ -37,8 +37,10 @@
 					
 					if( home_result == "WIN") {
 						$('#result_text').text("WIN"); 
+						$('.p1_desc cont2').text("확률"); 
 					}else if (home_result == "LOOSE") {
 						$('#result').text('LOSE'); 
+						$('.p1_desc cont1_pl').text("확률"); 
 					}
 					if( away_result == "WIN") {
 						$('#result_text').text("WIN");

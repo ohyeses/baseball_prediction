@@ -291,8 +291,8 @@
 						<a href="#section1"><span>메인페이지</span></a><br> 
 						<a href="#section2"><span>게시판</span></a><br>
 						<a href="#section3"><span>경기예측</span></a><br> 
-						<a href="#section4"><span>ANIMATION</span></a><br>
-						<a href="#section5"><span>CONTACT</span></a><br>
+						<a href="#section4"><span>연봉예측</span></a><br>
+						<a href="#section5"><span>관리정보</span></a><br>
 				</div>
 		    </div>
 		</div>
@@ -526,7 +526,7 @@
 								<img id="home-emblem-img" class="emblem-st-img" src="assets/baseball/kbo_emblem.jpg">
 								<span style="font-size: 5rem;" id="result_text"></span>
 							</h3>
-							<p class="p1_desc cont2">확률</p>
+							<p class="p1_desc cont2"></p>
 							<p class="s1_tit ta_left"></p>
 						</div>
 						
@@ -541,7 +541,7 @@
 								<img id="away-emblem-img" class="emblem-st-img" src="assets/baseball/kbo_emblem.jpg">
 								<span style="font-size: 5rem;" id="result"></span>
 							</h3>
-							<p class="p1_desc cont1_pl">확률</p>
+							<p class="p1_desc cont1_pl"></p>
 							<p class="s1_tit ta_pl"></p>
 						</div>
 					</div>
@@ -660,26 +660,26 @@
 		    	<div class="sec5">
 		    	
 		    		<div class="sec5-title show">
-		    			<span>CONTACT BY</span>
-		    			<span>PUBLISHER</span>
+		    			<span>SMHRD BigData</span>
+		    			<span>3차 프로젝트</span>
 		    		</div>
 		    		<div class="contact-img show">
 		    		</div>
 		    		<div class="contactMe-left show">
-		    			<span>72 Bundang-gu, Seongnam-si, Gyeonggi</span>
+		    			<span>60, Songam-ro, Nam-gu, Gwangju, Republic of Korea</span>
 		    		</div>
 		    		<div class="contactMe-right show">
 		    			<div class="home">
 		    				<strong>HOME</strong><br>
-		    				<strong>031-5569-8877</strong>
+		    				<strong>062-1234-5678</strong>
 		    			</div>
 		    			<div class="tell">
 		    				<strong>TELL ME</strong><br>
-		    				<strong>+82 10-3192-7793</strong>
+		    				<strong>+82 10-1234-5678</strong>
 		    			</div>
 		    			<div class="email">
 		    				<strong>E-MAIL US</strong><br>
-		    				<strong>wngus3277@naver.com</strong>
+		    				<strong>shmrd@gmail.com</strong>
 		    			</div>
 		    		</div>
 		    	</div>
