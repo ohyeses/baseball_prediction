@@ -545,8 +545,6 @@
 							<p class="s1_tit ta_pl"></p>
 						</div>
 					</div>
-					
-					
 	            	
 
 
@@ -555,30 +553,50 @@
 	    </div>
 	    <!-- //section3 -->
 
-	    <!-- <div id="section4">
+	    <div id="section4">
 	    	<div class="sec4">
                 <div class="o_container">
                     <div class="row">
                         <div class="ani-title">
                             <p>
-                            	<span>H</span><span>T</span><span>M</span><span>L</span><span>5</span> <span>&middot;</span> <span>C</span><span>S</span><span>S</span><span>3</span> <span>&middot;</span> <span>J</span><span>A</span><span>V</span><span>A</span><span>S</span><span>C</span><span>R</span><span>I</span><span>P</span><span>T</span>
+                            	<span>내년 연봉 예측 결과</span>
+                            	<!-- <span>H</span><span>T</span><span>M</span><span>L</span><span>5</span> <span>&middot;</span> <span>C</span><span>S</span><span>S</span><span>3</span> <span>&middot;</span> <span>J</span><span>A</span><span>V</span><span>A</span><span>S</span><span>C</span><span>R</span><span>I</span><span>P</span><span>T</span> -->
                             </p>
                             <h4>
-                            	<span>T</span><span>H</span><span>E</span> <span>A</span><span>N</span><span>I</span><span>M</span><span>A</span><span>T</span><span>I</span><span>O</span><span>N</span>
+                            	<span>S</span><span>A</span><span>L</span><span>A</span><span>R</span><span>Y</span>
                             </h4>
                         </div>
 
                         <div class="ani-wrap clearfix">
-                            <div class="tit tit-left">TweenMax<br><em>Animation</em></div>
+                        	<div>
+                        		<select id="address2" class="select-data away_team">
+									<option value="" >팀 선택</option>
+									<option value="KIA">기아 타이거즈</option>
+									<option value="DU">두산 베어스</option>
+									<option value="LG">LG 트윈스</option>
+									<option value="SL">삼성 라이온즈</option>
+									<option value="SK">SSG 랜더스</option>
+									<option value="HE">한화 이글스</option>
+									<option value="NC">NC 다이노스</option>
+									<option value="GI">롯데 자이언츠</option>
+									<option value="KH">키움 히어로즈</option>
+									<option value="KT">KT 위즈</option>
+								</select>
+								<select id="address3" class="baseball-member-salary select-data" onchange="playerPredict();">
+									<option value="">선수 선택</option>
+								</select>
+                        	</div>
                             <div class="desc desc-left">
                                 <h5>TimelineMax</h5>
                                 <p>이 우주선은 GSAP의 TweenMax를 이용한 애니메이션입니다. TweenMax 기능 중 TimelineMax 기능을 이용하여 우주선이 자연스럽게 이동하도록 만들었으며, <strong>translateY</strong>, <strong>scale</strong>, <strong>ease</strong> 효과를 통해 사실처럼 움직이는 애니메이션을 완성하였습니다.</p>
                             </div>
-                            <div class="iframe iframe-left"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
-                            <a href="https://codepen.io/wngus3277/pen/VBmQVV" target="_blank" class="code code-left">Code View</a>
+                            <div class="iframe iframe-left">
+                            	<iframe src="assets/baseball/emblem_HT.png" frameborder="0" scrolling="no"></iframe>
+                            </div>
+                            <a target="_blank" class="code code-left">Code View</a>
                         </div>
 
-                        <div class="ani-wrap clearfix">
+                        <!-- <div class="ani-wrap clearfix">
                             <div class="tit tit-right">Kraken<br><em>Animation</em></div>
                             <div class="desc desc-right">
                                 <h5>Kraken Animation</h5>
@@ -648,11 +666,11 @@
                             </div>
                             <div class="iframe iframe-right"><iframe src="" frameborder="0" scrolling="no"></iframe></div>
                             <a href="https://codepen.io/wngus3277/pen/GGvVMy" target="_blank" class="code code-right">Code View</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
-	    </div> -->
+	    </div>
 		<!-- //section4 -->
 
 		<div id="section5">

@@ -37,10 +37,8 @@
 					
 					if( home_result == "WIN") {
 						$('#result_text').text("WIN"); 
-						$('.p1_desc cont2').text("확률"); 
 					}else if (home_result == "LOOSE") {
 						$('#result').text('LOSE'); 
-						$('.p1_desc cont1_pl').text("확률"); 
 					}
 					if( away_result == "WIN") {
 						$('#result_text').text("WIN");
