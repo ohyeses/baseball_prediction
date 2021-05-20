@@ -32,6 +32,14 @@ public class BoardController {
 		
 		return "testmain01";
 	}
+	
+	@RequestMapping("/testmain2.do")
+	public String testmain2(Model model) {
+		
+		return "testmain2";
+	}
+	
+	
 	//게시물 작성 페이지
 	@RequestMapping("/boardRegister.do")
 	public String boardRegister() {

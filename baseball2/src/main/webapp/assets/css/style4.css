@@ -311,7 +311,7 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 /* /흰색 이미지 */
 
 .sec3 .s3-cont1 .side-text                       {position: absolute; right: 0; top: 0; width: 40%; height: 1000px; text-align: right; overflow: hidden;}
-.sec3 .s3-cont1 .side-text-pl                        {position: absolute; left: 0; top: 0; width: 40%; height: 1000px; text-align: left; z-index: 1000; }
+.sec3 .s3-cont1 .side-text-pl                        {position: absolute; left: 0; top: 0; width: 40%; height: 1000px; text-align: left; z-index: 900; }
 
 
 /* cont2 */
@@ -399,7 +399,8 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 /* .sec4 .ani-wrap .iframe:before {content:'hover'; position: absolute; left: 50%; top:50%; transform: translate(-50%,-50%); color:#000; width: 150px; height: 50px; z-index: 2000; font-size: 50px; opacity: 0.3; text-transform: uppercase; text-align: center;} */
 /* .sec4 .ani-wrap .iframe:after {content: ''; width: 100%; height: 100%; background: rgba(204,204,204,.98); position: absolute; left: 0; top: 0; transition: all 0.5s cubic-bezier(.215,.61,.355,1);}
  */
-.sec4 .ani-wrap .iframe iframe {width: 100%; height: 500px;}
+.sec4 .ani-wrap .iframe iframe {width: 100%; height: 500px; }
+.sec4 .ani-wrap img {display: block; margin: 0px auto; width: 20rem;}
 .sec4 .ani-wrap .code {position: absolute; overflow: hidden; left: 0; top: 74%; border: 1px solid #000; font-size: 18px; display: block; padding: 15px; line-height: 18px; font-family: 'Roboto', sans-serif; font-weight: bold; transition: all 0.5s cubic-bezier(.215,.61,.355,1);}
 .sec4 .ani-wrap .code:after {content: ''; position: absolute; width: 50px; height: 155px ;top: -50px; left: -75px; opacity:0.1; background: #000; transform: rotate(35deg); transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);}
 .sec4 .ani-wrap .code:hover:after {left: 140px; }
@@ -454,7 +455,7 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
 .sec4 .ani-wrap .desc-right.show {opacity: 1; transform: translateY(0%);}
 .sec4 .ani-wrap .code-right.show{opacity: 1; transform: translateX(0%);}
 
-.sec4 .ani-wrap .iframe.show:hover {width: 100%;}
+/* .sec4 .ani-wrap .iframe.show:hover {width: 100%;} */
 
 /************************************seciont5*******************************************/
 .sec5 {position: relative; overflow: hidden;}
@@ -570,6 +571,8 @@ body.active .main-title h1 span:nth-child(4)      {opacity: 1; transform: transl
     .sec3 .s1_tit {font-size: 1.5rem;}
     .sec3 .h3_tit {font-size: 0rem;}
     .sec3 .h3_tit span {font-size: 5rem;}
+    .sec3 .h3_tit_pl span {font-size: 1.5rem;}
+    
     .sec3 .s3-title .p1_desc {padding: 0% 0% 6% 0%;}
     .sec3 .s3-cont1 .s3-img1.visual-middle {position: absolute; left: 23%; top:120px; width: 350px; height: 350px; overflow: hidden; }
     .sec3 .s3-cont1 .s3-img2.visual-up        {position: absolute; left: 0%; top: 100%; width: 200px; height: 200px; overflow: hidden; }
